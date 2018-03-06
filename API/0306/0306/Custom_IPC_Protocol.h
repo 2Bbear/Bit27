@@ -1,0 +1,12 @@
+
+#ifndef MYPROTOCOL
+#define MYPROTOCOL
+
+#define WM_FINDHANDLE WM_USER+1
+#define WM_CHANGHANDLE WM_USER+2
+#define WM_PRINT_WPARAM WM_USER+3
+#define WM_SENDMESSAGE WM_USER+4
+
+
+#endif
+
