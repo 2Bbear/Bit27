@@ -4,7 +4,11 @@
 #include <tchar.h>
 #include <vector>
 
+
+
 //Custom Header
 #include"MyHero.h"
+#include "Monster.h"
+
 #include"DrawWindow.h"
 #include"handler.h"

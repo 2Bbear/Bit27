@@ -2,15 +2,16 @@
 
 #define WM_JJHMESSAGE WM_USER+100
 
-MyHero  * hero;
 
+MyHero g_currentCharacter;
+Monster g_currentMonster;
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)	{
 	//Init Event
 	case WM_CREATE:
 	{
-					  return OnCreate(hwnd,hero);
+		return OnCreate(hwnd);
 	}
 		
 	//===================================================================
@@ -42,7 +43,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_KEYDOWN:
 	{
 		//Arrow Keys
-		return OnKeyDown(hwnd,wParam, hero);
+		return OnKeyDown(hwnd,wParam);
 	}
 	case WM_KEYUP:
 	{
@@ -54,15 +55,20 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	//Draw window
 	case WM_PAINT:
 	{
-		return OnPaint(hwnd,hero);
+		return OnPaint(hwnd);
+	}
+	//===================================================================
+	//Timer
+	case WM_TIMER:
+	{
+		return 0;
 	}
 	//===================================================================
 	//Destroy Event
 	case WM_DESTROY:
 	{
-					   delete(hero);
-					   PostQuitMessage(0);
-					   return 0;
+					  
+		 return OnDestroy(hwnd);
 	}
 	}
 	return DefWindowProc(hwnd, msg, wParam, lParam);

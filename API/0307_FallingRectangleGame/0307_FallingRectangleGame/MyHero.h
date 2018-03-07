@@ -1,25 +1,18 @@
 #pragma once
-
 class MyHero
 {
-private:
-	TCHAR name[20];
-	POINT currentPoint ;
+public:
 
-	//Constructor
-public :
+	POINT currentPoint;
+	int type;
+	COLORREF color;
+	int hp=100;
+	int score=0;
+public:
 	MyHero();
 	~MyHero();
-
-	//Getter Setter
 public:
-	const TCHAR * getName()const;
-	void setName(TCHAR * _name);
-	const POINT getCurrentPoint()const;
-	void setCurrentPoint(POINT * pPoint);
-	
-	//Custom Function
-	//move Function
-	void moveCharacter(int x,int y);
-	
+	void setCurrentPoint(int x, int y);
+public:
+	void moveCharacter(int x, int y);
 };
