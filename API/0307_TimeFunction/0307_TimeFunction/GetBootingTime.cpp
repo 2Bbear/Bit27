@@ -7,7 +7,25 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)	{
 	case WM_CREATE:
+	{
+		SetTimer(hwnd, 1, 1000, NULL);//(타이머 메세지를 받을 윈도우,타이머의 번호 지정,주기값,호출될 함수) 내부 적으로 WM_TIMER 메세지를 보냄 wParam에 Timer ID를 같이 넣어서 보냄
+		SendMessage(hwnd, WM_TIMER, 1, NULL);//강제로 WM_TIMER를 실행시키는 함수
 		return 0;
+	}
+	case WM_TIMER:
+	{
+		if (wParam == 1)
+		{
+			SYSTEMTIME st;
+			GetLocalTime(&st);
+			TCHAR buf[20];
+			wsprintf(buf, TEXT("현재 시간 : %d:%d:%d"),
+				st.wHour, st.wMinute, st.wSecond);
+			SetWindowText(hwnd, buf);
+		}
+
+		return 0;
+	}
 	case WM_LBUTTONDOWN:
 	{
 		DWORD count = GetTickCount();
@@ -16,8 +34,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		int hour = (second % 86400) / 3600;
 		int day = second / 864000;
 		TCHAR buf[50];
-		wsprintf(buf, TEXT("%d일 %d시간 %d분 %d초 가 경과하였습니다."),
-			day, hour, minute, second % 60);
+		wsprintf(buf, TEXT("%d일 %d시간 %d분 %d초 가 경과하였습니다."),day, hour, minute, second % 60);
 		SetWindowText(hwnd, buf);
 
 		return 0;

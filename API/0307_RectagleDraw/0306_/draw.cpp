@@ -51,10 +51,11 @@ void draw_EllipsePrint(HDC hdc, SHAPE * sh)
 }
 void draw_TiltePrint(HWND hwnd, int size)
 {
-	TCHAR str[20];
-	wsprintf(str, TEXT("저장개수 : %d개"), size);
-
-	SetWindowText(hwnd, str);
+	SYSTEMTIME st;
+	GetLocalTime(&st);
+	TCHAR buf[20];
+	wsprintf(buf, TEXT("현재 시간 : %d:%d:%d"),st.wHour, st.wMinute, st.wSecond);
+	SetWindowText(hwnd, buf);
 }
 void draw_CurPrint(HDC hdc, SHAPE g_drawCurrent, int size)
 {

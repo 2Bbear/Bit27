@@ -13,6 +13,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_CREATE:			return OnCreate(hwnd);
 	//Re Draw Window Event
 	case WM_PAINT:			return OnPaint(hwnd);
+	//Timer Event
+	case WM_TIMER: return OnTimer(hwnd,wParam);
 	//key Event
 	case WM_LBUTTONDOWN:	return OnLButtonDown(hwnd,lParam);
 	case WM_RBUTTONDOWN:	return OnRButtonDown(hwnd);
@@ -20,7 +22,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_CHAR: return OnChar(hwnd,wParam);
 		
 	//Destroy Event
-	case WM_DESTROY:		return OnDestroy();
+	case WM_DESTROY:		return OnDestroy(hwnd);
 	}
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }

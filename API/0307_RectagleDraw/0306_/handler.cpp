@@ -8,13 +8,18 @@ extern SHAPE g_drawCurrent;// 현재 어떠한 것을 그릴 것인지를 담고 있는 정보
 
 LRESULT OnCreate(HWND hwnd)
 {
+	//Timer Init
+	SetTimer(hwnd, 1, 1000, NULL);//(타이머 메세지를 받을 윈도우,타이머의 번호 지정,주기값,호출될 함수) 내부 적으로 WM_TIMER 메세지를 보냄 wParam에 Timer ID를 같이 넣어서 보냄
+	SendMessage(hwnd, WM_TIMER, 1, NULL);//강제로 WM_TIMER를 실행시키는 함수
+	//GUI obj Init
 	draw_curDataInit(&g_drawCurrent);
-	draw_TiltePrint(hwnd, g_drawList.size());
+
 	return 0;
 }
 
-LRESULT OnDestroy()
+LRESULT OnDestroy(HWND hwnd)
 {
+	KillTimer(hwnd, 1);
 	PostQuitMessage(0);
 	return 0;
 }
@@ -118,5 +123,15 @@ LRESULT OnChar(HWND hwnd, WPARAM wParam)
 	}
 	}
 
+	return 0;
+}
+
+LRESULT OnTimer(HWND hwnd, WPARAM wParam)
+{
+	//현재 시간 값을 제목표시줄에 출력함
+	if (wParam == 1)
+	{
+		draw_TiltePrint(hwnd, g_drawList.size());
+	}
 	return 0;
 }
