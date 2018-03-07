@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E79D1B9C-F567-439E-BF44-2417B663DA9B}</ProjectGuid>
+    <ProjectGuid>{E7CA22D1-B4FA-413E-AC17-700EE5FA1D83}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>My0307_TimeFunction</RootNamespace>
+    <RootNamespace>My0307_FallingRectangleGame</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -76,16 +76,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GetBootingTime.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GetCurrentTime.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GetFileTime.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="PrintCurrentTimeOnClientWindow.cpp" />
+    <ClCompile Include="DrawWindow.cpp" />
+    <ClCompile Include="handler.cpp" />
+    <ClCompile Include="MyHero.cpp" />
+    <ClCompile Include="source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DrawWindow.h" />
+    <ClInclude Include="handler.h" />
+    <ClInclude Include="MyHero.h" />
+    <ClInclude Include="std.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

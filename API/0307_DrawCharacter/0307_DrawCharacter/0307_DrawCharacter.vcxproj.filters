@@ -15,16 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GetCurrentTime.cpp">
+    <ClCompile Include="DrawString.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GetFileTime.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GetBootingTime.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="PrintCurrentTimeOnClientWindow.cpp">
+    <ClCompile Include="DrawFormatString.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
