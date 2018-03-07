@@ -8,7 +8,37 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch (msg)	{
 	case WM_CREATE:
 		return 0;
-	 case WM_LBUTTONDOWN:
+	case WM_PAINT:
+	{
+					 PAINTSTRUCT ps;
+					 HDC hdc = BeginPaint(hwnd, &ps);
+					 //hdc setting
+						 //brush change
+					 HBRUSH brush = CreateSolidBrush(RGB(255,0,0));
+					 HBRUSH old = (HBRUSH)SelectObject(hdc, brush);
+
+						 //pen change
+					 HPEN pen = CreatePen(0,1,RGB(0, 0, 255));
+					 HPEN oldPen = (HPEN)SelectObject(hdc, pen);
+					//SetPixel(hdc, 10, 10, RGB(255, 0, 0));
+					 MoveToEx(hdc, 0, 0, NULL);
+					 LineTo(hdc, 300, 90);
+					Rectangle(hdc, 50, 100, 200, 180);
+					BYTE a = RGB(0,0,0);
+					// Ellipse(hdc, 220, 100, 400, 200);
+
+					//hdc setting reset
+						//brush reset
+					DeleteObject(SelectObject(hdc,old));
+						//pen reset
+					DeleteObject(SelectObject(hdc, oldPen));
+
+					 EndPaint(hwnd, &ps);
+
+					 return 0;
+	}
+
+	case WM_LBUTTONDOWN:
 		return 0;
 	case WM_DESTROY:
 		PostQuitMessage(0);

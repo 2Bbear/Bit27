@@ -8,8 +8,21 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch (msg)	{
 	case WM_CREATE:
 		return 0;
-	 case WM_LBUTTONDOWN:
+	case WM_LBUTTONDOWN:
+	{
+		DWORD count = GetTickCount();
+		int second = count / 1000;
+		int minute = (second % 3600) / 60;
+		int hour = (second % 86400) / 3600;
+		int day = second / 864000;
+		TCHAR buf[50];
+		wsprintf(buf, TEXT("%d일 %d시간 %d분 %d초 가 경과하였습니다."),
+			day, hour, minute, second % 60);
+		SetWindowText(hwnd, buf);
+
 		return 0;
+	}
+		
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;

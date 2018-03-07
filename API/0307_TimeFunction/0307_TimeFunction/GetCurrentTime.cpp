@@ -7,8 +7,26 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)	{
 	case WM_CREATE:
+	{
+		SYSTEMTIME st;
+		GetSystemTime(&st);
+		TCHAR buf[50];
+		GetDateFormat(LOCALE_USER_DEFAULT, 0, &st, TEXT("yyy년 M월 d일"), buf, 50);
+		SetWindowText(hwnd, buf);
 		return 0;
-	 case WM_LBUTTONDOWN:
+	}
+
+	case WM_RBUTTONDOWN:
+	{
+		SYSTEMTIME st;
+		GetLocalTime(&st);
+		TCHAR buf[50];
+		GetTimeFormat(LOCALE_USER_DEFAULT, 0, &st, TEXT("tt h시 m분 s초"), buf, 50);
+		SetWindowText(hwnd, buf);
+
+		return 0;
+	}
+	case WM_LBUTTONDOWN:
 		return 0;
 	case WM_DESTROY:
 		PostQuitMessage(0);
