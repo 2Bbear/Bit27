@@ -127,6 +127,8 @@ LRESULT OnLButtonDown(HWND hwnd, WPARAM wParam, LPARAM lParam)
 
 LRESULT OnRButtonDown(HWND hwnd)
 {
+	g_drawList.pop_back();
+	InvalidateRect(hwnd, 0, TRUE);
 	return 0;
 }
 

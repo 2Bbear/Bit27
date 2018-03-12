@@ -13,6 +13,7 @@ void ui_GetControlHandle(HWND hDlg)
 
 	//combo
 	g_hComboBox1 = GetDlgItem(hDlg, IDC_COMBO1);
+	//combo박스에 글자 추가하기
 	SendMessage(g_hComboBox1, CB_ADDSTRING, 0, (LPARAM)TEXT("R"));
 	SendMessage(g_hComboBox1, CB_ADDSTRING, 0, (LPARAM)TEXT("G"));
 	SendMessage(g_hComboBox1, CB_ADDSTRING, 0, (LPARAM)TEXT("B"));
