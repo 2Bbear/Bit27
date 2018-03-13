@@ -120,6 +120,7 @@ BOOL OnGetProcessIDInWidowHandle(HWND hwnd, LPDWORD lpdwProcessID)
 BOOL OnGetWindowHandleInProcessID(DWORD dwDesiredAccess, BOOL bInheritHandle, DWORD dwProcessID)
 {
 	HANDLE temp = OpenProcess( dwDesiredAccess,  bInheritHandle, dwProcessID);
+//핸들을 가져오면 참조함수가 증가하기 때문에 반드시 CloseHandle(temp)를 해주어야 한다.
 
 	return 0;
 }
