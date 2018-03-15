@@ -1,4 +1,5 @@
-#pragma once
+#pragma 
+#include"resource.h"
 #include <windows.h>
 #include <tchar.h>
 #include<vector>

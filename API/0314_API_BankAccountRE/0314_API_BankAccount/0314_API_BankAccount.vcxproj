@@ -146,7 +146,11 @@
     <ClInclude Include="Account.h" />
     <ClInclude Include="AccountDetail.h" />
     <ClInclude Include="bank.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="std.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="0314_API_BankAccount.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
