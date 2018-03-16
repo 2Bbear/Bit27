@@ -1,0 +1,8 @@
+스레드
+스레드는 suspend스레드count가 0일때 실행된다.
+
+-suspend스레드
+ 이 함수를 사용하면 해당 스레드의 suspend스레드count를 증가시킨다.
+-resume스레드
+ 이 함수를 사용하면 해당 스레드의 suspend스레드count를 감소시킨다.
+
