@@ -90,7 +90,7 @@ BOOL CALLBACK ModalProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 		}
 		case IDOK:
 		{
-			_temp = (SHAPE*)lParam;
+			_temp = (SHAPE*)lParam;//d-init에 넣어야해 여기다 넣으면 안됨
 			
 			//x 받아오기			
 			g_CurData.pt.x = GetDlgItemInt(hDlg, IDC_EDIT11, 0, 0);
