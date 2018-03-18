@@ -1,6 +1,9 @@
 #include <windows.h>
 #include <tchar.h>
 
+//
+#include <stdio.h> //콘솔 출력용
+//
 #define WM_JJHMESSAGE WM_USER+100
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -19,6 +22,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 int WINAPI _tWinMain(HINSTANCE hInst, HINSTANCE hPrev, LPTSTR lpCmdLine,
 	int nShowCmd)
 {
+	//콘솔 출력용
+	AllocConsole(); // console 창 생성
+
+	freopen("CONOUT$",   // console 을
+		"wt",        // text write 모드로
+		stdout);	  // stdout 과 연결..
+	//===============================================
 	// 1. 윈도우 클래스 만들기 
 	WNDCLASS wc;
 	wc.cbWndExtra = 0;
@@ -29,7 +39,7 @@ int WINAPI _tWinMain(HINSTANCE hInst, HINSTANCE hPrev, LPTSTR lpCmdLine,
 	wc.hInstance = hInst;
 	wc.lpfnWndProc = WndProc;
 	wc.lpszClassName = TEXT("First");
-	wc.lpszMenuName = 0;
+	wc.lpszMenuName = 0;// 메뉴 추가하는 방법 MAKEINTRESOURCE(원하는메뉴아이디);
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	// 2. 등록(레지스트리에)
 	RegisterClass(&wc);
