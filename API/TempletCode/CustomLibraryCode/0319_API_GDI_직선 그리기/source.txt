@@ -1,0 +1,42 @@
+static POINTS start, end;
+static BOOL bNowDraw = FALSE;
+
+
+LRESULT OnLButtonDown(HWND hwnd, WPARAM wParam, LPARAM lParam)
+{
+	start = MAKEPOINTS(lParam);
+	end = start;
+	bNowDraw = TRUE;
+
+	return 0;
+}
+
+
+LRESULT OnLButtonUp(HWND hwnd, WPARAM wParam, LPARAM lParam)
+{
+	bNowDraw = FALSE;
+	HDC hdc = GetDC(hwnd);
+	MoveToEx(hdc, start.x, start.y, NULL);
+	LineTo(hdc, end.x, end.y);
+	ReleaseDC(hwnd, hdc);
+
+	return 0;
+}
+
+LRESULT OnMouseMove(HWND hwnd, WPARAM wParam, LPARAM lParam)
+{
+	if (bNowDraw)
+	{
+		HDC hdc = GetDC(hwnd);
+		SetROP2(hdc, R2_NOT);
+		MoveToEx(hdc, start.x, start.y, NULL);
+		LineTo(hdc, end.x, end.y);
+
+		end = MAKEPOINTS(lParam);
+		MoveToEx(hdc, start.x, start.y, NULL);
+		LineTo(hdc, end.x, end.y);
+		ReleaseDC(hwnd, hdc);
+	}
+
+	return 0;
+}

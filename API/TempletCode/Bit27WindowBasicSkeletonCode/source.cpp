@@ -1,54 +1,47 @@
+#include <windows.h>
+#include <tchar.h>
 
-#include"std.h"
-
+//
+#include <stdio.h> //콘솔 출력용
+//
+#include"handle.h"
 
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg) {
+	
 	case WM_CREATE:
 	{
-		return OnCreate(hwnd, wParam, lParam);
+		return 0;
 	}
-	//=======================================
-	case WM_INITMENUPOPUP:
-	{
 		
-		return OnInitMenuPopUp(hwnd, wParam, lParam);
-	}
-	case WM_CONTEXTMENU:
-	{
-		return OnContextMenu(hwnd, wParam, lParam);
-	}
-	case WM_COMMAND:
-	{
-		
-		return OnCommand(hwnd, wParam, lParam);
-	}
-	//=========================================
 	case WM_LBUTTONDOWN:
 	{
-		return OnLButtonDwon(hwnd, wParam, lParam);
+		return 0;
 	}
-	case WM_RBUTTONDOWN:
-	{
-		return OnRButtonDwon(hwnd, wParam, lParam);
-	}
-	//=========================================
 		
 	case WM_DESTROY:
 	{
 		PostQuitMessage(0);
-		return OnDestroy();
+		return 0;
 	}
 		
 	}
+
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 int WINAPI _tWinMain(HINSTANCE hInst, HINSTANCE hPrev, LPTSTR lpCmdLine,
 	int nShowCmd)
 {
-	// 1. 윈도우 클래스 만들기 
+	//콘솔 출력용
+	AllocConsole(); // console 창 생성
+
+	freopen("CONOUT$",   // console 을
+		"wt",        // text write 모드로
+		stdout);	  // stdout 과 연결..
+					  //===============================================
+					  // 1. 윈도우 클래스 만들기 
 	WNDCLASS wc;
 	wc.cbWndExtra = 0;
 	wc.cbClsExtra = 0;
@@ -58,7 +51,7 @@ int WINAPI _tWinMain(HINSTANCE hInst, HINSTANCE hPrev, LPTSTR lpCmdLine,
 	wc.hInstance = hInst;
 	wc.lpfnWndProc = WndProc;
 	wc.lpszClassName = TEXT("First");
-	wc.lpszMenuName = 0;
+	wc.lpszMenuName = 0;// 메뉴 추가하는 방법 MAKEINTRESOURCE(원하는메뉴아이디);
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	// 2. 등록(레지스트리에)
 	RegisterClass(&wc);
@@ -71,13 +64,6 @@ int WINAPI _tWinMain(HINSTANCE hInst, HINSTANCE hPrev, LPTSTR lpCmdLine,
 		hInst,		// WinMain의 1번째 파라미터 (exe 주소)
 		0);		// 생성 인자
 				// 4. 윈도우 보여주기
-	
-	//메뉴추가하기///////////////////////////////////////////////////////////////////////////////////
-	//메뉴 리소스가 있어야 가능한 코드
-	//HMENU hMenu = LoadMenu(hInst, MAKEINTRESOURCE(IDR_MENU1));
-	//SetMenu(hwnd, hMenu);
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	//윈도우 출력하기
 	ShowWindow(hwnd, SW_SHOW);
 	UpdateWindow(hwnd);
 

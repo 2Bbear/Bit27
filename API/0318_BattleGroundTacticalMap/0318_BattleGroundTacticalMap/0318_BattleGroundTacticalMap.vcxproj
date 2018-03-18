@@ -139,10 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="drawPencilLine.cpp" />
     <ClCompile Include="handler.cpp" />
     <ClCompile Include="source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="drawPencilLine.h" />
     <ClInclude Include="handler.h" />
     <ClInclude Include="MyDebugMacro.h" />
     <ClInclude Include="resource.h" />

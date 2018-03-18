@@ -10,11 +10,26 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		MYDEBUG("프로그램 초기화")
 		return 0;
 	}
-		
+	case WM_PAINT:
+	{
+		return OnPaint(hwnd, wParam, lParam);
+	}
 	case WM_LBUTTONDOWN:
 	{
 		MYDEBUG("마우스 l버튼")
-		return OnLbuttonDown( hwnd,  wParam,  lParam);
+		return OnLButtonDown( hwnd,  wParam,  lParam);
+	}
+	case WM_LBUTTONUP:
+	{
+		return OnLButtonUp(hwnd, wParam, lParam);
+	}
+	case WM_RBUTTONDOWN:
+	{
+		return OnRButtonDown(hwnd, wParam, lParam);
+	}
+	case WM_MOUSEMOVE:
+	{
+		return OnMouseMove(hwnd, wParam, lParam);
 	}
 	case WM_COMMAND:
 	{

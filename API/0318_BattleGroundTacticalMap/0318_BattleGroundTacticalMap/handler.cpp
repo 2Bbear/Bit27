@@ -58,8 +58,36 @@ LRESULT OnDestroy()
 	return 0;
 }
 
-LRESULT OnLbuttonDown(HWND hwnd, WPARAM wParam, LPARAM lParam)
+
+
+LRESULT OnLButtonDown(HWND hwnd, WPARAM wParam, LPARAM lParam)
+{
+	DPL_LButton(lParam);
+
+	return 0;
+}
+
+LRESULT OnLButtonUp(HWND hwnd, WPARAM wParam, LPARAM lParam)
 {
 
+
+	return 0;
+}
+
+LRESULT OnRButtonDown(HWND hwnd, WPARAM wParam, LPARAM lParam)
+{
+	
+	return 0;
+
+}
+
+LRESULT OnMouseMove(HWND hwnd, WPARAM wParam, LPARAM lParam)
+{
+	DPL_MouseMove(GetDC(hwnd), hwnd, wParam, lParam);
+	return 0;
+}
+
+LRESULT OnPaint(HWND hwnd, WPARAM wParam, LPARAM lParam)
+{
 	return 0;
 }
