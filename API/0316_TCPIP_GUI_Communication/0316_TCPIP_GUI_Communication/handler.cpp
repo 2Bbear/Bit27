@@ -67,8 +67,10 @@ void OnClientLogMessage(int flag, char * ip, int port)
 void OnMessage(char * _buf, int _nRead)
 {
 	TCHAR buf[256];
-	wchar_t w_ip[250];
-	MultiByteToWideChar(CP_ACP, 0, _buf, -1, w_ip, 250);
+	//wchar_t w_ip[250];
+	memcpy(buf, _buf, _nRead);
+	
+	//MultiByteToWideChar(CP_ACP, 0, _buf, -1, w_ip, 250);
 
 	ui_LogMessage(buf);
 }

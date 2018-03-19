@@ -1,0 +1,39 @@
+클라이언트 -> 서버
+[어플리케이션 프로토콜]
+모든 데이터 크기는 64바이트
+#define PACK_ADDMEMBER 1
+#define PACK_LOGIN  2
+#define PACK_SHORTMESSAGE 3
+/*
+가입 1, 
+로그인 2
+숏 3
+*/
+
+typedef struct tagADDMEMBER
+{
+  int flag;
+  TCHAR name[20];
+  TCHAR id[20];
+  TCHAR pw[20];
+}ADDMEMVER;
+
+typedef struct tagLOGIN
+{
+  int flag;
+  TCHAR name[20];
+  TCHAR pw[20];
+  TCHAR rest[20];
+}LOGIN;
+
+typedef struct taSHORTMESSAGE
+{
+  int flag;
+  TCHAR rest[60];
+
+}SHORTMESSAGE;
+
+
+가입(flag 4 ,이름20, 아이디 20, 패스워드 20)
+로그인(flag 4, 아이디20, 패스워드20,빈공간20)
+숏매시지(flag 4, 60)

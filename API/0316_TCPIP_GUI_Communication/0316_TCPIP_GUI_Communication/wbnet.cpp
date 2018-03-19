@@ -40,11 +40,11 @@ DWORD WINAPI foo(void* p)
 	{
 		memset(buf, 0, 1024);
 
-		//int nRead = recv( s, buf, 1024, 0);
-		int nRead = recvn(s, buf, 1024, 0);
-		OnMessage(buf,nRead);
+		int nRead = recv( s, buf, 1024, 0);
+		//int nRead = recvn(s, buf, 1024, 0);
 		printf("%s\n", buf);//=====================================================
 		if (nRead <= 0) break;
+		OnMessage(buf, nRead);
 		// 받은 data를 list 에 있는 모든 client에게 보낸다.
 		for (int i = 0; i < (int)client_list.size(); ++i)
 		{

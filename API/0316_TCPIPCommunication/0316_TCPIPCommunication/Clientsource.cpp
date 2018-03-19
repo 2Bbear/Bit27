@@ -88,7 +88,10 @@ void main()
 	char name[256] = "[자신이름] :JJH";
 	char data[256] = { 0 };
 	char buf[1024] = { 0 };
-
+	/*
+	send 스레드
+	receive 스레드
+	*/
 	while (1)
 	{
 		memset(buf, 0, 1024);
