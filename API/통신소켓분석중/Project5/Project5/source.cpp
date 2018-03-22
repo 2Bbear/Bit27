@@ -92,25 +92,25 @@ void ClientStart()
 	//-----------------------------------------------
 	// 사용자의 입력을 서버에 전달한다.
 	char name[256] = "[자신이름] :";
-	char data[256] = { 0 };
-	char buf[1024] = { 0 };
+	
 	
 	DATA data2;
 	data2.flag = 1;
-	strcpy_s(data2.msg, "와아아아아아아아아 시불장 것 이게 뭐시다냐");
+	
 	
 
 	while (1)
 	{
+		char data[256] = { 0 };
+		char buf[1024] = { 0 };
+
 		memset(buf, 0, 1024);
 		memset(data, 0, 256);
-		gets_s(data);
-		strcpy(buf, name);
-		strcat(buf, data);
-
+		gets_s(buf, 1024);
+		strcpy_s(data2.msg, buf);
 		// 서버에 전송한다
-		wbnet_SendMessage((char *)&data2, sizeof(data2));
-		printf("문자다쓴거 맞냐\n");
+		wbnet_SendMessage(buf, sizeof(buf));
+		
 	}
 
 	closesocket(g_socket);

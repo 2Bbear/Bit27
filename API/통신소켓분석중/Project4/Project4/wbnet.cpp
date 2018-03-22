@@ -13,7 +13,7 @@ BOOL OnMessage(char * _buf,int size)
 	//메세지 분석
 	if (*p==1)
 	{
-		printf("1 패킷 전송 확인 \n");
+		printf(_buf);
 	}
 	if (*p == 2)
 	{
@@ -57,14 +57,25 @@ DWORD WINAPI foo(void* p)
 	while (1)
 	{
 		memset(buf, 0, 1024);
-
-		//		int nRead = recv( s, buf, 1024, 0);
+		//int nRead = recv( s, buf, 1024, 0);
 		int nRead = recvn(s, buf, 1024, 0);
 		printf("%s\n", buf);
 		if (nRead <= 0) break;
 
-		OnMessage(buf,nRead);
 
+		OnMessage(buf,nRead);//메세지 분석기
+
+		//==================들어온 메세지 수정하기
+		char temp[1024];
+		strcpy_s(temp, buf);
+
+		for (int i=0;i<1024;i++)
+		{
+			buf[i] = '\0';
+		}
+		strcpy_s(buf, "ECHO : ");
+		strcat_s(buf, temp);
+		//============================메세지 보내기
 
 		// 받은 data를 list 에 있는 모든 client에게 보낸다.
 		for (int i = 0; i < client_list.size(); ++i)

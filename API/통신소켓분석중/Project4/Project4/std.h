@@ -9,6 +9,7 @@
 #include <vector> // STL ÀÇvector
 using namespace std;
 
+#include"packet.h"
 
 
 #include"wbnet.h"
