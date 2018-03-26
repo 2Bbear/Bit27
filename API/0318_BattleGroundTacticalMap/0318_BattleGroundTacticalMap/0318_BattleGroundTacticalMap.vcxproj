@@ -139,14 +139,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="drawcontroler.cpp" />
     <ClCompile Include="drawPencilLine.cpp" />
     <ClCompile Include="handler.cpp" />
+    <ClCompile Include="network.cpp" />
     <ClCompile Include="source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="drawcontroler.h" />
     <ClInclude Include="drawPencilLine.h" />
     <ClInclude Include="handler.h" />
+    <ClInclude Include="linedata.h" />
+    <ClInclude Include="markerdata.h" />
+    <ClInclude Include="member.h" />
     <ClInclude Include="MyDebugMacro.h" />
+    <ClInclude Include="network.h" />
+    <ClInclude Include="packet.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="std.h" />
   </ItemGroup>
