@@ -1,0 +1,2 @@
+select groupid
+from team;         

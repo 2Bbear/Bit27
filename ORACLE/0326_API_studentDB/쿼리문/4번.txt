@@ -1,0 +1,4 @@
+4 .insert Äõ¸®¹®(Á¶)
+
+insert into Team
+values (10, 'Team');

@@ -1,0 +1,6 @@
+CREATE TABLE Team
+(GroupId number,
+GroupName varchar2(20),
+CONSTRAINT Group_id_pk primary key(GroupId));
+
+DROP TABLE Team;

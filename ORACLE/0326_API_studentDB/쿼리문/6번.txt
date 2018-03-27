@@ -1,0 +1,1 @@
+delete member where mem_ID=1;

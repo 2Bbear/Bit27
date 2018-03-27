@@ -1,0 +1,5 @@
+
+5 .insert 쿼리문(맴버 테이블) - 시퀀스
+
+insert into Member
+values (mem_ID_seq.nextval, '이름', '성별', '010-1111-1111', 10, sysdate);

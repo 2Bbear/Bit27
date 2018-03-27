@@ -1,0 +1,13 @@
+CREATE TABLE member(
+	mem_ID   	 NUMBER , 
+        mem_NAME  	VARCHAR2(20 BYTE) NOT NULL, 
+        mem_gen		VARCHAR2(20 BYTE) check (mem_gen in('남성','여성')), 
+        mem_phone 	 VARCHAR2(20 BYTE), 
+        mem_GID          NUMBER NOT NULL, 
+	mem_date	date,
+  CONSTRAINT member_PK PRIMARY KEY (mem_ID));
+
+ALTER TABLE member 
+ADD CONSTRAINT member_FK FOREIGN KEY ( mem_ID )
+    REFERENCES ROLES ( mem_ID );
+         

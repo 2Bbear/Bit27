@@ -1,0 +1,4 @@
+select member.*,team.groupname
+  from MEMBER join team
+ on MEMBER.MEM_GID = team.GROUPID
+   where MEMBER.MEM_NAME ='¿Ã∏ß';
