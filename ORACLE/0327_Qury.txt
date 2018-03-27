@@ -1,0 +1,210 @@
+이름문자, 전화번호문자,생년월일날짜, 성별문자, 나이숫자
+=========================================================DDL
+--테이블 생성
+CREATE TABLE dept
+(dno number(2),
+dname varchar2(14),
+loc varchar2(13));
+
+++++++++++++++++()
+CREATE TABLE dept
+(dno number(2),
+dname varchar2(14),
+loc date);
+
+CREATE TABLE member
+(name varchar2(20) not null,
+phone varchar2(20) not null,
+birth date,
+gender varchar2(10),
+age number);
+
+CREATE TABLE member
+(memberid number,
+name varchar2(20) not null,
+phone varchar2(20) not null,
+birth date,
+gender varchar2(10),
+age number,
+adddate date);
+
+--테이블 구조 변경 (컬럼 추가)
+ALTER TABLE 테이블명
+ADD(birth DATE);
+
+ALTER TABLE member
+ADD(ADDDATE DATE);
+========================================================
+--제약조건 걸기
+1. 테이블 생성시 제약 조건 걸기
+CREATE TABLE customer(
+                         id           VARCHAR2(20) NOT NULL,
+                         pwd        VARCHAR2(20) NOT NULL,
+                         name      VARCHAR2(20) NOT NULL,
+                         phone     VARCHAR2(30) ,
+                         address  VARCHAR2(100)) ;
+
+2. 이미 있는 테이블에 제약 조건 걸기
+ALTER TABLE 테이블명
+ ADD [CONSTRAINT constraint_name] constraint_type (column_name)
+
+
+--제약조건에 별명 붙이기
+CREATE TABLE customer(
+id          VARCHAR(20),
+pwd       VARCHAR(20) constraint customer_pwd_nn not null,
+name     VARCHAR(20) constraint customer_name_nn not null,
+phone    VARCHAR(30),
+Address VARCHAR(100), 
+CONSTRAINT customer_id_pk primary key(id) ;
+
+--별명 붙은 제약조건 검색
+SELECT table_name, constraint_name 
+  FROM    user_constraints
+  WHERE  table_name IN (‘제약조건별명’)  ;
+
+--Primary key 지정
+
+--Primary key 조합지정
+CREATE TABLE customer(
+id          VARCHAR(20),
+pwd       VARCHAR(20) constraint customer_pwd_nn not null,
+name     VARCHAR(20) constraint customer_name_nn not null,
+phone    VARCHAR(30),
+Address VARCHAR(100), 
+CONSTRAINT customer_id_pk primary key(id) ;
+
+--Foreign key 지정
+
+--제약조건 삭제
+ALTER TABLE table_name
+  DROP PRIMARY KEY |  UNIQUE (column) | CONSTRAINT contraint_name[CASCADE]
+
+
+
+
+
+
+
+
+=====================================================
+--테이블 구조 변경 (컬럼 타입 변경) // 해당 컬럼에 데이터가 있을 경우 이 문장은 실행되지 않는다.
+ALTER TABLE dept
+MODIFY dname varchar2(30);
+
+--테이블 구조 변경 (컬럼 삭제)
+ALTER TABLE 테이블명 
+DROP COLUMN 컬럼명 ;
+
+--테이블 구조 변경 (컬럼 비표시)
+ALTER TABLE 테이블 명
+ SET UNUSED  (컬럼명) ;
+======================================================
+--테이블 스키마 출력
+desc 테이블명;
+
+======================================================
+--테이블 삭제
+drop table 테이블명;
+
+--테이블 내용 데이터 삭제
+TRUNCATE TABLE 테이블명 ;
+
+
+--데이터 사전 ppt 8장 참조
+SELECT table_name FROM user_tables ;
+============================================================
+--시퀸스 생성
+CREATE SEQUENCE 시퀸스명
+[START WITH 숫자]
+[INCREMENT BY n]             
+[{MAXVALUE n | NOMAXVALUE}]
+[{MINVALUE n | NOMINVALUE}]
+[{CYCLE | NOCYCLE}]         
+[{CACHE n | NOCACHE}]   
+
+CREATE SEQUENCE memberid_seq
+start with 1000          
+increment by 1;   
+
+-- 시퀸스 제거
+
+-- 인덱스 생성 // 빠른 SELECT , 느린 insert, update, delete ,검색이 느릴때만 만들자
+
+
+
+
+============================================================DML
+--테이블에 내용 추가
+INSERT INTO 테이블명
+  VALUES         (10, ‘ACCOUNTING’, ‘NEW YORK’) ;
+
+INSERT INTO member
+  VALUES         ('허길동', '010-5948-5781', '1994/01/04','남',25,sysdate) ;
+
+
+INSERT INTO member
+  VALUES         (memberid_seq.nextval,'홍길동', '010-5948-5781', '1994/01/04','남',25,sysdate) ;
+
+
+--테이블 전체 내용 출력
+SELECT * FROM 테이블 명
+
+SELECT * FROM member
+=============================================================
+-테이블 내용 수정 (컬럼 데이터 수정)
+UPDATE table_name 
+  SET column_name1 = value1, column_name2 = value2, … 
+  WHERE conditions ;
+
+UPDATE member 
+  SET name= '이길동', age= 30;
+
+UPDATE member 
+  SET phone='010-2222-2222', age=20
+WHERE name='허길동';
+===========================================================
+--테이블 내용 삭제
+DELETE table_name 
+  WHERE conditions ;
+
+DELETE member
+where name='허길동';
+
+=========================================================
+--롤백
+rollback;
+
+--커밋
+commit;
+
+
+================================================================
+CREATE TABLE CHARACTERS (
+         CHARACTER_ID    NUMBER NOT NULL, 
+          CHARACTER_NAME  VARCHAR2(30 BYTE), 
+          MASTER_ID       NUMBER(5,0), 
+          ROLE_ID         NUMBER(5,0), 
+          EMAIL           VARCHAR2(40 BYTE), 
+          CONSTRAINT CHARACTERS_PK PRIMARY KEY (CHARACTER_ID));
+
+
+CREATE TABLE CASTING (
+         EPISODE_ID    NUMBER(5,0)  NOT NULL, 
+          CHARACTER_ID  NUMBER(5,0)  NOT NULL,  
+          REAL_NAME     VARCHAR2(30 BYTE),
+          CONSTRAINT CASTING_PK PRIMARY KEY (EPISODE_ID, CHARACTER_ID)); 
+
+
+INSERT INTO CHARACTERS ( CHARACTER_ID, CHARACTER_NAME, EMAIL)
+VALUES ( 1, '루크 스카이워커','luke@jedai.com');
+
+
+ALTER TABLE CHARACTERS 
+ADD CONSTRAINT CHARACTERS_FK FOREIGN KEY ( ROLE_ID )
+    REFERENCES ROLES ( ROLE_ID );
+
+
+
+
+
