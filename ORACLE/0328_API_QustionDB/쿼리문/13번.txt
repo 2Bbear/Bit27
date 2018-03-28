@@ -1,0 +1,4 @@
+13. select member.*, team.groupname
+from member join team
+on member.mem_gid = team.groupid
+where mem_gen='³²¼º'; 

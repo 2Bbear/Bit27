@@ -1,0 +1,4 @@
+select m.*, T.groupname
+from member m join Team t
+on m.mem_id = t.groupid
+where m.mem_id = 'asd';

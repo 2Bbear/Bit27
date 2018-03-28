@@ -1,0 +1,3 @@
+update Team
+set GroupName= '¡÷∞Ê≈√'
+where GroupId = 10;

@@ -1,0 +1,3 @@
+SELECT m.* , t.groupname
+FROM member m NATURAL join team t
+where m.mem_gid= t.groupid;

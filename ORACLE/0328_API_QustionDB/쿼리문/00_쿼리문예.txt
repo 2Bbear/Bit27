@@ -1,0 +1,77 @@
+-- 테이블 생성 
+
+CREATE TABLE member
+(memberid  number,
+ name varchar2(20) not null, 
+ phone varchar2(20) not null,
+ birth   date,
+ gender varchar2(10),
+ age    number,
+ adddate date);
+
+--테이블 스키마 확인
+desc dept;
+
+-- 테이블 삭제
+drop table member;
+
+--- 테이블의 모든 데이터 삭제
+TRUNCATE TABLE dept;
+
+
+-- 테이블 구조 변경1(컬럼 추가)
+ALTER TABLE member
+ADD(adddate DATE);
+
+-- 테이블 구조 변경2(컬럼 타입 변경)
+ALTER TABLE dept
+MODIFY dname carchar2(30);
+
+
+
+-- 테이블 구조 변경2(컬럼 삭제)
+ALTER TABLE dept
+DROP COLUMN dname;
+
+-- 데이터 사전
+SELECT table_name FROM user_tables;
+SELECT table_name, tablespace_name 
+  FROM tabs;
+
+=============================================
+insert into member 
+values (memberid_seq.nextval,'허길동', '010-1111-1111', '2000/03/01', '남', 20, sysdate);
+
+update member
+set phone = '010-2222-2222', age = 25
+where name = '허길동';
+
+delete member
+where name = '허길동';
+
+select * from member;
+
+============================================
+rollback;
+
+commit;
+
+=========================================
+
+CREATE SEQUENCE memberid_seq
+start with 1000
+increment by 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

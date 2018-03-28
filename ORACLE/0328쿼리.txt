@@ -1,0 +1,89 @@
+//======================================================================================
+INSERT 문   
+--Exam 테이블에 추가하는 쿼리문    						2번
+insert into exam
+values ( EXAM_ID_SEQ.nextval,(문제번호));
+
+
+--ExamPool 테이블에 추가하는 쿼리문  						1번
+insert into exampool
+values (EXAMPOOL_ID_SEQ.nextval, '문제', '답1', '답2', '답3', '답4', 1);
+
+
+--ExamResult 테이블에 추가하는 쿼리문  						4번
+insert into EXAMRESULT
+values (EXAMRESULT_ID_SEQ.nextval, (문제ID),(멤버ID),(멤버가 선택한 숫자),(정답이면 10, 아니면 0));
+
+
+//======================================================================================
+SELECT 문
+
+--SELECT ExamPool ALL   
+SELECT * 
+FROM exampool;
+
+--SELECT ExamPool ExampoolID
+SELECT *
+FROM exampool e
+where e.exampool_id=숫자
+
+--SELECT Exampool 문제 아이디로 답 찾기   					5번
+SELECT e.answer
+FROM exampool e
+where e.exampool_id=94;
+
+--SELECT  문제 출제 기능 							3번
+SELECT ep.*
+FROM exam ex , exampool ep
+WHERE ex.exampool_id = ep.exampool_id;
+
+--SELECT Exam ALL 시험지 전부 출력  
+SELECT *
+FROM Exam;
+
+--SELECT Exam ExamID examid로 검색
+SELECT *
+FROM Exam e
+where e.exam_id=숫자;
+
+--SELECT Examresult member_id 특정학생을 검색하여 푼 시험지 보기 			7번
+SELECT er.exam_id, ep.answer, er.member_selectnum, er.result
+FROM Examresult er NATURAL join exampool ep
+WHERE er.exam_id=ep.exampool_id AND er.mem_id=1001;
+
+--SELECT 전체 학색의 점수 보기 							6번
+SELECT e.mem_id, m.mem_name , SUM(result) sresult
+FROM member m , examresult e
+WHERE m.mem_id= e.mem_id
+GROUP BY m.mem_name, e.mem_id;
+
+--SELECT 전체 학생 수와, 평균 점수 구하기						8번
+SELECT COUNT(mem_name),AVG(sresult)
+FROM (SELECT e.mem_id, m.mem_name , SUM(result) sresult
+FROM member m , examresult e
+WHERE m.mem_id= e.mem_id
+GROUP BY m.mem_name, e.mem_id) ptr;
+
+--SELCT 전체성적 오름차순
+SELECT e.mem_id, m.mem_name , SUM(result) sresult				9번
+FROM member m , examresult e
+WHERE m.mem_id= e.mem_id
+GROUP BY m.mem_name, e.mem_id
+ORDER BY sresult DESC;
+
+//=======================================================================================
+UPDATE 문
+--UPDATE ExamPool exampool_id
+UPDATE exampool
+SET answer=1
+WHERE exampool_id=104;
+
+--UPDATE Exam exam_id                						5번
+UPDATE Examresult
+SET RESULT=10 또는 0
+WHERE exam_id=숫자;
+
+
+
+
+
