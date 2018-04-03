@@ -7,6 +7,8 @@
 // 해당 프로젝트와 문서 코드를 공유하도록 해 줍니다.
 #ifndef SHARED_HANDLERS
 #include "0402_MFC_soo.h"
+
+
 #endif
 
 #include "0402_MFC_sooDoc.h"
