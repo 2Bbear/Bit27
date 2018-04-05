@@ -1,0 +1,24 @@
+//개체 선언
+CListBox temp= (CListBox*)GetDlgItem(IDC_LIST1);
+
+//사용 방법
+//추가하기
+//(IDC_LIST1)는 listboxcontrol의 id값
+
+void CDataDlg::OnListAdd() 
+{
+	CString str;
+	CListBox* pList = (CListBox*)GetDlgItem(IDC_LIST1);
+	GetDlgItemText(IDC_EDIT1, str);
+	pList->AddString(str);
+
+	GetDlgItemText(IDC_EDIT2, str);
+	pList->AddString(str);
+
+	GetDlgItemText(IDC_EDIT3, str);
+	pList->AddString(str);
+	
+	GetDlgItemText(IDC_EDIT4, str);
+	pList->AddString(str);
+	pList->SetCurSel(2);
+}

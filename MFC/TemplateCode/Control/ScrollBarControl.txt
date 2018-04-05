@@ -1,0 +1,9 @@
+//개체 선언
+//IDC_SCROLLBAR1 는 스크롤 바의 ID 값
+CScrollBar* pScroll = (CScrollBar*)GetDlgItem(IDC_SCROLLBAR1);
+
+
+//사용방법
+//초기화 방법
+pScroll->SetScrollRange(0, 100);
+pScroll->SetScrollPos(0);

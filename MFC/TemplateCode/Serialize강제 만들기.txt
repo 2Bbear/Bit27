@@ -1,0 +1,89 @@
+/*
+CObject를 상속받는 클래스에서만 Serialize가 가능함.
+printf함수를 따로 만들어야 함.그래야지 Updatadata, updateWindow 등의 화면 초기화를 할 수가 있다.
+
+*/
+
+//Override
+public:
+	virtual void Serialize(CArchive & ar);
+
+void CMFCApplication8Dlg::Serialize(CArchive & ar)
+{
+	if (ar.IsStoring())
+	{
+		int size = (int)m_List.size();
+
+		ar << n;
+		ar << size;
+
+		for (int i = 0; i<size; i++)
+		{
+			ar << m_List[i];
+		}
+	}
+	else 
+	{
+		m_List.clear();
+		n = 0;
+		int size = 0;
+		ar >> n;
+		ar >> size;
+		
+		for (int i =0 ; i<size;i++)
+		{
+			int n;
+			ar>>n;
+
+			m_List.push_back(n);
+		}
+	}
+	AfxMessageBox(TEXT("End"));
+	//CDialogEx::Serialize(ar);
+}
+
+
+
+
+
+//Serialize 호출하는 방법
+//저장할때
+void CMFCApplication8Dlg::OnBnClickedButton2()
+{
+	// TODO: Add your control notification handler code here
+	
+
+	CFile f;
+	f.Open(TEXT("tt.txt"), CFile::modeCreate | CFile::modeWrite);
+	CArchive ar(&f, CArchive::store);
+	this->Serialize(ar);
+
+
+
+	ar.Close();
+	f.Close();
+
+}
+
+
+
+//불러올때
+void CMFCApplication8Dlg::OnBnClickedButton3()
+{
+	// TODO: Add your control notification handler code here
+	
+	CFile f;
+	f.Open(TEXT("tt.txt"), CFile::modeRead);
+	CArchive ar(&f, CArchive::load);
+	this->Serialize(ar);
+	printNumber();
+	ar.Close();
+	f.Close();
+}
+
+
+
+
+
+
+

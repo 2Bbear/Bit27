@@ -1,0 +1,77 @@
+//개체 선언
+//IDC_RADIO1는 라디오버튼의 ID값
+CButton*  pOption = (CButton*)GetDlgItem(IDC_RADIO1);
+
+//사용방법=================================================
+
+//초기화 방법
+pOption->SetCheck(1);
+
+
+
+//선택시 발생하는 메시지 바인딩
+BEGIN_MESSAGE_MAP(CDataDlg, CDialog)
+	//{{AFX_MSG_MAP(CDataDlg)
+
+ON_BN_CLICKED(IDC_RADIO1, OnRadio1)
+
+END_MESSAGE_MAP()
+
+void CDataDlg::OnRadio1() 
+{
+	m_ImageCtrl.SetBitmap(m_imgBatman);
+}
+
+
+void CDataDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar) 
+{
+	UINT nTemp;
+	nTemp = pScrollBar->GetScrollPos();
+
+	switch(nSBCode)
+	{
+	case SB_LINELEFT: // 좌측 화살표 버튼 클릭시
+		if(nTemp > 0)
+			nTemp -= 5;
+		else
+			nTemp = 0;
+		pScrollBar->SetScrollPos(nTemp);
+		break;
+
+	case SB_PAGELEFT: // Thumb과 좌측 화살표 버튼 사이 클릭시
+		if(nTemp >= 0)
+			nTemp -= 20;
+		else
+			nTemp = 0;
+		pScrollBar->SetScrollPos(nTemp);
+		break;
+
+    case SB_LINERIGHT: // 우측 화살표 버튼 클릭시
+		if(nTemp < 100)
+			nTemp += 5;
+		else
+			nTemp = 100;
+		pScrollBar->SetScrollPos(nTemp);
+        break;
+
+	case SB_PAGERIGHT: // Thumb과 우측 화살표 버튼사이 클릭시
+		if(nTemp <= 90)
+			nTemp += 20;
+		else
+			nTemp = 0;
+		pScrollBar->SetScrollPos(nTemp);
+		break;
+
+	case SB_THUMBTRACK: // Thumb을 드래그&드롭할 때  
+		nTemp = nPos;
+		pScrollBar->SetScrollPos(nTemp);
+        break;
+	}
+
+	CString  str;
+	str.Format("%d%%", nTemp);
+	m_strCount = str;
+	UpdateData(FALSE);
+
+	CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
+}

@@ -1,0 +1,68 @@
+#pragma once
+
+
+// SearchDlg dialog
+class CMy0404MFCMemberManagerView;
+
+class SearchDlg : public CDialogEx
+{
+	DECLARE_DYNAMIC(SearchDlg)
+
+public:
+	SearchDlg(CMy0404MFCMemberManagerView* _parents,CWnd* pParent = nullptr);   // standard constructor
+	virtual ~SearchDlg();
+
+//Attribute
+public:
+	CMy0404MFCMemberManagerView * parents;
+	vector<MEMBER> * parentsMemberList;
+
+//Operations
+public:
+	//Finding member in Member List
+	MEMBER* findMemberName(const CString str);
+//Override
+public:
+	virtual void PostNcDestroy();
+// Dialog Data
+#ifdef AFX_DESIGN_TIME
+	enum { IDD = IDD_DIALOG_SEARCH };
+#endif
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+
+	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedOk();
+
+
+	CString findname;
+
+	afx_msg void OnBnClickedCancel();
+};
+
+
+
+//How to Create Modaless
+//1. 먼저 모달리스를 띄울 클래스의 헤더에 모달리스의 포인터를 선언한다.
+//생성한 모달리스의 new포인터를 이 변수에 담아서 계속 살릴 것임
+
+ SearchDlg * m_Modaless;
+
+//2.모달리스를 생성할 위치에 new로 모달리스를 생성하고, create로 setting을 해준다. 그뒤
+/ShowWindow로 윈도우에 업데이트 해주면 끝
+
+	if (m_SearchModaless==NULL)
+	{
+		m_SearchModaless = new SearchDlg(this);
+		m_SearchModaless->Create(IDD_DIALOG_SEARCH);
+		m_SearchModaless->ShowWindow(SW_SHOW);
+	}
+	else
+	{
+		m_SearchModaless->SetFocus();
+	}
+
+
+//3.모달 내부의 종료 코드에 직접 delete를 작성해야 메모리 누수가 없다.

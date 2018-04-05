@@ -1,0 +1,67 @@
+document
+- insetpoint()
+- UpdateAllView
+ => 모든 view의 Update함수를 호출해라
+ => 모든 view들은 내부적으로 update함수가 있다.
+
+
+LeftBottomView
+-List Control
+-자신의 ListCrlr 객체 알아내기.
+ CListCtrl & list =GetListCtrl();
+ list.ModifyStyle(LVS_TYPEMASK,LVS_REPORT); //ListView의 스타일 변경
+ list.InsertColumn(0,TEXT("아무거나"),0,100);
+  list.InsertColumn(1,TEXT("이것도 넣자"),0,100);
+
+===============================================================
+직렬화 114p
+- CObject class를 상속받으면 직렬화를 할 수 있다.
+
+ 다이얼로그 구조에서 직렬화
+ -CFile f;
+f.Open(경로 , CFile::modeCreate|CFile::modeWrite);
+ CArchive ar(&f,CArchive::store);
+
+ar.Close();
+f.Close();
+
+
+int size = docment의 m_poinlist.size();
+arr<<size;
+for(int i =0;i<size;i++)
+{
+	CPoint pt=GetDocument의 m_pointlistp[i];
+	ar<<pt;
+}
+
+==
+OnBnClickeButton2()
+UpdateData(true);
+CFile f;
+f.Open(경로 , CFile::modeCreate|CFile::modeWrite);
+ CArchive ar(&f,CArchive::store);
+
+
+=========================================================================
+모달리스
+
+생성 과정
+ 모달리스 포인터의 GetSageHwnd()를 호출해서 ==NULL인지 확인
+ {
+	모달리스 포인터 = new 모달리스 형태;
+	모달리스포인터->Create(ID값);
+}
+삭제 과정
+
+view에서 다른 view를 알아내는 방법
+
+즉 Fram에서 아까 분할할때 만들었던 CSplitterWnd로 해당 view 값을 전달해야 한다. 
+
+================================================
+bmp은 이동하는 과정에서 memDc에 해당 그림의 정보를 담게 된다.
+호환된다 == 두개의 dv 정보가 일치한다.
+
+selectobject로 이미지를 선택한다.
+이제 memoryDc에는 그림의 데이터가 저장되었을 것이다.
+memoryDC가 즉 보여질 화면에잇는 bitmapcontrol객체다.
+

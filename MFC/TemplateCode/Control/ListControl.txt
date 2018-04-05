@@ -1,0 +1,48 @@
+//리스트 컨트롤 객체 선언
+CListCtrl m_MemberListControl;
+
+
+//초기화
+//listControl 상단 컬럼 만들기
+void CMy0404MFCMemberManagerView::settingListColum(CListCtrl * pList, int n)
+{
+	if (n==0)//n is mode.
+	{
+		//Setting Colum
+		LVCOLUMNW col;
+		col.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
+		col.fmt = LVCFMT_LEFT;
+		//0번
+		col.cx = 60;
+		col.pszText = TEXT("이름");
+		col.iSubItem = 0;
+		m_MemberListControl.InsertColumn(0, &col);
+		//1번
+		col.cx = 60;
+		col.pszText = TEXT("성별");
+		m_MemberListControl.InsertColumn(1, &col);
+		//2번
+		col.cx = 150;
+		col.pszText = TEXT("전화번호");
+		m_MemberListControl.InsertColumn(2, &col);
+	}
+}
+
+//ListControl 출력하기
+oid CMy0404MFCMemberManagerView::printMemberList()
+{
+	//Initailize list page
+	m_MemberListControl.DeleteAllItems();
+
+	//Print list page
+	for (int i = 0; i<(int)(*m_MemberList).size(); i++)
+	{
+		//이름
+		m_MemberListControl.InsertItem(i, (*m_MemberList)[i].name);
+		//성별
+		m_MemberListControl.SetItem(i, 1, LVIF_TEXT, (*m_MemberList)[i].gender, 0, 0, 0, NULL);
+		//전화번호
+		m_MemberListControl.SetItem(i, 2, LVIF_TEXT, (*m_MemberList)[i].phone, 0, 0, 0, NULL);
+	}
+	UpdateData();
+}

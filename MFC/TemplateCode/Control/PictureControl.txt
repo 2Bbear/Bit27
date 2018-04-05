@@ -1,0 +1,114 @@
+//개체선언
+CStatic m_ctlPic1;
+
+void CMy0404MFCMemberManagerView::DoDataExchange(CDataExchange* pDX)
+{
+DDX_Control(pDX, IDC_STATIC_MAIN_IMAGE, m_ctlPic1);
+}
+
+또는
+//(IDC_STATIC_COLOR);는 pictureControl ID값
+CStatic* pFrame = (CStatic*)GetDlgItem(IDC_STATIC_COLOR);
+
+
+//사용 방법
+//비트맵 출력
+//미리 비트맵을 리소스에 만들어두어야 한다.
+//(IDB_BITMAP2));는 만들어진 비트맵의 ID값
+//또한 이 코드는 2013에서는 실행되지 않는다.
+HBITMAP hbit;
+	hbit = ::LoadBitmap(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_BITMAP2));
+	m_ctlPic1.SetBitmap(hbit);
+
+//단색 출력
+void CPixelDlg::CurrentPixelColor(COLORREF color)
+{
+	CRect  rc;
+	CStatic* pFrame = (CStatic*)GetDlgItem(IDC_STATIC_COLOR);
+	pFrame->GetClientRect(rc);
+
+	CClientDC dc(pFrame);
+
+	CBrush br(color);
+	CBrush* pOld = dc.SelectObject(&br);
+    dc.FillRect(rc, &br);
+	dc.SelectObject(pOld);
+}
+
+void CPixelDlg::SendCurrentColor(COLORREF color)
+{
+	CRect  rc;
+    CStatic* pFrame = 
+		(CStatic*)(GetParentFrame()->GetActiveView()->GetDlgItem(IDC_FORM_COLOR));
+
+	/** 다음 방법을 사용할 경우 #include "MainFrm.h"를 추가해야 한다.
+	CMainFrame* pS = (CMainFrame*)AfxGetMainWnd();
+	CStatic* pFrame =
+		(CStatic*)(pS->GetActiveView()->GetDlgItem(IDC_FORM_COLOR));
+	*******************************************************/
+
+	pFrame->GetClientRect(rc); 
+
+	CClientDC dc(pFrame);
+
+	CBrush br(color);
+	CBrush* pOld = dc.SelectObject(&br);
+    dc.FillRect(rc, &br);
+	dc.SelectObject(pOld);
+}
+
+//탐색기 띄워서 그림 찾는 방법
+//m_picture;는 picture 컨트롤의 개체
+//DDX_Control(pDX, IDC_STATIC_MAIN_PICTURE, m_picture);
+
+void CMFCApplication8Dlg::OnBnClickedButton4()
+{
+	CString dirdir;
+	CString m_filename;
+	CString m_filedir;
+
+	CString szFilter = _T("All Files(.)|.|Image (.BMP, .PNG, *.JPG) | *.BMP;.PNG;.JPG | |");
+
+	CFileDialog dlg(TRUE, NULL, NULL, OFN_HIDEREADONLY, szFilter);
+
+	if (IDOK == dlg.DoModal())
+	{
+		UpdateData(TRUE);
+		m_filename = dlg.GetFileName();      // 파일명 받기
+		m_filedir = dlg.GetPathName();       // 경로 받기
+
+		m_load = m_filedir;
+		//wprintf(m_filedir);
+
+		CString strPathName = dlg.GetPathName();
+
+		CDC *pDc = m_picture.GetWindowDC();
+		CDC memdc;
+		CImage m_bmpBitmap;
+		int width, height;
+
+		m_bmpBitmap.Destroy();
+		m_bmpBitmap.Load(strPathName);
+
+		width = m_bmpBitmap.GetWidth();
+		height = m_bmpBitmap.GetHeight();
+
+		memdc.CreateCompatibleDC(pDc);
+		m_bmpBitmap.Draw( pDc->m_hDC, 0, 0, width, height);
+		pDc->StretchBlt(0, 0, width, height, &memdc, 0, 0, width, height, SRCCOPY);
+
+		m_picture.ReleaseDC(pDc);
+		pDc->DeleteDC();
+		pDc = NULL;
+		UpdateData(FALSE);
+	}
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+==============================================================
+//커서의 색가져오는 코드
+void CPixelDlg::OnMouseMove(UINT nFlags, CPoint point) 
+{
+	CClientDC  dc(this);
+    COLORREF color;
+	color = dc.GetPixel(point);
+}

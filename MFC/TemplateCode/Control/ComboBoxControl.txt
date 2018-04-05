@@ -1,0 +1,11 @@
+//ComboBox 개체 선언
+	CComboBox	m_Combo;
+
+//사용방법
+1. 선택된 sell의 idx값을 알아내는 방법
+	int nIndex;
+	nIndex = m_Combo.GetCurSel();
+	
+	CString  str;
+	m_Combo.GetLBText(nIndex, str);
+	SetDlgItemText(IDC_STATIC_COMBO, str);

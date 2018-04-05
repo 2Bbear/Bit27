@@ -95,5 +95,11 @@
     <Image Include="res\bitmap1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="C:\Users\User\Desktop\bmp-file-icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="C:\Users\User\Desktop\2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

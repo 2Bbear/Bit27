@@ -215,6 +215,8 @@
     <None Include="res\My0404MFCMemberManager.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="C:\Users\User\Desktop\2.bmp" />
+    <Image Include="C:\Users\User\Desktop\bmp-file-icon.png" />
     <Image Include="E:\Private\유머\15d3e565a9943a641.jpg" />
     <Image Include="res\0404_MFC_MemberManager.ico" />
     <Image Include="res\0404_MFC_MemberManagerDoc.ico" />

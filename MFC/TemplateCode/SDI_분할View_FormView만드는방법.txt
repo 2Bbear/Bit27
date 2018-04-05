@@ -1,0 +1,2 @@
+//Add Item - MFC Class - View BasedClass - Change View to FormView - cpp Chane, h Change
+//and last , 프레임에서 해당 뷰를 추가해준다.
