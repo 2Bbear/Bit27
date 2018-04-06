@@ -1,0 +1,39 @@
+
+
+
+
+1. 들어갈 Control 만들기.
+리소스 뷰에서 String Table을 만들어 추가로
+ID를 생성하고 Captuin을 설정한다.
+
+Ex ) ID          Value         Caption
+     IDP_CCP     100          아무 글자
+
+2. Fram 클래스에 가서 indicators 배열에 방금 만든 아이디 값을 추가한다.
+static UINT indicators[] =
+{
+	ID_SEPARATOR,           // status line indicator
+	ID_INDICATOR_CAPS,
+	ID_INDICATOR_NUM,
+	ID_INDICATOR_SCRL,
+	IDP_CCP     ,
+};
+
+마지막에 ,를 잊지 않도록 하자
+
+3.이제 만들어진 부분에 데이터를 넣어보자
+
+void CMainFrame::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: Add your message handler code here and/or call default
+	if (nIDEvent == 1)
+	{
+		CTime t = CTime::GetCurrentTime(); // 현재 시간 얻기
+		CString buf;
+		buf.Format(TEXT("%02d:%02d:%02d"),
+			t.GetHour(), t.GetMinute(), t.GetSecond());
+		m_wndStatusBar.SetPaneText(4, buf); // 매개변수 인덱스 부분은 indicators 배열의 인덱스를 나타낸다.
+	}
+
+	CFrameWnd::OnTimer(nIDEvent);
+}
