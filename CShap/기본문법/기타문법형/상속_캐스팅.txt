@@ -1,0 +1,47 @@
+//다운 캐스팅
+부모의 형태로 자식의 개체를 담는 것
+
+//상향 캐스팅
+자식의 형태로 부모의 개체를 담는 것
+//===========================================기본 가정
+
+class Man
+{
+internal string Name{ get; private set; }
+internal Man(string name)
+{
+Name = name;
+}
+internal void Eat()
+{
+Console.WriteLine("{0} 밥을 먹다.",Name);
+}
+}
+
+class Stu : Man //기반 형식 Man에서 파생
+{
+internal Stu(string name): base(name){ }
+internal void Study()
+{
+Console.WriteLine("{0} 공부하다.",Name);
+}
+}
+
+//as의 사용법
+//부모의 개체를 자식에게 담고 싶을 때
+Stu stu = man as Stu; //파생된 형식 개체 참조
+
+//is의 사용법
+//해당 부모 형태의 변수가 알고보니 자식 개체일때 그게 맞는지 찾는 함수
+Man man = new Stu();
+if (man is Stu) //man이 Stu개체일 때
+{
+Stu stu = (Stu)man;
+stu.Study();
+}
+object obj = 3;
+if (obj is int) //obj가 int 형식일 때
+{
+int i = (int)obj;
+Console.WriteLine(i.ToString());
+}

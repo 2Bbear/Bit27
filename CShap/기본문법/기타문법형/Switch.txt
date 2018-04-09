@@ -1,0 +1,10 @@
+string name = string.Empty;
+Console.WriteLine("이름을 입력하세요..");
+name = Console.ReadLine();
+switch (name)
+{
+case "홍길동": Console.WriteLine("휘리릭~"); break;
+case "강감찬":
+case "을지문덕 ": Console.WriteLine("이랴~"); break;
+default: Console.WriteLine("음냐뤼~"); break;
+}

@@ -1,0 +1,50 @@
+//목적
+정보 은닉을 통해 데이터의 신뢰성을 높이기 위함
+//
+public : 다른 net어셈블리에서도 접근 가능
+internal : 같은 net 어셈블리에서만 접근 가능
+protected internal : 같은 net어셈블리와 파생된 평식에서 접근하게 하고 싶다면 쓴다.
+
+//선언법
+class Student
+{
+const int max_iq = 200;
+int iq = 100; //접근 수준: private
+internal int Iq
+{
+get //접근 수준: internal
+{
+return iq;
+}
+private set //접근 수준 private
+{
+if ((iq + value) > max_iq)
+{
+iq = max_iq;
+}
+else
+{
+iq += value;
+}
+}
+}
+internal void Study(int scnt) //접근 수준: internal
+{
+Iq += scnt;
+}
+}
+
+//호출법
+
+class Program
+{
+static void Main(string[] args)
+{
+Student stu = new Student();
+Console.WriteLine("공부할 시간을 입력하세요.");
+int scnt = int.Parse(Console.ReadLine());
+stu.Study(scnt); //접근수준이 private인 멤버 필드 iq를 직접 사용 못함
+//접근 수준이 internal인 멤버 속성 Iq를 통해 개체의 iq를 얻어옴
+Console.WriteLine("아이큐:{0}", stu.Iq);
+}
+}

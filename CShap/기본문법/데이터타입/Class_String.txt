@@ -1,0 +1,32 @@
+//선언 대문자를 쓰든 소문자를 쓰든 똑같이 쓸 수 있다.
+ char[] ccc = { 'd','c','d'};
+ String str232 = new String(ccc);
+ string dddd = new string(ccc);
+
+ String stre = "asdf";
+ string str143 = "asd";
+//출력
+  Console.WriteLine(stre.ToString());
+
+//그외 메소드===================================================================
+//비교
+ stre.Equals("asdf");//값 비교
+
+String.Equals(stre, stre);// 값 비교
+
+//부분 문자열 검색
+  string str = "I am a boy. You are a girl.";
+Console.WriteLine(str.Contains("boy")); //부분 문자열 포함 여부
+Console.WriteLine(str.EndsWith("girl.")); //문자열 끝 부분 비교
+Console.WriteLine(str.StartsWith("I")); //문자열 시작 부분 비교
+Console.WriteLine(str.IndexOf('.').ToString());//특정 문자가 처음 발견되는 인덱스 반환
+//특정 문자열이 처음 발견되는 인덱스 반환
+Console.WriteLine(str.IndexOf("You").ToString());
+//특정 문자가 뒤에서 처음 발견되는 인덱스 반환
+Console.WriteLine(str.LastIndexOf('a').ToString());
+//특정 문자열이 뒤에서 처음 발견되는 인덱스 반환
+Console.WriteLine(str.LastIndexOf(" a").ToString());
+
+
+
+

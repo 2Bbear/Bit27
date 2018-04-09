@@ -1,0 +1,41 @@
+//부모 클래스가 virtual로 함수를 선언하지 않음 추상클래스가 아니고
+자식이 메소드를 오버라이드 하고 싶을때
+
+//선언
+class Man
+{
+internal void Work()
+{
+Console.WriteLine("일을 하다.");
+}
+}
+class Student : Man
+{
+internal new void Work() //new 키워드를 이용하여 Man 형식의 Work메서드 무효화
+{
+Console.WriteLine("공부하다.");
+}
+}
+
+//설명
+자식 클래스에서 오버라이드 하면서 new 연산자를 함수에 쓰면 해당 함수에 대해서 부모의 메소드를 무효화 한다.
+
+
+//무효화한 메소드 다시 쓰고 싶을 때
+class Man
+{
+internal void Work()
+{
+Console.WriteLine("일을 하다.");
+}
+}
+class Student : Man
+{
+internal new void Work() //new 키워드로 기반 형식 Man의 Work 메서드 무효화
+{
+base.Work(); //base 키워드로 무효화 된 Work 메서드 사용
+Console.WriteLine("공부하다.");
+}
+}
+
+//base 키워드를 이용해서 무효화 한 메소드를 다시 살려낼 수 있다.

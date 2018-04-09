@@ -1,0 +1,12 @@
+//입력 받기
+  ConsoleKeyInfo info = Console.ReadKey();
+
+//출력 하기
+Console.WriteLine(info.ToString());
+
+
+//비교 연산
+if(info.Key==ConsoleKey.F1)
+            {
+
+            }

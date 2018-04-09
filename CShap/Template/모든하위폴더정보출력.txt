@@ -1,0 +1,19 @@
+ static void Main(string[] args)
+        {
+
+            DirectoryInfo dinfo = new DirectoryInfo(@"C:\Users\User\Desktop\동고비");
+
+            DirectoryInfo[] dir = dinfo.GetDirectories(); // 하위디렉토리를 파일 정보 출력
+            foreach (DirectoryInfo d in dir)
+            {
+                FileInfo[] files = d.GetFiles(); // 디렉토리 안에 있는 파일 목록 출력
+                Console.WriteLine("디렉토리: {0}, 포함된 파일 수: {1}", d.FullName, files.Length);
+                int index = 0;
+                foreach (FileInfo f in files)    // 파일 이름 출력
+                {
+                    string str = String.Format("[{0}] : Name:{1}, Ext:{2}, Size:{3}",
+                                                           ++index, f.Name, f.Extension, f.Length);
+                    Console.WriteLine(str);
+                }
+            }
+        }

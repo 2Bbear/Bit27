@@ -1,0 +1,37 @@
+//선언 방법
+class DenGot
+    {
+        int n1 = 11;
+        int n2 = 22;
+        int n3 = 33;
+        int n4 = 44;
+        public int this[int index]
+        {
+            get
+            {
+                int result=0;
+                switch(index)
+                {
+                    case 0: { result = n1; break;  }
+                    case 1: { result = n2; break; }
+                    case 2: { result = n3; break; }
+                    case 3: { result = n4; break; }
+                }
+                return result;
+            }
+        }
+
+        public DenGot()
+        {
+           
+        }
+    }
+
+//호출 방법
+ DenGot a = new DenGot();
+            Console.WriteLine(a[2]);
+
+
+/*
+요점, class의 내부의 값들을 인덱스 형식으로 호출해서 쓰고 싶을 때
+*/

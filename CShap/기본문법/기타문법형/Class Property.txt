@@ -1,0 +1,27 @@
+//선언 방법 
+class Cal
+    {
+       private int num1;
+       //private  int num2;
+       public int Num2 { get { return 0; } /*set;*/ }
+        public Cal() { }
+
+        //Property
+        public int Num1
+        {
+            
+            get{ return num1; }
+            set{
+                if(value<0)
+                {
+                    return;
+                }
+                num1 = value; }
+        }
+    }
+
+//초기화 방법
+public Cal()
+{
+Num1 =10;
+}

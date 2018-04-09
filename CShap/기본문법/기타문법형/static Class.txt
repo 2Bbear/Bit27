@@ -1,0 +1,20 @@
+//용도
+1. 프로그램에서 자주사용하는 상수와, 기능을 모아 놓는다.
+2. 네이티브 코드로 작성된 라이브러리를 마이그레이션할 때 사용함
+
+//선언 방법
+
+static class EHGlobal
+{
+public const int max_man = 100;
+public static int GetNum()
+{
+int num = 0;
+try
+{
+num = int.Parse(Console.ReadLine());
+}
+catch{ }
+return num;
+}
+}

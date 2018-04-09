@@ -1,0 +1,11 @@
+//입력받기
+  int ch = Console.Read();
+  char cd = dd.ToString()[0];
+
+//출력하기
+  Console.Write((char)dd);
+
+//비교 연산
+ if(  cd.Equals('c'))
+{
+}

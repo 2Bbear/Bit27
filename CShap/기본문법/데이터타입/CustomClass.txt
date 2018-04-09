@@ -1,0 +1,33 @@
+//선언
+namespace ConsoleApp1
+{
+    class Cal
+    {
+       private int num1;
+       //private  int num2;
+       public int Num2 { get { return 0; } /*set;*/ }
+        public Cal() { }
+
+        //Property
+        public int Num1
+        {
+            
+            get{ return num1; }
+            set{
+                if(value<0)
+                {
+                    return;
+                }
+                num1 = value; }
+        }
+    }
+}
+
+//호출
+Cal d = new Cal();
+Cal c = new Cal();
+
+
+//비교 연산
+  Console.WriteLine(d.Equals(c)); //주소값 비교
+

@@ -1,0 +1,16 @@
+//While
+
+int i = 0;
+while (i < 10)
+{
+	Console.WriteLine("{0}", i);
+i++;
+}
+
+//Do while
+
+do
+{
+i++;
+	Console.WriteLine("do-while:{0}", i);
+} while (i < 10);

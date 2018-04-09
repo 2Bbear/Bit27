@@ -1,0 +1,6 @@
+//선언
+
+Object c= new Object();
+
+//delete 
+GC가 알아서 처리한다.

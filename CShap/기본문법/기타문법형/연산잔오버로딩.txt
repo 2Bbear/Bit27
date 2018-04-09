@@ -1,0 +1,21 @@
+//선언
+//== 연산자 중복 정의 (!= 연산자도 같이 중복 정의해야 함)
+string name;
+
+public static bool operator == (Man man,string name)
+{
+return man.name == name;
+}
+//!= 연산자 중복 정의 (== 연산자도 같이 중복 정의해야 함)
+public static bool operator !=(Man man, string name)
+{
+return !(man == name);
+}
+
+
+//다른 방법 (묵시적 형변환)
+public static implicit operator string(Man man)
+{
+return man.name;
+}
+

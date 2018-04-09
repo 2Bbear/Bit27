@@ -1,0 +1,19 @@
+//입력받기
+
+int dd = int.Parse(Console.ReadLine());
+
+//출력하기
+ Console.WriteLine(dd.ToString());
+
+//비교연산
+if(dd.Equals(2))
+{
+}
+
+//그 외 메소드====================================================================
+
+//기본형식 변환
+public static int Parse (string s); // string을 int로
+public static bool TryParse (string s,out int result);//첫 문자를 아스키값으로 result로 변경해줌
+
+
