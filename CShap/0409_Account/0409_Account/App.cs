@@ -4,6 +4,18 @@ using System.Text;
 
 namespace _0409_Account
 {
+    enum Menu {
+        DEFAULT=0,
+        INSERTACC = ConsoleKey.F1,
+        SELECTACC = ConsoleKey.F2,
+        INPUTACC = ConsoleKey.F3,
+        OUTPUTACC = ConsoleKey.F4,
+        DELETEACC = ConsoleKey.F5,
+        PRINTACC = ConsoleKey.F6,
+        PRINTFAITHACC = ConsoleKey.F7,
+        PRINTCONTRIACC = ConsoleKey.F8,
+        EXIT = ConsoleKey.Escape
+    };
     class App
     {
 
@@ -42,14 +54,17 @@ namespace _0409_Account
             {
                 Console.Clear();
                 bank.SelectAll_Account();
-                switch(WbPrint.MenuPrint())
+                switch((Menu)WbPrint.MenuPrint())
                 {
-                    case ConsoleKey.F1: { bank.Insert_Account(); break; }
-                    case ConsoleKey.F2: { bank.Select_Account(); break; }
-                    case ConsoleKey.F3: { bank.Input_Account(); break; }
-                    case ConsoleKey.F4: { bank.Output_Account(); break; }
-                    case ConsoleKey.F5: { bank.Delete_Account(); break; }
-                    case ConsoleKey.Escape: { return; }
+                    case Menu.INSERTACC: { bank.Insert_Account(); break; }
+                    case Menu.SELECTACC: { bank.Select_Account(); break; }
+                    case Menu.INPUTACC: { bank.Input_Account(); break; }
+                    case Menu.OUTPUTACC: { bank.Output_Account(); break; }
+                    case Menu.DELETEACC: { bank.Delete_Account(); break; }
+                    case Menu.PRINTACC: { bank.PrintAcc_Account(); break; }
+                    case Menu.PRINTFAITHACC: { bank.PrintFaith_Account(); break; }
+                    case Menu.PRINTCONTRIACC: { bank.PrintContri_Account(); break; }
+                    case Menu.EXIT: { return; }
 
 
 

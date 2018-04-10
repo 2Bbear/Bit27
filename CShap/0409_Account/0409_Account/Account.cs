@@ -40,7 +40,7 @@ namespace _0409_Account
         #endregion
 
         #region Method
-        public void AddMoney(int money)
+        public virtual void AddMoney(int money)
         {
             if(money<0)
             {
@@ -71,7 +71,7 @@ namespace _0409_Account
             String result=string.Empty;
             result = "[ID]" + this.id + "\t";
             result+="[NAME]"+this.name + "\t";
-            result += "[BALANCE]" + this.balance ;
+            result += "[BALANCE]" + this.balance+"\t" ;
             return result;
         }
         #endregion

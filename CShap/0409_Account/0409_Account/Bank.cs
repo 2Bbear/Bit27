@@ -4,17 +4,15 @@ using System.Text;
 
 namespace _0409_Account
 {
+    enum AccType { DEFAULT,ACCOUNT=1,FAITHACCOUNT,CONTRIACCOUNT};
+
     class Bank
     {
-        private Account[] acclist;
-        private int size;
-        private int max;
+        private WbArray arrlist;
         //Controuctor
         public Bank(int _max)
         {
-            acclist = new Account[_max];
-            size = 0;
-            max = _max;
+            arrlist = new WbArray(_max);
         }
 
 
@@ -25,17 +23,47 @@ namespace _0409_Account
             String name = Console.ReadLine();
             Console.Write("[입금액] ");
             int money = int.Parse(Console.ReadLine());
+            Console.Write("[계좌 종류(1:일반계좌 2: 신용계좌 3:기부계좌)]");
+            AccType type = (AccType)(int.Parse(Console.ReadLine()));
 
-            Account acc = new Account(name, money);
+            Account acc = null;
+            if(type==  AccType.ACCOUNT)
+            {
+                acc = new Account(name, money);
+            }
+            else if (type == AccType.FAITHACCOUNT)
+            {
+                acc = new FaithAccount(name, money);
+            }
+            else if (type == AccType.CONTRIACCOUNT)
+            {
+                acc = new ContriAccount(name, money);
+            }
+            else 
+            {
+                Console.WriteLine("계좌 생성 실패");
+                return;
+            }
+            
 
-            acclist[size] = acc;
-            size++;
-            Console.WriteLine(">>저장되었습니다.");
+            try
+            {
+                arrlist.push_back(acc);
+                Console.WriteLine(">>저장되었습니다.");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+          
+
+           
         }
         public void SelectAll_Account()
         {
-            foreach(Account acc in acclist)
+            for(int i =0;i<arrlist.Size ;i++)
             {
+                Account acc = (Account)arrlist[i];
                 Console.WriteLine(acc);
             }
         }
@@ -51,6 +79,7 @@ namespace _0409_Account
             }
             Console.WriteLine("");
             //error
+            
         }
         public void Delete_Account()
         {
@@ -63,12 +92,9 @@ namespace _0409_Account
                 return;
             }
             //배열 삭제
-            for(int i =idx;i<size ;i++)
-            {
-                acclist[i] = acclist[i + 1];
-            }
-            size--;
-           
+            arrlist.erase(idx);
+            Console.WriteLine("삭제되었습니다.");
+
         }
         public void Input_Account()
         {
@@ -84,7 +110,8 @@ namespace _0409_Account
             {
                 Console.Write("[입금액] ");
                 int money = int.Parse(Console.ReadLine());
-                if(money<=0)
+              
+                if (money<=0)
                 {
                     throw new Exception("입금액이 0이거나 숫자가 아닙니다.");
                 }
@@ -124,8 +151,9 @@ namespace _0409_Account
         }
         private Account NameToAccount(String name)
         {
-            foreach(Account acc in acclist)
+            for(int i=0;i<arrlist.Size;i++)
             {
+                Account acc = (Account)arrlist[i];
                 if(acc.Name==name)
                 {
                     return acc;
@@ -135,15 +163,57 @@ namespace _0409_Account
         }
         private int NameToIdx(string name)
         {
-           for(int i =0;i<size ;i++)
+           for(int i =0;i<arrlist.Size ;i++)
             {
-                Account acc = acclist[i];
-                if(acc.Name.Equals(name))
+                Account acc = (Account)arrlist[i];
+                if (acc.Name.Equals(name))
                 {
                     return i;
                 }
             }
             return -1;
         }
+
+        public void PrintAcc_Account()
+        {
+            for (int i = 0; i < arrlist.Size; i++)
+            {
+                Account acc = (Account)arrlist[i];
+
+                if(!(acc is FaithAccount)&& !(acc is ContriAccount))
+                {
+                    Console.WriteLine((FaithAccount)acc);
+                }
+            }
+        }
+
+        public void PrintFaith_Account()
+        {
+            for (int i = 0; i < arrlist.Size; i++)
+            {
+                Account acc = (Account)arrlist[i];
+                
+                if (acc is FaithAccount)
+                {
+                    Console.WriteLine((FaithAccount)acc);
+                }
+
+            }
+        }
+
+        public void PrintContri_Account()
+        {
+            for (int i = 0; i < arrlist.Size; i++)
+            {
+                Account acc = (Account)arrlist[i];
+                ContriAccount conacc = acc as ContriAccount;
+                if(conacc!=null)
+                {
+                    Console.WriteLine(conacc);
+                }
+                
+            }
+        }
+
     }
 }

@@ -1,0 +1,25 @@
+//¼±¾ð
+//using System;
+            Array arr;
+            //using System.Collections;
+            ArrayList arrlist;
+            //using System.Collections.Generic;
+            List<Student> stuList;
+            //using System.Collections;
+            Hashtable htable;
+            //using System.Collections;
+            SortedList sortlist;
+            //using System.Collections.Generic;
+            SortedList<int, string> sortlistT;
+            //using System.Collections.Generic;
+            Dictionary<int, string> dic;
+            //using System.Collections.Generic;
+            SortedDictionary<int, String> sdic;
+            //using System.Collections;
+            Queue que;
+            //using System.Collections.Generic;
+            Queue<Student> queT;
+            //using System.Collections;
+            Stack stack;
+            //using System.Collections.Generic;
+            Stack<Student> stackT;

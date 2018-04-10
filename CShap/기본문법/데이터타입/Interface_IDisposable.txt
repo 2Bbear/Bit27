@@ -1,0 +1,23 @@
+//예제
+
+class Man:IDisposable
+{
+bool isdispose;
+~Man()
+{
+Dispose();
+}
+public void Dispose()
+{
+if ( ! isdispose )
+{
+//자원 해제 구문
+}
+isdispose = true;
+ // Dispose of unmanaged resources.
+   Dispose(true);
+   // Suppress finalization.
+   GC.SuppressFinalize(this);
+}
+}
+

@@ -4,3 +4,9 @@ Object c= new Object();
 
 //delete 
 GC가 알아서 처리한다.
+
+
+//구조체에서의 new
+
+Data data1 =new Data(1,"test");//해당 값은 힙메모리에 존재하지 않는다. 
+//또한 값형식이기 때문에, class처럼 사용해서는 안된다.

@@ -1,0 +1,7 @@
+//선언
+void sum(ref ExClass cs)
+{
+}
+
+
+해당 값을 주소값으로 받겠다는 의미.

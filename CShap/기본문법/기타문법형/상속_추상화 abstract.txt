@@ -1,0 +1,22 @@
+//목적
+1. 인터페이스의 목적
+2. 설계 협업의 목적
+
+
+//선언
+abstract class Man //추상 클래스
+{
+internal abstract void Work(); //추상 메서드
+}
+
+class Student : Man
+{
+internal override void Work()//기반 형식 Man의 추상 메서드 Work 재정의
+{
+Console.WriteLine("공부하다.");
+}
+}
+
+
+//설명
+virtual과 헷갈리지 말자

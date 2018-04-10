@@ -9,12 +9,20 @@ MSDN에서는 될 수 있으면 0값을 사용하지 말거나 적
 
 enum Season { DefaultSeason,Spring=10,Summer,Autumn,Winter};
 
+//내부적으로 자동 파싱을 지원해주기 때문에 정수와 문자열의 변환이 쉽다.
+
+// enum 대입할때 앞의 대입 값이, 뒤의 대입 값 보다 작아야 한다.
+
 //그외 사용 방법 =======================================================================
 //비트연산을 통한 열거목록 이용법
 enum MyFlag{ HasCar = 0x01, Married = 0x02, HasHouse = 0x04 }
 
 MyFlag flag = MyFlag.HasCar | MyFlag.Married | MyFlag.HasHouse;
 Console.WriteLine("{0}", flag);
+
+[Flags]
+    enum MyFlag { HasCar = 0x01, Married = 0x02, HasHouse = 0x04 };
+이렇게 사용하면 출력할때 해당 이텀의 문자열을 출력한다.
 
 
 

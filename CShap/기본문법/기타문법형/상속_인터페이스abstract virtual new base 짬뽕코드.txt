@@ -1,0 +1,164 @@
+using System;
+
+namespace ConsoleApp5
+{
+    interface SocketSystem
+    {
+        void MakeSocket();
+        void MakePacket();
+    }
+
+    interface GameUser
+    {
+        void Login();
+        void LogOut();
+        
+    }
+   
+    interface User: SocketSystem
+    {
+        void Login();
+        void LogOut();
+        string CurrentState();
+    }
+    abstract class People
+    {
+        #region Attribute
+        String name;
+        int age;
+        String address;
+        String job;
+        #endregion
+
+        #region Property
+        public string Name { get => name; private set => name = value; }
+        public int Age { get => age; private set => age = value; }
+        public string Address { get => address; protected set => address = value; }
+        public string Job { get => job;  protected set => job = value; }
+
+        #endregion
+
+        #region Constructor
+
+        public People(string name, int age, string address)
+        {
+            this.name = name;
+            this.Age = age;
+            this.Address = address;
+            this.Job = "무직";
+        }
+
+        #endregion
+
+        #region method
+        public abstract void SetJob();
+        public virtual String SelfIntroduce()
+        {
+            String result="";
+            result += String.Format("[이름] : {0}\t [나이]:{1}\t",name,age);
+            return result;
+        }
+        public virtual void Nothing() { }
+
+        internal void PrintMajor()
+        {
+            
+        }
+        internal void PrintSpecies()
+        {
+            Console.WriteLine("인간입니다.");
+        }
+
+        #endregion
+
+        #region override method
+        #endregion
+
+    }
+    class Student : People, User, GameUser
+    {
+        #region Constructor
+        public Student(string name, int age, string address = "홈리스 ㅜㅜ") : base(name, age, address)
+        {
+
+        }
+
+
+        #endregion
+
+        #region Override method
+        public override void SetJob()
+        {
+            Job = "학생";
+        }
+        public override string SelfIntroduce()
+        {
+            String result = "";
+            result += base.SelfIntroduce();
+            result += String.Format("[직업] : {0}\t", Job);
+            return result;
+        }
+        
+        //new  override
+        public new void  PrintMajor()
+        {
+            Console.WriteLine("전공 미정");
+        }
+        public new void PrintSpecies()
+        {
+            base.PrintSpecies();
+        }
+        //Implement
+        void User.Login()
+        {
+            Console.WriteLine("로그인 성공");
+        }
+        void GameUser.Login()
+        {
+            Console.WriteLine("게임 로그인 성공");
+        }
+
+        public void LogOut()
+        {
+            Console.WriteLine("로그아웃 성공");
+        }
+
+        public string CurrentState()
+        {
+            return "지금상태???";
+        }
+
+        public void MakeSocket()
+        {
+            Console.WriteLine("소켓 생성 성공");
+        }
+
+        public void MakePacket()
+        {
+            Console.WriteLine("패킷 생성 성공");
+        }
+
+
+        #endregion
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Student st1 = new Student("jjh", 10);
+            st1.SetJob();
+
+            Console.WriteLine(st1.SelfIntroduce());
+
+            //쩔죠?
+            GameUser user1 = st1;
+            user1.Login();
+
+            st1.PrintSpecies();
+            st1.PrintMajor();
+            
+
+        }
+    }
+}

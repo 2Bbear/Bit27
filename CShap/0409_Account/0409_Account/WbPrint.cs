@@ -19,6 +19,9 @@ namespace _0409_Account
             Console.WriteLine("[F3] 계좌 입금");
             Console.WriteLine("[F4] 계좌 출금");
             Console.WriteLine("[F5] 계좌 삭제");
+            Console.WriteLine("[F6] 계좌 검색(일반계좌 리스트)");
+            Console.WriteLine("[F7] 계좌 검색(신용계좌 리스트)");
+            Console.WriteLine("[F8] 계좌 검색(기부계좌 리스트)");
             Console.WriteLine("[ESC] 프로그램 종료");
             Console.WriteLine("**************************************");
             return Console.ReadKey().Key;

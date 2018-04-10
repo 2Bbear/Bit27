@@ -14,6 +14,6 @@ if(dd.Equals(2))
 
 //기본형식 변환
 public static int Parse (string s); // string을 int로
-public static bool TryParse (string s,out int result);//첫 문자를 아스키값으로 result로 변경해줌
+public static bool TryParse (string s,out int result);//예외처리가 이미 있는 파싱함수 
 
 

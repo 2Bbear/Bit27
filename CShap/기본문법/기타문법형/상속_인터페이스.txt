@@ -1,0 +1,111 @@
+//묵시적 선언
+interface IStudy
+{
+void Study(); //접근 한정자를 지정할 수 없음 묵시적으로 public임
+}
+
+
+//묵시적구현
+class Student : IStudy
+{
+public void Study() //public으로 접근 지정해야 함
+{
+}
+}
+
+
+//명시적 구현
+class Student : IStudy
+{
+IStudy.Study(){ } // 접근지정자를 명시 하지 않아도 됨
+}
+
+
+//다중 인터페이스선언 과 구현===================================================================
+interface IStudy
+{
+void Study();
+}
+interface ISleep
+{
+void Sleep();
+}
+
+//묵시적 구현
+class Student : IStudy, ISleep
+{
+public void Study()
+{
+Console.WriteLine("학생이 공부하다.");
+}
+public void Sleep()
+{
+Console.WriteLine("학생이 잠을 자다.");
+}
+}
+
+//명시적 구현
+interface IStudy
+{
+void Study();
+void Work(); //ITeach 인터페이스에도 같은 이름의 멤버가 있음
+}
+interface ITeach
+{
+void Teach();
+void Work(); //IStudy 인터페이스에도 같은 이름의 멤버가 있음
+}
+class PartTimeTeacher : IStudy, ITeach
+{
+void IStudy.Study()
+{
+Console.WriteLine("공부하다.");
+}
+void IStudy.Work() //이름 충돌을 막기 위해 명시적 인터페이스 구현
+{
+Console.WriteLine("강의를 듣다.");
+}
+void ITeach.Teach()
+{
+Console.WriteLine("강의하다.");
+}
+void ITeach.Work() //이름 충돌을 막기 위해 명시적 인터페이스 구현
+{
+Console.WriteLine("연구하다.");
+}
+}
+//명시적 구현 후 호출 방법
+class Program
+{
+static void Main(string[] args)
+{
+PartTimeTeacher pt_teacher = new PartTimeTeacher();
+IStudy istudy = pt_teacher as IStudy; //IStudy 인터페이스 참조
+if (istudy != null)
+{
+istudy.Study();
+}
+}
+}
+
+중복 이름 함수를 오류를 낼 수 밖에 없다.
+따라서 해당 인터페이스로 변환 후 사용해야 한다.
+
+//기반 클래와 인터페이스의 동시 상속=========================================================
+class Man
+{
+public void Think()
+{
+Console.WriteLine("생각하다.");
+}
+}
+
+class Student : Man,IStudy
+{
+void IStudy.Study()
+{
+Console.WriteLine("학생이 공부하다. ");
+}
+}
+
+//반드시 기반 클래스가 먼저 상속되어야 한다.
