@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowoerPoint_0413", "PowoerPoint_0413\PowoerPoint_0413.csproj", "{892E7FE3-5198-4DA4-90C9-58DA9DDF8CB7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{892E7FE3-5198-4DA4-90C9-58DA9DDF8CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{892E7FE3-5198-4DA4-90C9-58DA9DDF8CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{892E7FE3-5198-4DA4-90C9-58DA9DDF8CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{892E7FE3-5198-4DA4-90C9-58DA9DDF8CB7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8BE8EDC8-500F-45D1-912C-1FA74B3F3437}
+	EndGlobalSection
+EndGlobal
