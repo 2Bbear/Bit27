@@ -1,0 +1,91 @@
+
+Panel
+다른 컨트롤을 구별할 수 있도록 그룹화하는데 사용
+Panel 컨트롤은 스크롤 막대가 있음
+
+GroupBox
+다른 컨트롤을 구별할 수 있도록 그룹화하는데 사용
+ GroupBox 컨트롤은 캡션을 표시
+
+TabControl
+여러 개의 탭을 이용해 Panel을 겹쳐놓은 것과 같은 효과를 주는 컨트롤
+
+SplitContainer
+이동 가능한 막대로 구분된 두 개의 패널로 구성
+
+FlowLayoutPanel
+내용을 가로 또는 세로로 동적 배열하는 패널
+
+TableLayoutPanel
+행과 열로 구성된 표 형태로 내용을 동적으로 배열하는 패널
+
+
+
+//=====================================================================
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+
+namespace PanelExam
+{
+    public partial class Form1 : Form
+    {
+        int index_color = 0;
+        int index_border = 0;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            // Panel 바탕색 바꾸기
+            if(index_color == 0){
+                this.panel.BackColor = Color.Red;
+                this.panel.BackgroundImage = null;
+            }
+            else if(index_color == 1){
+                this.panel.BackColor = Color.Yellow;
+            }
+            else if (index_color == 2){
+                this.panel.BackColor = Color.Blue;
+            }
+            else if (index_color == 3){
+                this.panel.BackgroundImage = Image.FromFile("회벽.bmp");
+            }
+
+            if(index_color > 3){
+                index_color = 0;                
+            }
+            else{
+                index_color++;
+            }            
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            // Panel BoarderStyle 바꾸기
+            if(index_border == 0){
+                this.panel.BorderStyle = BorderStyle.None;
+            }
+            else if(index_border == 1){
+                this.panel.BorderStyle = BorderStyle.FixedSingle;
+            }
+            else if(index_border == 2){
+                this.panel.BorderStyle = BorderStyle.Fixed3D;
+            }
+
+            if (index_border > 2){
+                index_border = 0;
+            }
+            else{
+                index_border++;
+            }     
+        }
+    }
+}
+

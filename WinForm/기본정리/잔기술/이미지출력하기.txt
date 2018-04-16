@@ -1,0 +1,86 @@
+Win OS에서 메타 파일 처리를 위한 파일 형식
+ WMF(Windows 메타 파일)
+ EMF(확장 메타 파일)
+  *) Metafile클래스로 손쉽게 제어 가능
+
+사용예제
+ 이미지를 GDI+화면에 출력
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+public class LoadImage : System.Windows.Forms.Form
+{
+    static void Main()
+    {
+        Application.Run(new LoadImage());
+    }
+
+    protected override void OnPaint(PaintEventArgs e)
+    {
+        Graphics g = e.Graphics;
+        Image bmp = Image.FromFile("f15.jpg");
+        //Bitmap bmp = new Bitmap("f15.jpg");
+
+        this.Height = bmp.Height;
+        this.Width = bmp.Width;
+
+        g.DrawImage(bmp, 0, 0);
+    }
+}
+
+ 메타 파일 다루기 
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
+
+
+public class MetafileExam : System.Windows.Forms.Form
+{
+    private Metafile metafile;
+    private int index;
+    private Graphics.EnumerateMetafileProc metafileDelegate;
+    private Point destPoint;
+
+    public MetafileExam()
+    {
+        metafile = new Metafile("test.wmf");
+        index = 0;
+
+        metafileDelegate = new Graphics.EnumerateMetafileProc(MetafileCallback);
+        destPoint = new Point(20, 10);
+        this.Text = "Metafile 이미지 출력";
+    }
+
+    static void Main()
+    {
+        Application.Run(new MetafileExam());
+    }
+
+    protected override void OnPaint(PaintEventArgs e)
+    {
+        e.Graphics.EnumerateMetafile(metafile, destPoint, metafileDelegate);
+    }
+
+    private bool MetafileCallback(
+        EmfPlusRecordType recordType,
+        int flags,
+        int dataSize,
+        IntPtr data,
+        PlayRecordCallback callbackData)
+    {
+        byte[] dataArray = null;
+        if (data != IntPtr.Zero)
+        {
+            dataArray = new byte[dataSize];
+            Marshal.Copy(data, dataArray, 0, dataSize);
+        }
+
+        metafile.PlayRecord(recordType, flags, dataSize, dataArray);
+        Console.WriteLine("{0} -> type:{1}, flags:{2}, size:{3}", this.index++, recordType, flags, dataSize);
+
+        return true;
+    }
+}

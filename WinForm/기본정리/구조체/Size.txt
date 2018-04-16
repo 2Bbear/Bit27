@@ -1,0 +1,28 @@
+Size
+Size() : 기본 생성자
+Size(Point data)  : Point구조체의 X :Width, Y : Height
+Size(int x, int y)  : 각각 Width, Height
+    ==> 윈도우 영역을 저장할 때 주로 사용
+
+
+  Size 구조체 연산 
+ using System;
+   using System.Drawing;
+  
+   class StructExam1
+  {
+      static void Main(string[] args)
+      {
+          Size sz1 = new Size(100, 100);
+          Size sz2 = new Size(50, -50);
+          Size sz3 = new Size();
+          sz3 = sz1 + sz2;
+          System.Console.WriteLine(sz3.ToString());
+          sz3 = sz2 - sz1;
+          System.Console.WriteLine(sz3.ToString());
+          sz3 += sz1;
+          System.Console.WriteLine(sz3.ToString());
+          sz3 -= sz2;
+          System.Console.WriteLine(sz3.ToString());
+      }
+  }
