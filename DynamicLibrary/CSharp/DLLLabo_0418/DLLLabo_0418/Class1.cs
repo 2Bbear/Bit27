@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _0417
+namespace DLLLabo_0418
 {
-    class Packet
+    public class Class1
     {
-        #region Constructor
-        public
-        #endregion
     }
 }
