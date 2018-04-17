@@ -1,0 +1,76 @@
+/*****************************************************************
+ * [System.NET ]
+ * 
+ * TCP Server
+ *****************************************************************/
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
+
+class TcpServerExample
+{
+    static void Main(string[] args)
+    {
+        IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 7000);
+        Socket server = new Socket(AddressFamily.InterNetwork,
+                                     SocketType.Stream, ProtocolType.Tcp);
+        server.Bind(ipep);
+        server.Listen(20);
+
+        Console.WriteLine("서버 시작... 클라이언트 접속 대기중...");
+
+        try
+        {
+            while (true)
+            {
+                Socket client = server.Accept();  // 클라이언트 접속 대기
+                IPEndPoint ip = (IPEndPoint)client.RemoteEndPoint;
+                Console.WriteLine("{0}주소, {1}포트 접속", ip.Address, ip.Port);
+
+                //thead 호출
+                Thread thread = new Thread(ThreadFun);
+                thread.Start(client);
+            }
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine("서버 대기 오류 :" + ex.Message);
+
+        }
+        finally
+        {
+            server.Close();
+        }        
+    }
+
+    static void ThreadFun(object obj)
+    {
+        Socket client = (Socket)obj;
+
+        while (true)
+        {           
+            try
+            {
+                byte[] data = new byte[1024];
+                int value = client.Receive(data);
+                string str = Encoding.Default.GetString(data, 0, value);
+                //string str = Encoding.Default.GetString(data);
+                Console.WriteLine("수신 메시지: " + str);
+
+                client.Send(data, value, SocketFlags.None); // 문자열 전송
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("통신오류: " + ex.Message);
+                break;
+            }
+        }
+        client.Close();         //  소켓 연결 끊기
+    }
+}
+
+
+
+

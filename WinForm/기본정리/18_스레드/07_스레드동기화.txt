@@ -20,7 +20,7 @@ class MonitorExam
     }
     public void ShowData()
     {
-        Monitor.Enter(MonitorExam.obj);             // 객체 잠금 설정 
+        Monitor.Enter(MonitorExam.obj);//하나의 자원 // 객체 잠금 설정 
         //Monitor.TryEnter(MonitorExam.obj, 1000);  // 객체 잠금 설정
         try
         {
