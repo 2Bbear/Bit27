@@ -13,6 +13,7 @@ namespace _0417_FormClient
     public partial class UpdateNickNameForm : Form
     {
         public Form1 Parants;
+        public String newNickName;
         public UpdateNickNameForm(Form1 _parants)
         {
             InitializeComponent();
@@ -21,7 +22,13 @@ namespace _0417_FormClient
 
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox1=
+            if(textBox1.Text.Equals("")==false)
+            {
+                newNickName = textBox1.Text;
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
+           
         }
     }
 }

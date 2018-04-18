@@ -17,18 +17,24 @@ namespace _0417_FormClient
         private wbClient client;
         NewMemberForm form = new NewMemberForm();
         LogInForm logInForm ;
-
+        UpdateNickNameForm temp;
 
 
         public String currentID;
         public String currentNickName;
+
         public Form1()
         {
             InitializeComponent();
             logInForm = new LogInForm(this);
-           
-        }
+            SetNickNameBox("");
 
+
+        }
+        public void SetNickNameBox(string nickName)
+        {
+            textBox3.Text = nickName;
+        }
         public void Run(string ip, int port)
         {
             client = new wbClient(ip, port, LogMessage, DataMessage);
@@ -140,10 +146,10 @@ namespace _0417_FormClient
                 string[] filter1 = filter[1].Split('#');
                 if (filter1[1].Equals("TRUE"))
                 {
-                    
+                    currentNickName = filter1[0];
                     logInForm.CheckLogidId(true);
+                    SetNickNameBox(currentNickName);
 
-                    
                     // form.CheckIDResult(true);
 
                 }
@@ -188,6 +194,7 @@ namespace _0417_FormClient
                 {
                     currentNickName = filter1[0];
                     textBox1.Text += String.Format("{0} 닉네임 변경 성공", currentNickName) + "\r\n";
+                    SetNickNameBox(currentNickName);
                 }
                 else if (filter1[1].Equals("FALSE"))
                 {
@@ -328,17 +335,20 @@ namespace _0417_FormClient
 
         private void 회원정보수정ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            temp = new UpdateNickNameForm(this);
+            if(temp.ShowDialog()==DialogResult.OK)
             {
-                UpdateNickNameForm temp = new UpdateNickNameForm(this);
-
-                //string str = Packet.UpdateNickName);
-                //client.SendMessage(client.Server, str);
+                try
+                {
+                    string str = Packet.UpdateNickName(currentNickName, temp.newNickName);
+                    client.SendMessage(client.Server, str);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+           
         }
     }
 }

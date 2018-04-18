@@ -154,8 +154,9 @@ class Program
             string[] filter1 = filter[1].Split('#');
             string pack = "";
 
-            if (CheckID(filter1[0]) == false && CheckPW(filter1[1]) == true)
+            if (CheckID(filter1[0]) == false )
             {
+                Console.WriteLine("누군가의 닉네임 변경 시도...");
                 pack = Packet.UpdateNickName(ModifyIdInMeberList(filter1[0], filter1[1]), true);
             }
             else
