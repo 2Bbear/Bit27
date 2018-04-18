@@ -16,113 +16,61 @@ namespace DLLLabo_0418
     /// </summary>
     public class SocketPacket
     {
-        #region Attribute
-        private string packetModeName;
-        private byte[] outContents;
-        private int contentsStringLength;
-
-        public byte[] OutContents { get => outContents; private set => outContents = value; }
-        public int ContentsStringLength { get => contentsStringLength; set => contentsStringLength = value; }
-        public string PacketModeName { get => packetModeName; private set => packetModeName = value; }
-
+        #region SingleTone
+        private static SocketPacket singletone;
        
 
+        static SocketPacket()
+        {
+            singletone = new SocketPacket();
+        }
         #endregion
 
-        #region Constructor
+        private string nickname;
+        private string id;
+        private string pw;
+        private bool login;
+
+
+
         public SocketPacket()
         {
-            PacketModeName = null;
-            OutContents = null;
-            ContentsStringLength = 0;
+            nickname = null;
+            id = null;
+            pw = null;
+            login = false;
         }
 
-        #endregion
-
-        #region Method
-        //Convert Method======================================
-        //String을 byte로 변환해서 Contents에 저장함
-        public void SetContents(string target)
+        //서버로 전송하는 회원가입 
+        public static string SignUpMessage(String _nickName)
         {
-            outContents = Encoding.Default.GetBytes(target);
-            ContentsStringLength = (Encoding.Default.GetString(OutContents)).Length;
-            if (target==null|| outContents==null)
-            {
-                throw new Exception("콘텐츠 또는 콘텐츠에 넣을 값이 비어있습니다.");
-            }
+            String result = "NEWMEMBER@";
+            result += _nickName + "#" + true.ToString();
+            return result;
         }
-        //Int를 byte로 변환해서 contents에 저장함
-        public void Setcontents(int target)
+        //클라로 전송하는 회원가입
+        public static string ASK_SignUpMessage(String _nickName, bool b)
         {
-            outContents = Encoding.Default.GetBytes(target.ToString());
-            ContentsStringLength = (Encoding.Default.GetString(OutContents)).Length;
-            if (target == 0 || outContents == null)
-            {
-                throw new Exception("콘텐츠 또는 콘텐츠에 넣을 값이 비어있습니다.");
-            }
+            String result = "ASK_NEWMEMBER@";
+            result += _nickName +"#"+ b.ToString();
+            return "";
         }
-
-        //String을 byte로 변환해서 Contents에 추가함
-        public void AddContents(string target)
+        //서버로 전송하는 닉네임 중복여부 확인
+        public static string NickNameCheck(String _nickName)
         {
-           
-            String temp = Encoding.Default.GetString(outContents);
-            outContents=Encoding.Default.GetBytes(temp + target);
-            ContentsStringLength = (Encoding.Default.GetString(OutContents)).Length;
-            if (target == null || outContents == null)
-            {
-                throw new Exception("콘텐츠 또는 콘텐츠에 넣을 값이 비어있습니다.");
-            }
+            String result = "NICKNAMECHECK@";
+            result += _nickName + true.ToString();
+            return result;
         }
-        //Int을 byte로 변환해서 Contents에 추가함
-        public void AddContents(int target)
+        //클라로 전송하는 닉네임 중복여부 확인
+        public static string ASK_NickNameCheck(String _nickName,bool b)
         {
-            String temp = Encoding.Default.GetString(outContents);
-            outContents = Encoding.Default.GetBytes(temp + target.ToString());
-            ContentsStringLength = (Encoding.Default.GetString(OutContents)).Length;
-            if (target == 0 || outContents == null)
-            {
-                throw new Exception("콘텐츠 또는 콘텐츠에 넣을 값이 비어있습니다.");
-            }
-        }
-        //byte를 String으로 변환
-        public String GetContents()
-        {
-            return Encoding.Default.GetString(outContents);
-        }
-
-        //MakePacket Method===================================
-        public void MakePacket(SocketPackMode mode)
-        {
-            switch (mode)
-            {
-                case SocketPackMode.Default:
-                    { }
-                    break;
-                case SocketPackMode.ToServer:
-                    { }
-                    break;
-                case SocketPackMode.ToClient:
-                    { }
-                    break;
-            }
-        }
-
-        //Override Method=====================================
-        public override string ToString()
-        {
-            if(PacketModeName==null|| ContentsStringLength==0|| OutContents==null)
-            {
-                throw new Exception("출력하려는 패킷의 값이 비어있거나 정상적이지 않습니다.");
-            }
-            String result = "";
-            result += PacketModeName;
-            result += ContentsStringLength;
-            result += OutContents;
-
+            String result = "NICKNAMECHECK@";
+            result += _nickName + true.ToString();
             return result;
         }
 
-        #endregion
+
+
     }
 }

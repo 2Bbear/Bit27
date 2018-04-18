@@ -1,0 +1,12 @@
+-기본 선언-
+Program obj1 = new Program(7);
+Thread t1 = new Thread(new ThreadStart(obj1.ShowData));
+
+//단축 선언
+
+Thread t1 = new Thread(원하는 함수);
+
+//==============================================================
+-호출-
+
+t1.Start();

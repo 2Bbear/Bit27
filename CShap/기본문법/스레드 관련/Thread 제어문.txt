@@ -1,0 +1,23 @@
+-선언-
+Thread t1 = new Thread(콜백 함수);
+
+-제어문-
+//Thread 시작
+t1.Start(매개변수 전달);
+
+//Thread 강제 종료
+t1.Abort()
+
+//Thread 안전한 정지
+t1.Interrupt()
+
+//Thread 일시 정지
+t1.Suspend
+
+
+
+//Thread 재 시작
+t1.Resume
+
+//Thread 강제 합류지점 설정
+t1.Join

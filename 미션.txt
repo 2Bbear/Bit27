@@ -1,0 +1,92 @@
+패킷을 기반으로 한 회원정보 전송 및 처리
+
+회원정보(Member)--------------
+string nickname;   //중복불가
+string id;            //중복불가
+string pw;
+bool  login;
+-----------------------------
+1) 회원가입
+  [클] 정보를 서버에 전달
+  "NEWMEMBER@아이디#패스워드#닉네임
+  [서버] 저장
+   개인 회신
+  ACK_NEWMEMBER@아이디#TRUE
+  ACK_NEWMEMBER@아이디#FALSE
+
+2) 회원가입 과정에서 닉네임중복여부 확인
+    [클]정보를 서버에 전달
+    "NICKNAMECHECK@NICKNAMEz
+    [서버] 체크
+    개인 회신
+     ACK_NICKNAMECHECK@넥네임#TRUE
+    ACK_NICKNAMECHECK@닉네임#FALSE
+
+3) 아이디중복여부 확인
+   [클]정보를 서버에 전달
+    IDCHECK@아이디
+    [서버] 체크
+    개인 회신
+       ACK_IDCHECK@아이디#TRUE
+    ACK_IDCHECK@아이디#FALSE
+
+===================================================
+
+4) 회원탈퇴
+   [클] 정보를 서버에 전달
+   "DELMEMBER@아이디
+    [서버] 체크(해당 아이디 존재 유무)
+             삭제
+    개인 회신
+    ACK_DELMEMBER@아이디#TRUE
+    ACK_DELMEMBER@아이디#FALSE
+
+5) 로그인
+  [클] 정보를 서버에 전달
+  "LOGIN@아이디#패스워드
+  [서버] 체크
+   전체 회신
+  ACK_LOGIN@닉네임#TRUE
+  ACK_LOGIN@닉네임#FALSE
+
+
+6) 회원닉네임 수정
+  [클] 정보를 서버에 전달
+  "UPDATENICKNAME@원래닉네임#수정할닉네임
+  [서버] 체크 후 수정
+   개인회신
+  ACK_UPDATENICKNAME@수정할닉네임#TRUE
+  ACK_UPDATENICKNAME@수정할닉네임#FALSE
+
+
+7) 로그아웃
+  [클] 정보를 서버에 전달
+  "LOGOUT@닉네임
+  [서버] 체크
+   전체 회신
+  ACK_LOGOUT@닉네임#TRUE
+  ACK_LOGOUT@닉네임#FALSE
+
+
+
+8) 전체 회원리스트 얻기 
+   [클] 정보를 서버에 전달
+    "SELECTALLNICKNAME@"
+   [서버]
+   개인 회신
+   "ACK_SELECTALLNICKNAME@NICK1#NICK2#........"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
