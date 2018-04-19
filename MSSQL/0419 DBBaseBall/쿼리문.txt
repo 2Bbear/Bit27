@@ -1,0 +1,37 @@
+//Baseball에 저장된 값 보기
+SELECT Member.Name,BaseBall.TYPEID
+FROM Member inner join BaseBall
+ON Member.MemberID=BaseBall.MEMBERID;
+
+//모든 인원의 원하는 타에 따른 횟수
+SELECT Name,TYPEID,COUNT(TYPEID)AS 횟수
+FROM Member inner join BaseBall
+ON Member.MemberID=BaseBall.MEMBERID
+Group by Name,TYPEID
+Having TYPEID=4;
+
+//한 인원의 각 타에 따른 횟수
+SELECT Name,TYPEID,COUNT(TYPEID)AS 횟수
+FROM Member inner join BaseBall
+ON Member.MemberID=BaseBall.MEMBERID
+Group by Name,TYPEID
+Having Name='장정호';
+
+
+//한 인원의 각 타에 따른 회수를 특정 정렬로 수행함
+SELECT Name,TYPEID,COUNT(TYPEID)AS 횟수
+FROM Member inner join BaseBall
+ON Member.MemberID=BaseBall.MEMBERID
+
+Group by Name,TYPEID
+
+Having Name='장정호'
+order by TYPEID DESC;
+
+
+
+//멤버에 추가하기
+
+
+
+
