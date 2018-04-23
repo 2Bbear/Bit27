@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Configuration;
+
+namespace WindowsFormsApp4
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'wb27DataSet.BaseBall' table. You can move, or remove it, as needed.
+            this.baseBallTableAdapter.Fill(this.wb27DataSet.BaseBall);
+            // TODO: This line of code loads data into the 'wb27DataSet.Member' table. You can move, or remove it, as needed.
+            this.memberTableAdapter.Fill(this.wb27DataSet.Member);
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.baseBallTableAdapter.Update(this.wb27DataSet.BaseBall);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.memberTableAdapter.Update(this.wb27DataSet.Member);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            string str2 = ConfigurationManager.ConnectionStrings["wb27dbconnect"].ConnectionString;
+
+            MessageBox.Show(str2);
+          
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = ConfigurationManager.AppSettings["wbServerIp"];
+
+            textBox3.Text = ConfigurationManager.AppSettings["wbServerPort"];
+        }
+    }
+}
