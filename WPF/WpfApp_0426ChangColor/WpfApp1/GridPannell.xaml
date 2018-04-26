@@ -1,0 +1,29 @@
+﻿<Window x:Class="WpfApp1.GridPannell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="GridPannell" Height="450" Width="800">
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.RowSpan="4"  Grid.Row="0" Grid.Column="0" Margin="5" Content="1"  />
+        <Button Grid.ColumnSpan="6" Grid.Row="1" Grid.Column="1" Margin="5" Content="2" />
+        <Button Grid.Row="0" Grid.Column="2" Margin="5" Content="3" />
+        <Button Grid.Row="2" Grid.Column="0" Margin="5" Content="4" />
+        <Button Grid.Row="2" Grid.Column="1" Margin="5" Content="5" />
+        <Button Grid.Row="2" Grid.Column="2" Margin="5" Content="6" />
+
+    </Grid>
+</Window>

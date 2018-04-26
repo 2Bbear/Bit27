@@ -1,0 +1,61 @@
+﻿<Window x:Class="WpfApp1.PracticePannell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="PracticePannell"   Height="450" Width="800" Background="DarkGray" Initialized="Window_Initialized">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="97*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="103*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="99*"/>
+            <ColumnDefinition Width="112*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="도형" HorizontalAlignment="Center" VerticalContentAlignment="Center"  Grid.Row="0" Grid.Column="0"  />
+        <ComboBox SelectedIndex="0" Grid.Row="0" Grid.Column="1" Margin="5"  >
+            <ComboBoxItem Content="사각형" HorizontalAlignment="Right" Width="Auto" />
+            <ComboBoxItem Content="삼각형" HorizontalAlignment="Right" Width="Auto"/>
+            <ComboBoxItem Content="원형" HorizontalAlignment="Right" Width="Auto"/>
+            
+        </ComboBox>
+        
+        <Label Content="색상" HorizontalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="2"/>
+        <ComboBox  Name="Combo2" Grid.Row="0" Grid.Column="3" Margin="5" SelectionChanged="Combo2_SelectionChanged" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+
+        <TextBox  Grid.Row="0" Grid.Column="4" Margin="5" />
+
+
+        <Button Content="출 력" Grid.Row="0" Grid.Column="5" Margin="5">
+            
+        </Button>
+
+
+        <Canvas  Name="canvas" Background="LightBlue" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Margin="7,4,4.6,5" MouseLeftButtonUp="Canvas_MouseLeftButtonUp">
+
+        </Canvas>
+        <ListBox Name="PointListBox" Background="LightCoral" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,4,3,5">
+        
+        </ListBox>
+
+
+    </Grid>
+</Window>

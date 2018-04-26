@@ -1,0 +1,32 @@
+//XAml 내용============================================================
+
+ComboBox  Name="Combo2" Grid.Row="0" Grid.Column="3" Margin="5" SelectionChanged="Combo2_SelectionChanged" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+데이터 바인딩을 이용함
+
+//cs 생성자 내용========================================================================
+ public PracticePannell()
+        {
+            InitializeComponent();
+            Combo2.ItemsSource = typeof(Colors).GetProperties(); // 단순히 리스트를 추가하기만 해도 바로 적용됨
+
+            //PointListBox.ItemsSource= typeof(Colors).GetProperties();
+            //PropertyInfo[] props = typeof(Colors).GetProperties();
+            //foreach (PropertyInfo prop in props)
+            //{
+            //    Combo2.Items.Add(prop.Name);
+
+            //}
+
+            fillingcolor = Colors.DarkBlue;
+
+        }

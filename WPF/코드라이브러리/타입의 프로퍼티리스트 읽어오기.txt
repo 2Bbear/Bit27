@@ -1,0 +1,17 @@
+//프로퍼티 리스트 가져오기=========================================================
+
+//PropertyInfo[] props = typeof(Colors).GetProperties();
+            //foreach (PropertyInfo prop in props)
+            //{
+            //    Combo2.Items.Add(prop.Name);
+
+            //}
+
+
+
+//문자열로 해당 프로퍼티 비교==================================================
+
+String str = Combo2.SelectedItem.ToString();
+            String [] blankfilter = str.Split(' ');
+            String target = blankfilter[1];
+            fillingcolor = (Color)typeof(Colors).GetProperty(target).GetValue(null);
