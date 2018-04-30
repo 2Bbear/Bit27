@@ -1,0 +1,59 @@
+﻿<Window x:Class="ListDataBinding_0430.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ListDataBinding_0430"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Name="SuperWindow">
+
+    <Window.Resources>
+        <local:GenderToStringConverter x:Key="genderToString" />
+
+    </Window.Resources>
+    <StackPanel>
+        <StackPanel Background="Beige">
+            <Button Width="125" Height="25" Click="Button_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="White"/>
+                        <GradientStop Color="#FF5E7DFF" Offset="1"/>
+                        <GradientStop Color="#FFB0C5FF" Offset="0.93"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        <ListBox Name="listContent" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True" Background="Wheat" Width="{Binding Path=Width , ElementName=SuperWindow}" Height="Auto">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        이름:<StackPanel>
+                            <TextBox Text="{Binding Path=Name}"/>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                        </StackPanel>
+                        <!-- Text="{Binding Path=Age}"-->
+                        <TextBlock />
+                        , 나이:<TextBox Width="25" Name="age_TextBox">
+                            <TextBox.Text>
+                                    <Binding Path="Age" NotifyOnValidationError="True">
+                                        <Binding.ValidationRules>
+                                            <local:UnsingedIntValidationRule Min="50" Max="100"/> 
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            
+                        </TextBox>
+                        <TextBlock  />
+                        , 주소:<TextBox Text="{Binding Path=Address}"/>
+                        <TextBlock  />
+                        , 성별:<TextBox Text="{Binding Path=Gender, Converter={StaticResource genderToString}}"/> 
+                           
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </StackPanel>
+
+
+</Window>

@@ -1,0 +1,125 @@
+유효성 검사 - 하이라이트 방법-
+
+1. XAML로 유효성 검사를 할 구문 작성
+
+<TextBox Width="30">
+                                <TextBox.Text>
+                                    <Binding Path="ShortNumber">
+                                        <Binding.ValidationRules>
+                                            <ExceptionValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+
+2. CS에서 해당 변수를 선언
+  private int? shortNumber;
+        public int? ShortNumber
+        {
+            get { return shortNumber; }
+            set
+            {
+                shortNumber = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("ShortNumber"));
+            }
+        }
+
+
+//==========================================================
+유효성 검사 - 에러 메세지 박스 방법-
+
+1. XAML로 유효성 검사를 할 구문 작성
+
+<StackPanel Grid.Column="5" Margin="5" Orientation="Horizontal">
+                        <Label >단축번호(_S):</Label>
+                        <!--<TextBox Text="{Binding Path=ShortNumber}" Width="30"/>-->
+                        <TextBox Name="shortNumber" Width="30">
+                            <TextBox.Text>
+                                <Binding Path="ShortNumber" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <ExceptionValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        </StackPanel>
+
+NotifyOnValidationError="True" 이 구문이 여러가지 정보를 메세지 박스로 띄워주는 구문이다.
+
+2. 유효성 검사를 처리할 메소드 정의
+
+void shortNumver_ValidationError(object sender,ValidationErrorEventArgs e)
+        {
+            MessageBox.Show((string)e.Error.ErrorContent, "유효성 검사 실패");
+
+            shortNumber.ToolTip = (string)e.Error.ErrorContent;
+        }
+
+
+3. 유효성 검사 XAML와 메소드를 연결
+
+Validation.AddErrorHandler(shortNumber, shortNumver_ValidationError);
+
+//=================================================================
+
+사용자 정의 유효성 검사
+
+1. 사용자 정의 유효성 결과 클래스를 생성
+ class ShortNumberValidationRule : ValidationRule
+    {
+        int min;
+        public int Min
+        {
+            get { return min; }
+            set { min = value; }
+        }
+
+        int max;
+        public int Max
+        {
+            get { return max; }
+            set { max = value; }
+        }
+
+        public override ValidationResult Validate(object value,System.Globalization.CultureInfo cultureInfo)
+        {
+            int number;
+            if (!int.TryParse((string)value, out number))
+            {
+                return new ValidationResult(false, "정수를 입력하세요.");
+            } 
+
+            if (min <= number && number <= max)
+            {
+                // new ValidationResult(true, null) 같다
+                return ValidationResult.ValidResult;
+            }
+            else
+            {
+                string msg =string.Format("단축 번호는 {0}에서 {1}까지 입력 가능합니다.", min, max);
+                return new ValidationResult(false, msg);
+            }
+        }
+
+    }
+
+2. XAML 코드에서 해당 결과 클래스를 호출 
+ <StackPanel Grid.Column="6" Margin="5" Orientation="Horizontal">
+                            <Label >단축번호(_S):</Label>
+                            <!--<TextBox Text="{Binding Path=ShortNumber}" Width="30"/>-->
+                            <TextBox Name="shortNumber2"  Width="30">
+                                <TextBox.Text>
+                                    <Binding Path="ShortNumber" NotifyOnValidationError="True">
+                                        <Binding.ValidationRules>
+                                            <local:ShortNumberValidationRule Min="50" Max="100"/> // 요 부분
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+
+                        </StackPanel>
+
+3. 경고 메세지 창이 뜰 수 있도록 델리게이트 바인딩
+ Validation.AddErrorHandler(shortNumber2, shortNumver_ValidationError);
+

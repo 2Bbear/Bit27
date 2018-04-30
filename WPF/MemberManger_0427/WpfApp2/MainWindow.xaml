@@ -1,0 +1,178 @@
+﻿<Window x:Class="WpfApp2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="494.685" Width="368.642" Name="SuperWindow">
+
+    <TabControl HorizontalAlignment="Left"  VerticalAlignment="Top" Width="Auto" Height="Auto"  >
+        <TabItem Header="첫 번째 컨텐츠" MouseUp="TabItem_MouseUp_1" >
+            <StackPanel  >
+                <!--기본 정보 입력-->
+                <Grid >
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition ></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Target="{Binding ElementName=name}">이름(_N):</Label>
+                    <TextBox Name="UserName"  Grid.Column="1" Grid.Row="0"  Width="100" >
+                        <TextBox.ToolTip>
+                            <ToolTip Content="이름 입력" />
+                        </TextBox.ToolTip>
+                    </TextBox>
+                    <Label Grid.Column="2" Grid.Row="0" Target="{Binding ElementName=phone}">전화(_P):</Label>
+                    <TextBox Name="UserPhoneNum" Grid.Column="3" Grid.Row="0"   Width="100" ToolTip="전화 번호 입력" />
+
+                    <Label Grid.Column="0" Grid.Row="1" Target="{Binding ElementName=name}">아이디 (_N):</Label>
+                    <TextBox Grid.Column="1" Grid.Row="1" Name="UserID" Width="100" >
+                        <TextBox.ToolTip>
+                            <ToolTip Content="아이디 입력" />
+                        </TextBox.ToolTip>
+                    </TextBox>
+                    <Label Grid.Column="2" Grid.Row="1" Target="{Binding ElementName=phone}">비밀번호(_P):</Label>
+                    <TextBox Grid.Column="3" Grid.Row="1" Name="UserPassWord" Width="100" ToolTip="비밀번호 입력" />
+
+                </Grid>
+                <!--추가 정보 입력-->
+                <Grid ShowGridLines="True" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!--성별 입력-->
+                    <GroupBox  Grid.Column="0" Grid.Row="0" >
+                        <GroupBox.Header>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Padding="5"> <Bold>성별</Bold></TextBlock>
+
+                            </StackPanel>
+                        </GroupBox.Header>
+                        <Border Margin="10" Background="Yellow" Padding="5">
+                            <StackPanel >
+                                <RadioButton Content="남" Checked="RadioButton_Checked" />
+                                <RadioButton Content="여" Checked="RadioButton_Checked_1" />
+                            </StackPanel>
+                        </Border>
+                    </GroupBox>
+                    <!--세부 정보 입력-->
+                    <Expander Grid.Column="1" Grid.Row="0" IsExpanded="True">
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Padding="5"> <Bold>취미</Bold></TextBlock>
+
+                            </StackPanel>
+                        </Expander.Header>
+                        <Border Margin="10" Background="Yellow" Padding="5">
+                            <StackPanel>
+                                <CheckBox Name="UserHobbyReadBook" Content="독서"/>
+                                <CheckBox Name="UserHobbyWatchingMovie" Content="영화감상" />
+                                <CheckBox Name="UserHobbyTour" Content="여행" />
+                            </StackPanel>
+                        </Border>
+                    </Expander>
+                </Grid>
+                <!--색상 입력-->
+                <GroupBox>
+                    <GroupBox.Header>
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Padding="5"> <Bold>색상입력</Bold></TextBlock>
+
+                        </StackPanel>
+                    </GroupBox.Header>
+                    <Border Margin="10" Background="Yellow" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0" Grid.Row="0">R</TextBlock>
+                            <Slider Minimum="0" Maximum="1" Grid.Column="1" Grid.Row="0" Margin="5" ValueChanged="Slider_ValueChanged" ></Slider>
+
+                            <TextBlock Grid.Column="0" Grid.Row="1">G</TextBlock>
+                            <Slider Minimum="0" Maximum="1"  Grid.Column="1" Grid.Row="1" Margin="5" ValueChanged="Slider_ValueChanged_1"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="2">B</TextBlock>
+                            <Slider Minimum="0" Maximum="1" Grid.Column="1" Grid.Row="2" Margin="5" ValueChanged="Slider_ValueChanged_2"></Slider>
+                        </Grid>
+                    </Border>
+                </GroupBox>
+                <Rectangle Name="Palet" Fill="AliceBlue" Width="100" Height="100"></Rectangle>
+                <!--입력 버튼-->
+                <Button Content="저장 하기" Click="Button_Click"></Button>
+
+
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="두 번째 컨텐츠" MouseUp="TabItem_MouseUp" >
+            <StackPanel>
+                <ListView Width="600" Name="listview" Margin="10" Background="AliceBlue" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="6" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="이름" Width="120" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="전화번호" Width="120" DisplayMemberBinding="{Binding Phonenum}"/>
+                            <GridViewColumn Header="아이디" Width="120" DisplayMemberBinding="{Binding Id}"/>
+                            <GridViewColumn Header="비밀번호" Width="120" DisplayMemberBinding="{Binding Password}"/>
+                            <GridViewColumn Header="성별" Width="120" DisplayMemberBinding="{Binding Gender}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="세 번째 컨텐츠" MouseUp="TabItem_MouseUp_2">
+            <!--선택된 정보 출력-->
+            <Grid Name="Content3" Width="360" Height="436">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="47*" ></ColumnDefinition>
+                    <ColumnDefinition Width="133*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16">이름</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" >전화번호</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" >아이디</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" >비밀번호</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" >성별</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" >취미</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" >색깔</TextBlock>
+
+                <TextBlock Name="Content3Name" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16">이름</TextBlock>
+                <TextBlock Name="Content3Phone" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" >전화번호</TextBlock>
+                <TextBlock Name="Content3ID" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" >아이디</TextBlock>
+                <TextBlock Name="Content3PW" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" >비밀번호</TextBlock>
+                <TextBlock Name="Content3Gender" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" >성별</TextBlock>
+                <TextBlock Name="Content3Hobby" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" >취미</TextBlock>
+                <TextBlock Name="Content3Color" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" >색깔</TextBlock>
+            </Grid>
+        </TabItem>
+
+    </TabControl>
+
+</Window>

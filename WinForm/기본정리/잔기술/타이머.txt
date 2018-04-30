@@ -1,3 +1,31 @@
+//
+//간단한 사용방법
+
+Timer t;
+        int i = 0;
+        public Form1()
+        {
+            InitializeComponent();
+            t = new Timer();
+            t.Tick += T_Tick;
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            t.Start();
+            t.Interval = 1;
+        }
+
+        private void T_Tick(object sender, EventArgs e)
+        {
+            this.Text = i.ToString();
+            i++;
+            //throw new NotImplementedException();
+        }
+
+
+
 사용예제
  서버 기반 타이머
 서버 기반 타이머

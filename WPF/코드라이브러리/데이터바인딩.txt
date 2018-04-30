@@ -1,0 +1,209 @@
+
+//=============================================================================================
+CS를 이용한 바인딩
+1. 데이터 만들기
+List<int> a;
+
+2.바인딩 
+CS 코드 상에서
+
+콘텐츠이름.DataContext = a; // 한번만 하면 됨
+
+3.콘텐츠에 적용
+콘텐츠이름 안에 
+Text="{Binding Path=원하는 프로퍼티 이름}를 사용해서 적용
+
+//================
+콘텐츠 변경 시 CS 데이터 변경
+1. 데이터 설정 
+
+class Person : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+인터페이스를 상속하고, 이벤트를 선언한다
+
+ private string name;
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+            }
+        }
+
+프로퍼티의 set을 바꿔준다.
+
+이후 콘텐츠를 변경하면 적용된다.
+//=============================================================================================
+
+XAML을 이용한 바인딩
+1. 데이터 만들기
+<!--데이터 리소스-->
+    <Window.Resources>
+        <local:Person x:Key="per1" Name="홍길동" Phone = "010-1111-1234" Age="30"/>
+    </Window.Resources>
+
+2. 바인딩
+<StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal">
+                            <Label >이름(_N):</Label>
+                            <TextBox Name="tab2_name" Foreground="Coral" Width="120" Text="{Binding Path=Name, Source={StaticResource per1}}"   />
+                        </StackPanel>
+
+3. 콘텐츠와 콘텐츠 바인딩
+<Border Grid.Column="0" Margin="2" BorderBrush="Black" BorderThickness="2">
+                            <Label Background="{Binding Path=Foreground, ElementName=tab2_name }" Height="25" Content="{Binding Path=Name  , Source={StaticResource per1}}"/>
+                        </Border>
+
+
+//=============================================================================================
+
+서로 다른 속성끼리의 바인딩
+
+1. 변환기 생성
+ [ValueConversion(/* 원본 형식 */ typeof(bool), /* 대상 형식 */ typeof(bool))]
+    public class MaleToFemaleConverter : IValueConverter
+    {
+        // 데이터 속성을 UI 속성으로 변경할 때
+        public object Convert(object value, Type targetType, object parameter,System.Globalization.CultureInfo culture)
+        {
+            if (targetType != typeof(bool?))
+                return null;
+
+            bool? male = (bool?)value; // 들어오는 값이 bool값이냐?
+
+            if (male == null) // null이면 반환
+                return null;
+            else
+                return !(bool?)value;
+        }
+        // UI 속성을 데이터 속성으로 변경할 때
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (targetType != typeof(bool?))
+                return null;
+
+            bool? male = (bool?)value;
+
+            if (male == null)
+                return null;
+            else
+                return !(bool?)value;
+        }
+
+
+    }
+
+2. XAML에 리소스 객체로 생성
+<Window.Resources>
+        <local:Person x:Key="per1" Name="홍길동" Phone = "010-1111-1234" Age="30" Male="False" />
+        <local:MaleToFemaleConverter x:Key="maleConverter" />
+    </Window.Resources>
+
+3. 해당 콘텐츠와 바인딩
+<StackPanel Grid.Column="3" Margin="5" Orientation="Horizontal" Background="LightGreen">
+                            <RadioButton Name="tab2_male" IsChecked="{Binding Path=Male}" Content="남" Margin="5,5,20,5" />
+                            <RadioButton IsChecked="{Binding Path=Male, Converter={StaticResource maleConverter}}"  Content="여" Margin="5"/>
+</StackPanel>
+
+
+//======================================================================================================
+
+콜렉션 컨트롤과 콘텐츠 바인딩
+
+1. 콜렉션 선언과 데이터 채우기
+ People group1 = new People(); // List<Person> 을 상속받은 클래스
+        public MainWindow()
+        {
+            InitializeComponent();
+            group1.Add(new Person("홍길동",20,"상암동",true));
+            group1.Add(new Person("고수경", 44, "가리봉동", false));
+            group1.Add(new Person("조세호", 36, "상암동", true));
+
+            listContent.ItemsSource = group1;
+        }
+
+2. 콘텐츠 수정시 데이터도 변환 될 수 있도록 프로퍼티 세팅
+public class Person : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private String name;
+        private int age;
+        private String address;
+        private bool? gender;
+
+        public Person(string name, int age, string address, bool gender)
+        {
+            Name = name;
+            Age = age;
+            Address = address;
+            Gender = gender;
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+            }
+        }
+        public int Age {
+            get => age;
+            set
+            {
+                age = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Age"));
+            }
+        }
+        public string Address {
+            get => address;
+            set
+            {
+                address = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Address"));
+            }
+        }
+        public bool? Gender {
+            get => gender;
+            set
+            {
+                gender = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Gender"));
+            }
+        }
+    }
+
+
+3. 콘텐츠와 바인딩
+<ListBox Name="listContent" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True" Background="Wheat" Width="{Binding Path=Width , ElementName=SuperWindow}" Height="{Binding Path=Height ,ElementName=SuperWindow}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                        이름:<StackPanel>
+                            <TextBox Text="{Binding Path=Name}"/>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                        </StackPanel>
+                        <TextBlock />
+                        , 나이:<TextBox Text="{Binding Path=Age}"/>
+                        <TextBlock  />
+                        , 주소:<TextBox Text="{Binding Path=Address}"/>
+                        <TextBlock  />
+                        , 성별:<TextBox Text="{Binding Path=Gender, Converter={StaticResource genderToString}}"/> 
+                           
+                    </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
