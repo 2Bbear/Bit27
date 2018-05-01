@@ -9,11 +9,20 @@
 
     <Window.Resources>
         <local:GenderToStringConverter x:Key="genderToString" />
-
+        <local:GenderToReverseConverter x:Key="genderToReverse" />
     </Window.Resources>
     <StackPanel>
         <StackPanel Background="Beige">
             <Button Width="125" Height="25" Click="Button_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="White"/>
+                        <GradientStop Color="#FF5E7DFF" Offset="1"/>
+                        <GradientStop Color="#FFB0C5FF" Offset="0.93"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Width="125" Height="25" Click="Button_Click2">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="White"/>
@@ -47,6 +56,17 @@
                         , 주소:<TextBox Text="{Binding Path=Address}"/>
                         <TextBlock  />
                         , 성별:<TextBox Text="{Binding Path=Gender, Converter={StaticResource genderToString}}"/> 
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <RadioButton IsChecked="{Binding Path=Gender}" Grid.Column="0" Content="남"></RadioButton>     
+                            <RadioButton IsChecked="{Binding Path=Gender , Converter={StaticResource genderToReverse}}" Grid.Column="1" Content="여"></RadioButton>
+                        </Grid>
+                            
+                          
+
                            
                     </TextBlock>
                 </DataTemplate>

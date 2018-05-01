@@ -1,0 +1,95 @@
+﻿<Window x:Class="FigureMakeProgram_0501.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FigureMakeProgram_0501"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="1015.595" Name="SuperWindow">
+    <Grid Name="Win_Grid" DataContext="{Binding}" Height="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!--왼편-->
+        <StackPanel Grid.Column="0">
+            <ListBox Name="Win_FigureList" ItemsSource="{Binding}" Height="421" Margin="0,0,-0.2,0" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            인덱스:<StackPanel><TextBlock Text="{Binding Path=Id}"/></StackPanel>
+                            형태:<StackPanel><TextBlock Text="{Binding Path=Shape}"/></StackPanel>
+                            좌표:<StackPanel><TextBlock Text="{Binding Path=Pt}"/></StackPanel>
+                            색상:<StackPanel><TextBlock Text="{Binding Path=MyColor}"/></StackPanel>
+                            
+                        </TextBlock>
+                        
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <!--오른편-->
+        <StackPanel Grid.Column="1">
+            <!--옵션 영역-->
+            <Grid HorizontalAlignment="Stretch" Background="AliceBlue" Height="51" Margin="0,0,-0.2,0" >
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <!--형태 옵션-->
+                <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Content="사각형"></RadioButton>
+                <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Content="삼각형"></RadioButton>
+                <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Content="타원"></RadioButton>
+                <!--좌표 옵션-->
+                <TextBlock Grid.Column="3" Text="좌표" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <TextBox Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40"></TextBox>
+                <TextBox Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40"></TextBox>
+                <!--크기 옵션-->
+                <Label Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center" Content="크기" ></Label>
+                <ComboBox Grid.Column="7" Width="40" Height="25">
+                    <ComboBoxItem Content="50"/>
+                    <ComboBoxItem Content="100"/>
+                    <ComboBoxItem Content="150"/>
+                </ComboBox>
+                <!--색상 옵션-->
+                <Label Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" Content="색상" ></Label>
+                <ComboBox Grid.Column="9" Width="40" Height="25">
+                    <ComboBoxItem Content="ㅃㅃ빨간맛"/>
+                    <ComboBoxItem Content="ㅍㅍ파란맛"/>
+                    <ComboBoxItem Content="ㅊㅊ초록맛"/>
+                </ComboBox>
+            </Grid>
+            <!--현재 Item 영역-->
+            <StackPanel Orientation="Horizontal" Background="DarkCyan" Height="51" Margin="0,0,-0.2,0" >
+                <StackPanel >
+                    <Label Content="형태"/>
+                </StackPanel>
+                <StackPanel >
+                    <Label Content="{Binding Path=Shape}"/>
+                </StackPanel>
+            </StackPanel>
+            <!--삽입 Item 영역-->
+            <StackPanel Background="Coral" Height="51" Margin="0,0,-0.2,0" >
+
+            </StackPanel>
+            <!--선택 Item 영역-->
+            <StackPanel Background="BlanchedAlmond" Height="51" Margin="0,0,-0.2,0" >
+
+            </StackPanel>
+            <!--도형 그리는 영역-->
+            <Canvas Background="Aqua" Height="215" Margin="0,0,-0.2,0">
+                
+            </Canvas>
+        </StackPanel>
+        
+
+    </Grid>
+</Window>

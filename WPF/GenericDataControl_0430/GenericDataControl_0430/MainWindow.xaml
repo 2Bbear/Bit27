@@ -9,6 +9,12 @@
     <!--데이터 리소스-->
     <Window.Resources>
         <local:Person x:Key="per1" Name="홍길동" Phone = "010-1111-1234" Age="30" Male="False" />
+        <local:People x:Key="people">
+            <local:Person ShortNumber = "1" Name = "홍길동" Phone = "010-8888-1234" Male = "True" />
+            <local:Person ShortNumber = "50" Name = "일지매" Phone = "010-8888-1234" Male = "True" />
+            <local:Person ShortNumber = "51" Name = "임꺽정" Phone = "010-9999-1234" Male = "True" />
+        </local:People>
+
         <local:MaleToFemaleConverter x:Key="maleConverter" />
         <local:MaleToStringConverter x:Key="maleStringConverter" />
     </Window.Resources>
@@ -127,7 +133,7 @@
             </TabItem>
 
             <TabItem Header="데이터바인딩">
-                <StackPanel Name="panel" Background="#FFE5E5E5" DataContext="{StaticResource per1}">
+                <StackPanel Name="panel" Background="#FFE5E5E5" DataContext="{StaticResource people}">
                     <!--ui입출력-->
                     <Grid >
                         <Grid.ColumnDefinitions>
@@ -141,15 +147,36 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal">
                             <Label >이름(_N):</Label>
-                            <TextBox Name="tab2_name" Foreground="Coral" Width="120" Text="{Binding Path=Name, Source={StaticResource per1}}"   />
+                            <!--Text="{Binding Path=Name, Source={StaticResource per1}}-->
+                            <TextBox Name="tab2_name" Foreground="Coral" Width="120" >
+                                <TextBox.Text >
+                                    <!--Path="{Binding Path=Age , Source={StaticResource per1} }"-->
+                                    <Binding Path="Name" NotifyOnValidationError="True">
+                                        <Binding.ValidationRules>
+                                            <local:NameValidationRule Min="1" Max="5"/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Margin="5" Orientation="Horizontal">
                             <Label >전화(_P):</Label>
-                            <TextBox Name="tab2_phone" Foreground="DarkKhaki" Width="120" Text="{Binding Path=Phone , Source={StaticResource per1}}" />
+                            <TextBox Name="tab2_phone" Foreground="DarkKhaki" Width="120" Text="{Binding Path=Phone , Source={StaticResource per1}}"  >
+                                
+                            </TextBox>
                         </StackPanel>
                         <StackPanel Grid.Column="2" Margin="5" Orientation="Horizontal">
                             <Label >나이(_A):</Label>
-                            <TextBox Name="tab2_age" Foreground="Orchid"  Width="120" Text="{Binding Path=Age , Source={StaticResource per1} }"  />
+                            <TextBox Name="tab2_age" Foreground="Orchid"  Width="120"  >
+                                <TextBox.Text >
+                                    <!--Path="{Binding Path=Age , Source={StaticResource per1} }"-->
+                                    <Binding Path="ShortNumber" NotifyOnValidationError="True">
+                                        <Binding.ValidationRules>
+                                            <ExceptionValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
                         <StackPanel Grid.Column="3" Margin="5" Orientation="Horizontal" Background="LightGreen">
                             <RadioButton Name="tab2_male" IsChecked="{Binding Path=Male}" Content="남" Margin="5,5,20,5" />
@@ -227,9 +254,18 @@
                     <Grid >
                         <Button Name="eraseButton" Margin="3" Height="30" Grid.Column="2" Content="Clear" Click="eraseButton_Click" />
                     </Grid>
+                    <!--리스트를 위한 버튼-->
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="prev" Grid.Column="0" Margin="3" Height="30" Content="이전" Click="prev_Click" />
+                        <Button Name="next" Grid.Column="1" Margin="3" Height="30" Content="다음" Click="next_Click" />
+                    </Grid>
 
                     <!--리스트-->
-                    <ListBox Name="listbox2" SelectionChanged="listbox_SelectionChanged"/>
+                    <ListBox Name="listbox2" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True" SelectionChanged="listbox_SelectionChanged"/>
                     
                     
                 </StackPanel>

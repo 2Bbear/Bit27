@@ -36,7 +36,7 @@
                         <!--<TextBox Text="{Binding Path=ShortNumber}" Width="30"/>-->
                         <TextBox Name="shortNumber" Width="30">
                             <TextBox.Text>
-                                <Binding Path="ShortNumber" NotifyOnValidationError="True">
+                                <Binding Path="연결할 프로퍼티 이름" NotifyOnValidationError="True">
                                     <Binding.ValidationRules>
                                         <ExceptionValidationRule />
                                     </Binding.ValidationRules>

@@ -75,12 +75,17 @@ namespace GenericDataControl_0430
 
         public override string ToString()
         {
-            return Name + " : " + Phone + " : " + Age;
+            string sex;
+            if (Male == null)
+                sex = "남/여";
+            else if (Male == true)
+                sex = "남";
+            else
+                sex = "여";
+
+            return string.Format("단축번:{0}, 이름:{1}, 전화:{2},나이 :{3} 성별:{4}", ShortNumber, Name, Phone, Age, sex);
         }
 
-
-        /*
-         *
-         */
     }
+
 }

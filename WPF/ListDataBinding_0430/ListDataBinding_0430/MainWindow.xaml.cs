@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+/*
+ 리스트 에 컨텐츠 자동으로 생기는 것 까지 했는데, 거기에 유효성 검사 중 메세지 박스 띄우는 걸 아직 못함
+     */
 namespace ListDataBinding_0430
 {
 
@@ -32,7 +34,7 @@ namespace ListDataBinding_0430
             listContent.ItemsSource = group1;
 
             
-            Validation.AddErrorHandler(Age, shortNumver_ValidationError);
+            //Validation.AddErrorHandler(Age, shortNumver_ValidationError);
         }
         void shortNumver_ValidationError(object sender, ValidationErrorEventArgs e)
         {
@@ -55,6 +57,16 @@ namespace ListDataBinding_0430
             {
                 listContent.Items.Refresh();
             }
+            
+        }
+        //동적 바인딩
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            group1 = new People();
+            group1.Add(new Person("퉤ㅐㅅ", 20, "상암동", true));
+            group1.Add(new Person("퉤에엣", 44, "가리봉동", false));
+            group1.Add(new Person("퉷텟", 36, "상암동", true));
+            listContent.ItemsSource = group1;
             
         }
     }

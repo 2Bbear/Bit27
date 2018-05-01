@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FigureMaster_0501", "FigureMaster_0501\FigureMaster_0501.csproj", "{2F35A6DD-6F79-4479-9EE9-4EE5487302EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F35A6DD-6F79-4479-9EE9-4EE5487302EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F35A6DD-6F79-4479-9EE9-4EE5487302EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F35A6DD-6F79-4479-9EE9-4EE5487302EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F35A6DD-6F79-4479-9EE9-4EE5487302EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5A03CBC3-DB30-4C1D-B2F5-0AC1F357C099}
+	EndGlobalSection
+EndGlobal

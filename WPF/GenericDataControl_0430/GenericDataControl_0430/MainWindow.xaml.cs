@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,17 +42,32 @@ namespace GenericDataControl_0430
 
             Validation.AddErrorHandler(shortNumber, shortNumver_ValidationError);
             Validation.AddErrorHandler(shortNumber2, shortNumver_ValidationError);
+            Validation.AddErrorHandler(tab2_age, shortNumver_ValidationError);
+            Validation.AddErrorHandler(tab2_name, name_ValidationError);
             //Validation.AddErrorHandler(shortNumber2, );
             //
             //panel.DataContext = per;
             //
+            listbox.DataContext = people;
+            listbox2.ItemsSource = people;
 
         }
         void shortNumver_ValidationError(object sender,ValidationErrorEventArgs e)
         {
-            MessageBox.Show((string)e.Error.ErrorContent, "유효성 검사 실패");
+            if (e.Action == ValidationErrorEventAction.Added)
+            {
+                MessageBox.Show((string)e.Error.ErrorContent, "유효성 검사 실패");
+            }
 
             shortNumber.ToolTip = (string)e.Error.ErrorContent;
+        }
+        void name_ValidationError(object sender, ValidationErrorEventArgs e)
+        {
+            if (e.Action == ValidationErrorEventAction.Added) // 오류 중복 발생 해결 법
+            {
+                MessageBox.Show((string)e.Error.ErrorContent, "유효성 검사 실패");
+                shortNumber.ToolTip = (string)e.Error.ErrorContent;
+            }
         }
 
 
@@ -64,15 +80,26 @@ namespace GenericDataControl_0430
             //per.Age = null;
 
             //xaml에 있는 객체를 초기화 하는 코드
-            per = (Person)FindResource("per1");
-            per.Name = "";
-            per.Phone = "";
-            per.Age = null;
-            per.Male = null;
-            per.ShortNumber = null;
+            //per = (Person)FindResource("per1");
+            //per.Name = "";
+            //per.Phone = "";
+            //per.Age = null;
+            //per.Male = null;
+            //per.ShortNumber = null;
+            ICollectionView view =CollectionViewSource.GetDefaultView(FindResource("people"));
+            Person person = (Person)view.CurrentItem;
+            person.ShortNumber = null;
+            person.Name = "";
+            person.Phone = "";
+            person.Male = null;
+
+            
+            listbox2.Items.Refresh();
+            
+
 
         }
-        
+
 
 
         #region 데이터 => 컨트롤
@@ -227,6 +254,27 @@ namespace GenericDataControl_0430
 
         }
 
+        private void prev_Click(object sender, RoutedEventArgs e)
+        {
+            ICollectionView view =CollectionViewSource.GetDefaultView(FindResource("people"));
+            view.MoveCurrentToPrevious();
+            if (view.IsCurrentBeforeFirst)
+            {
+                view.MoveCurrentToFirst();
+            }
+
+        }
+
+        private void next_Click(object sender, RoutedEventArgs e)
+        {
+            ICollectionView view = CollectionViewSource.GetDefaultView(FindResource("people"));
+            view.MoveCurrentToNext();
+            if (view.IsCurrentAfterLast)
+            {
+                view.MoveCurrentToLast();
+            }
+
+        }
     }
 
     [ValueConversion(/* 원본 형식 */ typeof(bool), /* 대상 형식 */ typeof(bool))]
