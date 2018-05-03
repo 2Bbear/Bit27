@@ -1,0 +1,193 @@
+﻿<Window x:Class="_0501.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:local="clr-namespace:_0501"
+        Title="MainWindow" Height="400" Width="1000" WindowState="Maximized" Name="dd" >
+    <Window.Resources >
+        <local:ShapeCollection x:Key="shapecollection" >
+            <local:Shape Type = "False" PointX="100" PointY="100" Size="50" Color="Gold"/>
+        </local:ShapeCollection>
+        
+        <local:TypeToToggleConverter x:Key="typeConverter" />
+        <local:ColorConverter x:Key="colorConverter" />
+        <local:SizeConverter x:Key="sizeConverter" />
+        <local:UnsignedNumRule x:Key="unsignedNumRule"/>
+        <!--유효성 솔루션-->
+        
+        
+        <!--템플릿-->        
+        <DataTemplate x:Key="myColorTempletcode">
+            <StackPanel Orientation="Horizontal">
+                <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                <TextBlock Text="{Binding Name}" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <!--본문-->
+    <StackPanel Name="Win_StackPenel" Orientation="Horizontal" DataContext="{Binding}">
+        <StackPanel>
+              <Border Margin="2" BorderBrush="Black" BorderThickness="2" Width="150">
+                <ListBox Name="Wid_ListBox" ItemsSource="{Binding}"  IsSynchronizedWithCurrentItem="True" MouseUp="Wid_ListBox_MouseUp"/>
+            </Border>
+        </StackPanel>
+        <StackPanel>
+            <Grid Name="Win_OptionSection" Background="Fuchsia" DataContext="{Binding}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal"  >
+                    <Label >설 정   옵 션 : </Label>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="5" Orientation="Horizontal"  >
+                    <Label >타 입(_T):</Label>
+                    <RadioButton IsChecked="{Binding Path=Type}" Name="radiorect1" Content="사각형" Margin="5,5,20,5" />
+                    <RadioButton IsChecked="{Binding Path=Type, Converter={StaticResource typeConverter}}" Name="radioellipse1" Content="타원" Margin="5,5,20,5" />
+                </StackPanel>
+                <StackPanel Grid.Column="2" Margin="5" Orientation="Horizontal">
+                    <Label >좌표(_P):</Label>
+                    <TextBox  Name="pointx1" Width="60" Text="{Binding Path=PointX, NotifyOnValidationError=True}"/>
+                    <TextBox Name="pointy1" Width="60" Text="{Binding Path=PointY}" />
+                  
+                </StackPanel>
+                <StackPanel Grid.Column="3" Margin="5" Orientation="Horizontal">
+                    <Label >크기(_S):</Label>
+                    <ComboBox Name="comborect1" Width="80" SelectedIndex="{Binding Path=Size, Converter={StaticResource sizeConverter}}">
+                        <ComboBoxItem Content="50"/>
+                        <ComboBoxItem Content="100"/>
+                        <ComboBoxItem Content="150"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Column="4" Margin="5" Orientation="Horizontal">
+                    <Label >채우기(_F):</Label>
+                    <ComboBox Name="combocolor1" Width="80"  ItemTemplate="{StaticResource myColorTempletcode}" SelectedIndex="{Binding Path=Color, Converter={StaticResource colorConverter}}"></ComboBox>
+                </StackPanel>
+            </Grid>
+            <Grid Name="Win_CurrentItemSection" Background="Azure" DataContext="{Binding}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal"  >
+                    <Label >현재 아이템 :</Label>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="5" Orientation="Horizontal"  >
+                    <Label >타 입(_T):</Label>
+                    <RadioButton Name="radiorect2" IsChecked="{Binding Path=Type}" Content="사각형" Margin="5,5,20,5" />
+                    <RadioButton Name="radioellipse2" IsChecked="{Binding Path=Type, Converter={StaticResource typeConverter}}" Content="타원" Margin="5,5,20,5" />
+                </StackPanel>
+                <StackPanel Grid.Column="2" Margin="5" Orientation="Horizontal">
+                    <Label >좌표(_P):</Label>
+                    <TextBox Name="pointx2" Width="60" >
+                        <TextBox.Text>
+                            <Binding Path="PointX" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local:ShortNumberValidationRule Min="0" Max="750"/> 
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox Name="pointy2"  Width="60" >
+                        <TextBox.Text>
+                            <Binding Path="PointY" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <local:ShortNumberValidationRule Min="0" Max="500"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Grid.Column="3" Margin="5" Orientation="Horizontal">
+                    <Label >크기(_S):</Label>
+                    <ComboBox Name="comborect2" Width="80" SelectedIndex="{Binding Path=Size, Converter={StaticResource sizeConverter}}">
+                        <ComboBoxItem Content="50"/>
+                        <ComboBoxItem Content="100"/>
+                        <ComboBoxItem Content="150"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Column="4" Margin="5" Orientation="Horizontal">
+                    <Label >채우기(_F):</Label>
+                    <ComboBox Name="combocolor2" Width="80" SelectedIndex="{Binding Path=Color, Converter={StaticResource colorConverter}}"  ItemTemplate="{StaticResource myColorTempletcode}" >
+                       
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+            <Grid Background="LawnGreen">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal"  >
+                    <Label >저장 아이템 :</Label>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="5" Orientation="Horizontal"  >
+                    <Label >타 입(_T):</Label>
+                    <RadioButton Name="radiorect3" Content="사각형" Margin="5,5,20,5" />
+                    <RadioButton Name="radioellipse3" Content="타원" Margin="5,5,20,5" />
+                </StackPanel>
+                <StackPanel Grid.Column="2" Margin="5" Orientation="Horizontal">
+                    <Label >좌표(_P):</Label>
+                    <TextBox Name="pointx3" Width="60"  />
+                    <TextBox Name="pointy3" Width="60" />
+                </StackPanel>
+                <StackPanel Grid.Column="3" Margin="5" Orientation="Horizontal">
+                    <Label >크기(_S):</Label>
+                    <ComboBox Name="comborect3" Width="80">
+                        <ComboBoxItem Content="50"/>
+                        <ComboBoxItem Content="100"/>
+                        <ComboBoxItem Content="150"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Column="4" Margin="5" Orientation="Horizontal">
+                    <Label >채우기(_F):</Label>
+                    <ComboBox Name="combocolor3" Width="80"  ItemTemplate="{StaticResource myColorTempletcode}"/>
+                </StackPanel>
+            </Grid>
+            <Grid Background="Plum">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal"  >
+                    <Label >현재 아이템 인덱스 :</Label>
+                    <TextBox Name="Win_SearchTextBox" Width="200"/>
+                </StackPanel>         
+            </Grid>
+            <Border Margin="2" BorderBrush="Black" BorderThickness="2">
+                <Canvas Name="canvas" Background="SkyBlue" Height="500" MouseUp="canvas_MouseUp"  />
+            </Border>            
+        </StackPanel>
+        <StackPanel>
+            <Grid Background="Fuchsia">
+                <StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal"  >
+                    <Button Margin="2" Content="X" Width="80" Click="Button_Click"/>
+                </StackPanel>
+            </Grid>
+            <Grid Background="Azure">
+                <StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal"  >
+                    <Button Margin="2" Content="수정" Width="40" Click="Button_Click_1"/>
+                    <Button Margin="2" Content="삭제" Width="40" Click="Button_Click_2"/>
+                </StackPanel>
+            </Grid>
+            <Grid Background="LawnGreen">
+                <StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal"  >
+                    <Button Margin="2" Content="추가" Width="80" Click="AddFigure_Button_Click"/>
+                </StackPanel>
+            </Grid>
+            <Grid Background="Plum">
+                <StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal"  >
+                    <Button Margin="2" Content="검색" Width="80" Click="Search_Button_Click"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+</Window>

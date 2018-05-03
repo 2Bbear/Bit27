@@ -1,0 +1,42 @@
+//데이터 템플릿 사용
+1. XAML 수정=====================================================================================
+
+<ListBox Name="Win_ListBox2"  Grid.Column="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+           
+</ListBox>
+
+2. CS 수정
+
+List<int> s =new List<int>();
+Win_ListBox2.ItemSource=s;
+
+
+
+//데이터 템플릿과 그룹화=========================================================================
+
+1.XAML 수정
+ <ListBox Grid.Column="0" Name="ListBox1" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
+            <ListBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" Background="LightGoldenrodYellow"/> 
+				<!-- 여기서 Name은 프로퍼티의 이름이 오게 됨 굳이 Name프로퍼티를 선언 안해도, 새롭게 만들어진 그룹에서 Name이라는 프로퍼티가 생겨나는 것임-->
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListBox.GroupStyle>
+        </ListBox>
+
+2, CS 수정
+
+ListBox1.ItemsSource = listofperson;
+
+ ICollectionView view = CollectionViewSource.GetDefaultView(ListBox1.ItemsSource);
+            view.GroupDescriptions.Add(new PropertyGroupDescription("Department"));//매개변수로 프로퍼티가 들어가야함
+            view.SortDescriptions.Add(new SortDescription("Department", ListSortDirection.Ascending));//매개변수로 프로퍼티,와 정렬형태가 들어감

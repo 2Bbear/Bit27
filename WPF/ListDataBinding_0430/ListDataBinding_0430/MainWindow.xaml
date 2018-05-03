@@ -32,7 +32,7 @@
                 </Button.Background>
             </Button>
         </StackPanel>
-        <ListBox Name="listContent" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True" Background="Wheat" Width="{Binding Path=Width , ElementName=SuperWindow}" Height="Auto">
+        <ListBox Name="listContent" IsSynchronizedWithCurrentItem="True" Background="Wheat" Width="{Binding Path=Width , ElementName=SuperWindow}" Height="Auto">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>

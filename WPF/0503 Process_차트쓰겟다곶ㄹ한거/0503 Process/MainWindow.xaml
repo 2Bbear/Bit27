@@ -1,0 +1,757 @@
+﻿<Window x:Class="_0503_Process.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" 
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:_0503_Process"
+        Title="MainWindow" Height="1005" Width="1900"  >
+    <!--1005,1900-->
+
+    <Window.Background>
+        <ImageBrush ImageSource="바탕.jpg" ></ImageBrush>
+    </Window.Background>
+    <Grid Name="MainGrid">
+        <Grid.Resources >
+
+            <!--<Style x:Key="PreStyledPointerCap"
+                TargetType="{x:Type xctk:PointerCap}">
+                <Setter Property="Width"
+                    Value="16" />
+                <Setter Property="Height"
+                    Value="16" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type xctk:PointerCap}">
+                            <Ellipse Stroke="#E6FFCC"
+                              StrokeThickness="1" Fill="#80FF00"  Width="13" Height="13">
+                            </Ellipse>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>-->
+            <DataTemplate x:Key="PointerTemplate1">
+                <Polygon Fill="#C0FF80"
+                     StrokeThickness="0.5"
+                     Stroke="White" Height="100">
+                    <Polygon.Points>
+                        <PointCollection>
+                            0,90 5,0 10,90
+                        </PointCollection>
+                    </Polygon.Points>
+                </Polygon>
+            </DataTemplate>
+            <Style x:Key="GridViewColumnHeaderStyle1" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                            <Border BorderThickness="0,0,0,1" BorderBrush="#999999" Background="Transparent">
+                                <TextBlock FontSize="13" x:Name="ContentHeader" Foreground="White" Text="{TemplateBinding Content}" Padding="5,5,5,5" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="OverridesDefaultStyle" Value="True" />
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+            <DataTemplate x:Key="MajorTickLabelTemplate1">
+                <TextBlock Text="{Binding ., StringFormat={}{0:N0}}"
+                       Foreground="White"
+                       FontFamily="Book Antiqua"
+                       FontSize="14" />
+            </DataTemplate>
+            <DataTemplate x:Key="LabelTemplate">
+                <Border DockPanel.Dock="Top" BorderThickness="0" CornerRadius="0">
+                    <TextBlock FontFamily="Comic Sans MS" FontSize="10" Margin="2,2,2,1"
+				  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Text}">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="#9C9A98"/>
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="GridTemplate">
+                <Canvas Width="{Binding Path=W}" Height="{Binding Path=H}">
+                    <Polyline Points="{Binding Path=Points}" StrokeThickness="1" Stroke="#606060" StrokeDashArray="1 1 1 1" />
+                </Canvas>
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="181*"></RowDefinition>
+            <RowDefinition Height="14*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border  CornerRadius="30,30,30,30" Margin="40,40,39.6,0" BorderBrush="White" BorderThickness="3" >
+            <Border.Background>
+                <SolidColorBrush Color="#333333" Opacity="0.4"></SolidColorBrush>
+            </Border.Background>
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="53*"></RowDefinition>
+                    <RowDefinition Height="391*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,718" Grid.RowSpan="2">
+                    <Label Content="Queue1" Foreground="White" FontSize="40" Margin="50,40,5,10"></Label>
+                    <Label Content="시스템" Foreground="White" FontSize="40" Margin="5,40,5,10" FontWeight="ExtraBold"></Label>
+                    <Label Content="데이터" Foreground="White" FontSize="40" Margin="5,40,5,10" ></Label>
+                    <Label Content="1/6" Foreground="#727272" FontSize="20" Margin="5,60,5,10"  Visibility="Hidden"></Label>
+                </StackPanel>
+                <Grid Grid.Row="1" Margin="0,3.4,0,10" Name="Grid_t">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="703*"></ColumnDefinition>
+                        <ColumnDefinition Width="1105*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="30,0,24,59.6" Name="Grid_Label" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border Margin="5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" BorderBrush="White" BorderThickness="1" Background="#0B4B73" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock Text="구 분" Foreground="White" TextAlignment="Center" FontSize="20" Margin="40,40,40,30"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" BorderBrush="White" BorderThickness="1" Background="#0B4B73" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock Text="시스템 데이터" Foreground="White" TextAlignment="Center" FontSize="20" Margin="10" ></TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border Margin="5" Grid.Column="0" Grid.Row="2" BorderBrush="White" BorderThickness="1" Background="#0E556F" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock Text="CPU(%)" Foreground="White" TextAlignment="Center" FontSize="20"  Margin="10" Name="Service_Index_1" ></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="0" Grid.Row="3" BorderBrush="White" BorderThickness="1" Background="#0E556F" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock Text="Memory(%)" Foreground="White" TextAlignment="Center" FontSize="20"  Margin="10" Name="Memory_Index_1" ></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="0" Grid.Row="4" BorderBrush="White" BorderThickness="1" Background="#0E556F" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="Memory_total(%)" Foreground="White" TextAlignment="Center" FontSize="17"  Margin="10" Name="Memory_total_Index_1" ></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="0" Grid.Row="5" BorderBrush="White" BorderThickness="1" Background="#0E556F" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="Memory_ava(%)" Foreground="White" TextAlignment="Center" FontSize="17"  Margin="10" Name="Memory_ava_Index_1" ></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="0" Grid.Row="6" BorderBrush="White" BorderThickness="1" Background="#0E556F" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="NetWork_recv(%)" Foreground="White" TextAlignment="Center" FontSize="16"  Margin="10" Name="NetWork_recv_Index_1" ></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="0" Grid.Row="7" BorderBrush="White" BorderThickness="1" Background="#0E556F" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="NetWork_sent(%)" Foreground="White" TextAlignment="Center" FontSize="16"  Margin="10" Name="NetWork_sent_Index_1" ></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="0" Grid.Row="8" BorderBrush="White" BorderThickness="1" Background="#0E556F" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="Disk_read(%)" Foreground="White" TextAlignment="Center" FontSize="17"  Margin="10" Name="Disk_read_Index_1" ></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="0" Grid.Row="9" BorderBrush="White" BorderThickness="1" Background="#0E556F" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="Disk_write(%)" Foreground="White" TextAlignment="Center" FontSize="17"  Margin="10" Name="Disk_write_Index_1" ></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="0" Grid.Row="10" BorderBrush="White" BorderThickness="1" Background="#0E556F" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="Disk_total(%)" Foreground="White" TextAlignment="Center" FontSize="17"  Margin="10" Name="Disk_total_Index_1" ></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="0" Grid.Row="11" BorderBrush="White" BorderThickness="1" Background="#0E556F" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="Disk_ava(%)" Foreground="White" TextAlignment="Center" FontSize="17"  Margin="10" Name="Disk_ava_Index_1" ></TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border Margin="5" Grid.Column="1" Grid.Row="1" BorderBrush="White" BorderThickness="1" Background="#134363" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock Text="PC1" Foreground="White" TextAlignment="Center" FontSize="20"  Margin="10" ></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="2" Grid.Row="1" BorderBrush="White" BorderThickness="1" Background="#134363" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock Text="PC2" Foreground="White" TextAlignment="Center" FontSize="20"  Margin="10" ></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="3" Grid.Row="1" BorderBrush="White" BorderThickness="1" Background="#134363" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock Text="PC3" Foreground="White" TextAlignment="Center" FontSize="20"  Margin="10" ></TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border Margin="5" Grid.Column="1" Grid.Row="2" BorderBrush="White" BorderThickness="1" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock Text="{Binding Path=Cpu}" Foreground="YellowGreen"  TextAlignment="Center" FontSize="20" Margin="10" Name="Cpu_Index_1">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="1" Grid.Row="3" BorderBrush="White" BorderThickness="1" CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="{Binding Memory}" Foreground="YellowGreen"  TextAlignment="Center" FontSize="20"  Margin="10" Name="Memmory_Index_2"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="1" Grid.Row="4" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="{Binding Memory_total}" Foreground="YellowGreen"  TextAlignment="Center" FontSize="20"  Margin="10" Name="Memory_total_Index_3"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="1" Grid.Row="5" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="{Binding Memory_ava}" Foreground="YellowGreen"  TextAlignment="Center" FontSize="20"  Margin="10" Name="Memory_ava_Index_4"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="1" Grid.Row="6" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="{Binding NetWork_recv}" Foreground="YellowGreen"  TextAlignment="Center" FontSize="20"  Margin="10" Name="NetWork_recv_Index_5"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="1" Grid.Row="7" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="{Binding NetWork_sent}" Foreground="YellowGreen"  TextAlignment="Center" FontSize="20"  Margin="10" Name="NetWork_sent_Index_6"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="1" Grid.Row="8" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="{Binding Disk_read}"  Foreground="YellowGreen" TextAlignment="Center" FontSize="20"  Margin="10" Name="Disk_read_Index_7"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="1" Grid.Row="9" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="{Binding Disk_write}"  Foreground="YellowGreen" TextAlignment="Center" FontSize="20"  Margin="10" Name="Disk_write_Index_8"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="1" Grid.Row="10" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="{Binding Disk_total}" Foreground="YellowGreen"  TextAlignment="Center" FontSize="20"  Margin="10" Name="Disk_total_Index_9"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="1" Grid.Row="11" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+                                <TextBlock  Text="{Binding Disk_ava}" Foreground="YellowGreen"  TextAlignment="Center" FontSize="20"  Margin="10" Name="Disk_ava_Index_10"></TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border Margin="5" Grid.Column="2" Grid.Row="2" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="2" Grid.Row="3" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="2" Grid.Row="4" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="2" Grid.Row="5" BorderBrush="White" BorderThickness="1" CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="2" Grid.Row="6" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="2" Grid.Row="7" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="2" Grid.Row="8" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="2" Grid.Row="9" BorderBrush="White" BorderThickness="1" CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="2" Grid.Row="10" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="2" Grid.Row="11" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+
+                        <Border Margin="5" Grid.Column="3" Grid.Row="2" BorderBrush="White" BorderThickness="1" CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="3" Grid.Row="3" BorderBrush="White" BorderThickness="1" CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="3" Grid.Row="4" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="3" Grid.Row="5" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="3" Grid.Row="6" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="3" Grid.Row="7" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="3" Grid.Row="8" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="3" Grid.Row="9" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="3" Grid.Row="10" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Margin="5" Grid.Column="3" Grid.Row="11" BorderBrush="White" BorderThickness="1"  CornerRadius="10,10,10,10">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="2.8,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition ></ColumnDefinition>
+                            <ColumnDefinition ></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Grid.Row="0" Margin="10,10,10,5" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="29*"></RowDefinition>
+                                <RowDefinition Height="160*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <!--<StackPanel Grid.Column="1" Grid.Row="1">
+                                <DVC:Chart Name="myChart" Height="304" Margin="0,0,-0.4,0">
+                                    <DVC:Chart.Series>
+                                        <DVC:LineSeries IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"></DVC:LineSeries>
+                                    </DVC:Chart.Series>
+                                </DVC:Chart>
+                            </StackPanel>-->
+                            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
+                                <Label Content="◎" Foreground="White" FontSize="20"></Label>
+                                <Label Content="CPU·RAM·DISK 사용률" Foreground="White" FontSize="20"></Label>
+                                <Line X1="0" Y1="10" X2="260" Y2="10" Margin="0,10,10,10" StrokeThickness="1" Stroke="White"></Line>
+                            </StackPanel>
+                            <Grid Grid.Row="1">
+                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,10,0">
+
+                                    <StackPanel>
+                                        <Label Content="CPU"  Foreground="#9999ff"></Label>
+                                    </StackPanel>
+
+
+                                    <Label Content="RAM" Foreground="#993366"></Label>
+                                    <Label Content="DISK" Foreground="#FFFFCC"></Label>
+                                </StackPanel>
+
+                                <xctk:Chart Grid.Column="1" Grid.Row="1"  Margin="20,20,20,0" ShowLegend="False" Name="Cpu_Chart" DataContext="{Binding}">
+                                    <xctk:Chart.Areas>
+                                        <xctk:Area x:Name="_cpu" Title="C P U" Margin="0,0,0.2,0.4" >
+                                            <xctk:Area.XAxis>
+                                                <xctk:Axis  x:Name="_xAxis" LabelsType="Labels"  GraduationMode="Manual" TicksCount="11" ScaleMode="Automatic"
+                                        CustomRangeStart="0" CustomRangeEnd="10" Title="X Axis" TitleMargin="10" AxisLabelsLayout="ShowToFit"
+                                        ShowArrow="False" ShowAxis="True" ShowGridLines="True" ShowTicks="False" ShowTickLabels="True" ShowAxisLabel="False"
+                                        Reversed="False" IntersectMinValue="True" LabelDecimalCount="{x:Null}" GridTemplate="{StaticResource GridTemplate}"
+                                         LabelTemplate="{StaticResource LabelTemplate}"/>
+                                            </xctk:Area.XAxis>
+                                            <xctk:Area.YAxis>
+                                                <xctk:Axis  x:Name="_yAxis" LabelsType="Numeric"  GraduationMode="Automatic" TicksCount="11" ScaleMode="Manual"
+                                        CustomRangeStart="0" CustomRangeEnd="100" Title="Y Axis" TitleMargin="10" AxisLabelsLayout="ShowToFit"
+                                        ShowArrow="False" ShowAxis="True" ShowGridLines="True" ShowTicks="False" ShowTickLabels="True" ShowAxisLabel="False"
+                                        Reversed="False" IntersectMinValue="True" LabelDecimalCount="{x:Null}" GridTemplate="{StaticResource GridTemplate}"
+                                        LabelTemplate="{StaticResource LabelTemplate}" />
+                                            </xctk:Area.YAxis>
+                                            <xctk:Area.Series>
+                                                <xctk:Series   x:Name="Series_Cpu" Spacing="40" ShowPointsInLegend="False" ShowHintLabels="False">
+                                                    <xctk:Series.Layout>
+                                                        <xctk:ColumnLayout></xctk:ColumnLayout>
+                                                    </xctk:Series.Layout>
+
+                                                    <xctk:Series.DataPointBindings>
+                                                        <xctk:BindingInfo PropertyName="Y">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Cpu"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                        <xctk:BindingInfo PropertyName="Label">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Name"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                    </xctk:Series.DataPointBindings>
+                                                </xctk:Series>
+                                                <xctk:Series  x:Name="Series_Ram"  Spacing="40" ShowPointsInLegend="False" ShowHintLabels="False">
+                                                    <xctk:Series.Layout>
+                                                        <xctk:ColumnLayout></xctk:ColumnLayout>
+                                                    </xctk:Series.Layout>
+                                                    <xctk:Series.DataPointBindings>
+                                                        <xctk:BindingInfo PropertyName="Y">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Ram"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                        <xctk:BindingInfo PropertyName="Label">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Name"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                    </xctk:Series.DataPointBindings>
+
+                                                </xctk:Series>
+                                                <xctk:Series   x:Name="Series_Disk" Spacing="40" ShowPointsInLegend="False" ShowHintLabels="False">
+                                                    <xctk:Series.Layout>
+                                                        <xctk:ColumnLayout></xctk:ColumnLayout>
+                                                    </xctk:Series.Layout>
+                                                    <xctk:Series.DataPointBindings>
+                                                        <xctk:BindingInfo PropertyName="Y">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Disk"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                        <xctk:BindingInfo PropertyName="Label">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Name"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                    </xctk:Series.DataPointBindings>
+                                                </xctk:Series>
+                                            </xctk:Area.Series>
+                                        </xctk:Area>
+                                    </xctk:Chart.Areas>
+                                </xctk:Chart>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="1" Grid.Row="0" Margin="10" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="29*"></RowDefinition>
+                                <RowDefinition Height="160*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10,10,10,5">
+                                <Label Content="◎" Foreground="White" FontSize="20"></Label>
+                                <Label Content="DISK I/O·NET R/S" Foreground="White" FontSize="20"></Label>
+                                <Line X1="0" Y1="10" X2="300" Y2="10" Margin="0,10,10,10" StrokeThickness="1" Stroke="White"></Line>
+                            </StackPanel>
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="56*"/>
+                                    <RowDefinition Height="93*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,20.2,-0.4" Grid.RowSpan="2">
+                                    <Label Content="DISKread" Foreground="#9999ff"></Label>
+                                    <Label Content="DISKwrite" Foreground="#640165"></Label>
+                                    <Label Content="NETsent" Foreground="#FFFFCC"></Label>
+                                    <Label Content="NETrecv" Foreground="#993366"></Label>
+                                </StackPanel>
+                                <!--<xctk:Chart Margin="20,20,30.2,-0.4" ShowLegend="False" Grid.Column="0" Grid.RowSpan="2" >
+                                    <xctk:Chart.Areas>
+                                        <xctk:Area  Title="C P U" Margin="0,0,0.2,0.4" >
+                                            <xctk:Area.XAxis>
+                                                <xctk:Axis  LabelsType="Labels"  GraduationMode="Manual" TicksCount="11" ScaleMode="Automatic"
+                                        CustomRangeStart="0" CustomRangeEnd="10" Title="X Axis" TitleMargin="10" AxisLabelsLayout="ShowToFit"
+                                        ShowArrow="False" ShowAxis="True" ShowGridLines="True" ShowTicks="False" ShowTickLabels="True" ShowAxisLabel="False"
+                                        Reversed="False" IntersectMinValue="True" LabelDecimalCount="{x:Null}" GridTemplate="{StaticResource GridTemplate}"
+                                         LabelTemplate="{StaticResource LabelTemplate}" 
+                                       />
+                                            </xctk:Area.XAxis>
+                                            <xctk:Area.YAxis>
+                                                <xctk:Axis   LabelsType="Numeric"  GraduationMode="Automatic" TicksCount="11" ScaleMode="Automatic"
+                                        CustomRangeStart="0" CustomRangeEnd="100" Title="Y Axis" TitleMargin="10" AxisLabelsLayout="ShowToFit"
+                                        ShowArrow="False" ShowAxis="True" ShowGridLines="True" ShowTicks="False" ShowTickLabels="True" ShowAxisLabel="False"
+                                        Reversed="False" IntersectMinValue="True" LabelDecimalCount="{x:Null}" GridTemplate="{StaticResource GridTemplate}"
+                                        LabelTemplate="{StaticResource LabelTemplate}" />
+                                            </xctk:Area.YAxis>
+                                            <xctk:Area.Series>
+                                                <xctk:Series  x:Name="Series_net_recv"   Spacing="40" ShowPointsInLegend="False" ShowHintLabels="False">
+                                                    <xctk:Series.Layout>
+                                                        <xctk:LineLayout></xctk:LineLayout>
+                                                    </xctk:Series.Layout>
+                                                    <xctk:Series.DataPointBindings>
+                                                        <xctk:BindingInfo PropertyName="Y">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Net_Recv"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                        <xctk:BindingInfo PropertyName="Label">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Name"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                    </xctk:Series.DataPointBindings>
+
+                                                </xctk:Series>
+                                                <xctk:Series x:Name="Series_net_send"  Spacing="40" ShowPointsInLegend="False" ShowHintLabels="False">
+                                                    <xctk:Series.Layout>
+                                                        <xctk:LineLayout></xctk:LineLayout>
+                                                    </xctk:Series.Layout>
+                                                    <xctk:Series.DataPointBindings>
+                                                        <xctk:BindingInfo PropertyName="Y">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Net_Send"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                        <xctk:BindingInfo PropertyName="Label">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Name"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                    </xctk:Series.DataPointBindings>
+
+                                                </xctk:Series>
+                                                <xctk:Series x:Name="Series_disk_write"  Spacing="40" ShowPointsInLegend="False" ShowHintLabels="False">
+                                                    <xctk:Series.Layout>
+                                                        <xctk:LineLayout></xctk:LineLayout>
+                                                    </xctk:Series.Layout>
+                                                    <xctk:Series.DataPointBindings>
+                                                        <xctk:BindingInfo PropertyName="Y">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Disk_Write"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                        <xctk:BindingInfo PropertyName="Label">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Name"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                    </xctk:Series.DataPointBindings>
+
+                                                </xctk:Series>
+                                                <xctk:Series x:Name="Series_disk_read"  Spacing="40" ShowPointsInLegend="False" ShowHintLabels="False">
+                                                    <xctk:Series.Layout>
+                                                        <xctk:LineLayout></xctk:LineLayout>
+                                                    </xctk:Series.Layout>
+                                                    <xctk:Series.DataPointBindings>
+                                                        <xctk:BindingInfo PropertyName="Y">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Disk_Read"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                        <xctk:BindingInfo PropertyName="Label">
+                                                            <xctk:BindingInfo.Binding>
+                                                                <Binding Path="Name"/>
+                                                            </xctk:BindingInfo.Binding>
+                                                        </xctk:BindingInfo>
+                                                    </xctk:Series.DataPointBindings>
+
+                                                </xctk:Series>
+                                            </xctk:Area.Series>
+                                        </xctk:Area>
+                                    </xctk:Chart.Areas>
+                                </xctk:Chart>-->
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="0" Grid.Row="1" Margin="10,5,10,10" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="29*"></RowDefinition>
+                                <RowDefinition Height="160*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10,5,10,10">
+                                <Label Content="◎" Foreground="White" FontSize="20"></Label>
+                                <Label Content="Event Viewer" Foreground="White" FontSize="20"></Label>
+                                <Line X1="0" Y1="10" X2="350" Y2="10" Margin="0,10,10,10" StrokeThickness="1" Stroke="White"></Line>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="25,10,20,10" Grid.Row="1">
+                                <ListView  x:Name="EventViewer_Listview"   Foreground="White" Height="130"  Margin="0,0,-0.4,0" Background="{x:Null}"   >
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListViewItem}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsSelected" Value="true" >
+                                                    <Setter Property="Foreground" Value="Black" />
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Foreground" Value="Black" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+
+                                    <ListView.View>
+                                        <GridView  ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}">
+                                            <GridViewColumn Header="수준" Width="80" >
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="{Binding BasePriority}" TextAlignment="Center" FontSize="13"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="서비스" Width="60" >
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="{Binding SessionId}" TextAlignment="Center" FontSize="13"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+
+                                            <GridViewColumn Header="프로세스" Width="80">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock FontSize="13" Text="{Binding ProcessName}" TextAlignment="Center"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="날짜" Width="200">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock FontSize="13" Text="{Binding StartTime}" TextAlignment="Center"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                                        <Label Content="원본 : " FontSize="13" Foreground="White"/>
+                                        <Label Width="180" FontSize="13" x:Name="Process_Source" Foreground="White"/>
+                                        <Label Content="프로세스 : " FontSize="13"  Margin="10,0,0,0" Foreground="White"/>
+                                        <Label Width="100"  FontSize="13" x:Name="Process_Name" Foreground="White"/>
+                                    </StackPanel>
+                                    <StackPanel  Margin="5,0,5,5" Orientation="Horizontal" >
+                                        <Label Content="날짜 : " FontSize="13" Foreground="White"/>
+                                        <Label Width="180"  FontSize="13" x:Name="Process_Time" Foreground="White" />
+                                        <Label Content="수준 : "  FontSize="13"  Margin="10,0,0,0" Foreground="White"/>
+                                        <Label Width="100"  FontSize="13" x:Name="Process_Type"  Foreground="White"/>
+                                        <Label />
+                                    </StackPanel>
+                                    <StackPanel  Margin="5,0,5,5" Orientation="Horizontal">
+                                        <Label Content="내용 : " Foreground="White" FontSize="13"/>
+                                    </StackPanel>
+                                    <Border BorderThickness="0.5" BorderBrush="White">
+                                        <TextBlock FontSize="13" Height="50" Margin="0,0,0,5" x:Name="Process_Msg"  Foreground="White"  />
+                                    </Border>
+
+
+
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Column="1" Grid.Row="1" Margin="10,5,10,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="29*"></RowDefinition>
+                                <RowDefinition Height="160*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10,5,10,10">
+                                <Label Content="◎" Foreground="White" FontSize="20"></Label>
+                                <Label Content="Tag 정보" Foreground="White" FontSize="20"></Label>
+                                <Line X1="0" Y1="10" X2="380" Y2="10" Margin="0,10,10,10" StrokeThickness="1" Stroke="White"></Line>
+                            </StackPanel>
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Margin="25,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0" Margin="30,10,5,10" Background="#16CC6D">
+                                        <StackPanel Orientation="Vertical">
+                                            <Label Content="정상 태그" Foreground="White" FontSize="20" Margin="10"></Label>
+                                            <Label HorizontalAlignment="Right"  Name="Tag_G" Content="138" Foreground="White" FontWeight="ExtraBold" FontSize="50" Margin="0,0,20,10"></Label>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Column="1" Margin="5,10,30,10" Background="#E63E57">
+                                        <StackPanel Orientation="Vertical">
+                                            <Label Content="비정상 태그" Foreground="White" FontSize="20" Margin="10"></Label>
+                                            <Label HorizontalAlignment="Right" Name="Tag_NG" Content="38" Foreground="White" FontWeight="ExtraBold" FontSize="50" Margin="0,0,20,30"></Label>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Row="1"  Margin="10,0,10,0">
+                                    <!--<xctk:RadialGauge Margin="0,20,0,0" x:Name="_gauge" BorderBrush="White" StartAngle="270" EndAngle="90" Minimum="0"
+                                    Maximum= "100" Fill="{x:Null}"            
+                                     IsTickMarkVisible="False"
+                                    IsTickLabelVisible="True" StrokeThickness="0" 
+                                      MajorTickCount="3" MajorTickLabelOffset="30"
+                                    PointerTemplate="{StaticResource PointerTemplate1}"
+                                    PointerCapStyle="{StaticResource ResourceKey=PreStyledPointerCap}"
+                                     MajorTickLabelTemplate="{StaticResource MajorTickLabelTemplate1}"
+                                     Width="200" Height="200" 
+                                      IsNumericIndicatorVisible="False" Value="92">
+                                        <xctk:RadialGauge.BorderPortions >
+                                            <xctk:BorderGaugePortion  StrokeThickness="40"  PortionColor="#6464FF" PortionSize="60" />
+                                            <xctk:BorderGaugePortion  StrokeThickness="40" PortionColor="#FFFF64" PortionSize="20" />
+                                            <xctk:BorderGaugePortion  StrokeThickness="40" PortionColor="#FF6464" PortionSize="20"/>
+                                        </xctk:RadialGauge.BorderPortions>
+                                    </xctk:RadialGauge>-->
+                                </Grid>
+                            </Grid>
+
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+        </Border>
+        <Grid Grid.Row="1" Margin="0,30,0,0" Name="Grid_notice" Visibility="Hidden">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.6"></SolidColorBrush>
+            </Grid.Background>
+            <StackPanel Orientation="Horizontal" Name="Stack_notice">
+                <StackPanel.RenderTransform>
+                    <TranslateTransform></TranslateTransform>
+                </StackPanel.RenderTransform>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
