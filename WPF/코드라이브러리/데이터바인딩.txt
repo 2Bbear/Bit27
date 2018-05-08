@@ -223,3 +223,47 @@ public class Person : INotifyPropertyChanged
 
 
 //============================================================================
+데이터 컨버터
+
+1. XAML수정
+
+
+
+2. CS 수정
+
+  //타입을 인덱스로 바꾸는 컨버터
+    [ValueConversion(/* 원본 형식 */ typeof(DrawType), /* 대상 형식 */ typeof(int))]
+    public class DrawTypeToIndexConverter : IValueConverter
+    {
+     
+
+        // 데이터 속성을 UI 속성으로 변경할 때
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            // if (targetType != typeof(bool?))
+            //    return null;
+
+            DrawType colorvalue = (DrawType)value;
+            System.Reflection.PropertyInfo[] info = typeof(Colors).GetProperties();
+
+            return colorvalue;
+            
+        }
+
+        // UI 속성을 데이터 속성으로 변경할 때
+        public object ConvertBack(object value, Type targetType, object
+                parameter, System.Globalization.CultureInfo culture)
+        {
+            //   if (targetType != typeof(bool?))
+            //       return null;
+
+            int index = (int)value;
+            if (index == 0)
+                return 50;
+            else if (index == 1)
+                return 100;
+            else
+                return 150;
+        }
+    }

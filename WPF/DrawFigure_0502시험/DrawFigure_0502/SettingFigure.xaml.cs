@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 namespace DrawFigure_0502
 {
+    public enum sss {d,f };
     /// <summary>
     /// Interaction logic for SettingFigure.xaml
     /// </summary>
@@ -25,6 +26,9 @@ namespace DrawFigure_0502
             InitializeComponent();
             pa_target = t;
             Setting();
+
+         
+
         }
         private void Setting()
         {
@@ -45,22 +49,22 @@ namespace DrawFigure_0502
 
             //크기
             modal_figuresize.SelectedIndex = 0;
-            if(pa_target.Ds==Figure.DrawSize.RECT25)
+            if(pa_target.Ds==DrawSize.RECT25)
             {
                 modal_figuresize.SelectedIndex = 0;
             }
-            else if (pa_target.Ds == Figure.DrawSize.RECT50)
+            else if (pa_target.Ds == DrawSize.RECT50)
             {
                 modal_figuresize.SelectedIndex = 1;
             }
 
             //형태
             modal_figuretype.SelectedIndex = 0;
-            if(pa_target.Dt==Figure.DrawType.RECT)
+            if(pa_target.Dt==DrawType.RECT)
             {
                 modal_figuretype.SelectedIndex = 0;
             }
-            else if(pa_target.Dt == Figure.DrawType.ELLIPSE)
+            else if(pa_target.Dt == DrawType.ELLIPSE)
             {
                 modal_figuretype.SelectedIndex = 1;
             }
@@ -85,21 +89,21 @@ namespace DrawFigure_0502
             //크기 세팅
             if (modal_figuresize.SelectedIndex ==0)
             {
-                pa_target.Ds = Figure.DrawSize.RECT25;
+                pa_target.Ds = DrawSize.RECT25;
             }
             else if (modal_figuresize.SelectedIndex == 1)
             {
-                pa_target.Ds = Figure.DrawSize.RECT50;
+                pa_target.Ds = DrawSize.RECT50;
             }
 
             //타입 세팅
             if(modal_figuretype.SelectedIndex==0)
             {
-                pa_target.Dt = Figure.DrawType.RECT;
+                pa_target.Dt =DrawType.RECT;
             }
             else if (modal_figuretype.SelectedIndex == 1)
             {
-                pa_target.Dt = Figure.DrawType.ELLIPSE;
+                pa_target.Dt = DrawType.ELLIPSE;
             }
 
 

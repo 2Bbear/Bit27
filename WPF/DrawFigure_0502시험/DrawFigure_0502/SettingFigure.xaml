@@ -3,9 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:codeg="clr-namespace:System;assembly=mscorlib"
+        
         xmlns:local="clr-namespace:DrawFigure_0502"
         mc:Ignorable="d"
         Title="SettingFigure" Height="243.659" Width="246.757">
+    <Window.Resources>
+        <!--Converter-->
+        <local:DrawTypeToIndexConverter x:Key="typeConverter" />
+        <!--Enum DataSize-->
+        <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type codeg:Enum}" x:Key="myDrawSize">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="local:DrawSize"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <!--Enum DrawType-->
+        <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type codeg:Enum}" x:Key="myDrawType">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="local:DrawType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <!--Enum DrawColor-->
+        <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type codeg:Enum}" x:Key="myDrawColor">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="local:DrawColor"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
     <Grid Name="modal_grid" DataContext="{Binding}">
         <Label Content="x" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="33,19,0,0"/>
         <Label Content="y" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="33,45,0,0"/>
@@ -14,19 +39,15 @@
         <Button Content="확인" HorizontalAlignment="Left" Margin="89,185,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <TextBox IsReadOnly="True" Name="tager"  HorizontalAlignment="Left" Height="23" Margin="67,19,0,0" TextWrapping="Wrap" Text="{Binding Path=X}" VerticalAlignment="Top" Width="120"/>
         <TextBox  IsReadOnly="True"  HorizontalAlignment="Left" Height="23" Margin="67,47,0,0" TextWrapping="Wrap" Text="{Binding Path=Y}" VerticalAlignment="Top" Width="120"/>
-        <ComboBox Name="modal_color" HorizontalAlignment="Left" Margin="66,74,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="빨간맛"></ComboBoxItem>
-            <ComboBoxItem Content="초록맛"></ComboBoxItem>
-            <ComboBoxItem Content="파란맛"></ComboBoxItem>
+        <ComboBox Name="modal_color" ItemsSource="{Binding Source={StaticResource myDrawColor}}" HorizontalAlignment="Left" Margin="66,74,0,0" VerticalAlignment="Top" Width="120">
+         
         </ComboBox>
-        <ComboBox Name="modal_figuresize" HorizontalAlignment="Left" Margin="66,101,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="25"></ComboBoxItem>
-            <ComboBoxItem Content="50"></ComboBoxItem>
+        <ComboBox Name="modal_figuresize" ItemsSource="{Binding Source={StaticResource myDrawSize}}" HorizontalAlignment="Left" Margin="66,101,0,0" VerticalAlignment="Top" Width="120">
+            
         </ComboBox>
         <Label Content="형태" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,128,0,0"/>
-        <ComboBox x:Name="modal_figuretype" HorizontalAlignment="Left" Margin="66,128,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="사각형"/>
-            <ComboBoxItem Content="타원"/>
+        <ComboBox x:Name="modal_figuretype"  ItemsSource="{Binding  Source={StaticResource myDrawType}}"  HorizontalAlignment="Left" Margin="66,128,0,0" VerticalAlignment="Top" Width="120">
+         
         </ComboBox>
 
     </Grid>

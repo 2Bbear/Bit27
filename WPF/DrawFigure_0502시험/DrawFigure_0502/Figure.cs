@@ -11,14 +11,16 @@ using System.Windows.Media;
 
 namespace DrawFigure_0502
 {
-    
-
+    [Flags]
+    public enum DrawType { RECT=0, ELLIPSE }
+    public enum DrawSize : int { RECT25 = 25, RECT50 = 50, RECT75 = 75, RECT100 = 100 }
+    [Flags]
+    public enum DrawColor {빨간맛,초록맛,파란맛 }
     public class Figure: INotifyPropertyChanged
     {
-        [Flags]
-        public enum DrawType { RECT, ELLIPSE }
+       
         
-        public enum DrawSize : int { RECT25 = 25, RECT50 = 50 }
+      
 
         private DrawType dt;
         private Color color;
@@ -105,6 +107,42 @@ namespace DrawFigure_0502
         }
     }
 
+    //타입을 인덱스로 바꾸는 컨버터
+    [ValueConversion(/* 원본 형식 */ typeof(DrawType), /* 대상 형식 */ typeof(int))]
+    public class DrawTypeToIndexConverter : IValueConverter
+    {
+     
+
+        // 데이터 속성을 UI 속성으로 변경할 때
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            // if (targetType != typeof(bool?))
+            //    return null;
+
+            DrawType colorvalue = (DrawType)value;
+            System.Reflection.PropertyInfo[] info = typeof(Colors).GetProperties();
+
+            return colorvalue;
+            
+        }
+
+        // UI 속성을 데이터 속성으로 변경할 때
+        public object ConvertBack(object value, Type targetType, object
+                parameter, System.Globalization.CultureInfo culture)
+        {
+            //   if (targetType != typeof(bool?))
+            //       return null;
+
+            int index = (int)value;
+            if (index == 0)
+                return 50;
+            else if (index == 1)
+                return 100;
+            else
+                return 150;
+        }
+    }
 
     //색상을 인덱스로 바꾸는 컨버터 미완성
     [ValueConversion(/* 원본 형식 */ typeof(Color), /* 대상 형식 */ typeof(int))]

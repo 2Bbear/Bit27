@@ -58,7 +58,7 @@ namespace DrawFigure_0502
             foreach(Figure t in typelist)
             {
                 //사각형 일때
-                if(t.Dt==Figure.DrawType.RECT)
+                if(t.Dt==DrawType.RECT)
                 {
                     Rectangle rt = new Rectangle();
                     rt.Width = (double)t.Ds;
@@ -121,12 +121,12 @@ namespace DrawFigure_0502
         
         private void MenuItem_Click_FigureSize25(object sender, RoutedEventArgs e)
         {
-            currentfigure.Ds = Figure.DrawSize.RECT25;
+            currentfigure.Ds =DrawSize.RECT25;
         }
 
         private void MenuItem_Click_FigureSize50(object sender, RoutedEventArgs e)
         {
-            currentfigure.Ds = Figure.DrawSize.RECT50;
+            currentfigure.Ds =DrawSize.RECT50;
         }
 
         //모달 메뉴버튼
