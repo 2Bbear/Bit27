@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CCal" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_ICal_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.0.33/wcf/example/cal?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.0.33/wcf/example/cal?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.0.33/wcf/example/cal?xsd=xsd2" namespace="http://RuAAService.co.kr/Product" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICal_GetProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProduct" />
+  </wsdl:message>
+  <wsdl:message name="ICal_GetProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICal_Add_InputMessage">
+    <wsdl:part name="parameters" element="tns:Add" />
+  </wsdl:message>
+  <wsdl:message name="ICal_Add_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICal_Sub_InputMessage">
+    <wsdl:part name="parameters" element="tns:Sub" />
+  </wsdl:message>
+  <wsdl:message name="ICal_Sub_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICal_Mul_InputMessage">
+    <wsdl:part name="parameters" element="tns:Mul" />
+  </wsdl:message>
+  <wsdl:message name="ICal_Mul_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MulResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICal_Div_InputMessage">
+    <wsdl:part name="parameters" element="tns:Div" />
+  </wsdl:message>
+  <wsdl:message name="ICal_Div_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DivResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICal">
+    <wsdl:operation name="GetProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICal/GetProduct" message="tns:ICal_GetProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICal/GetProductResponse" message="tns:ICal_GetProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICal/Add" message="tns:ICal_Add_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICal/AddResponse" message="tns:ICal_Add_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Sub">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICal/Sub" message="tns:ICal_Sub_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICal/SubResponse" message="tns:ICal_Sub_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Mul">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICal/Mul" message="tns:ICal_Mul_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICal/MulResponse" message="tns:ICal_Mul_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Div">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICal/Div" message="tns:ICal_Div_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICal/DivResponse" message="tns:ICal_Div_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICal" type="tns:ICal">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProduct">
+      <soap:operation soapAction="http://tempuri.org/ICal/GetProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap:operation soapAction="http://tempuri.org/ICal/Add" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sub">
+      <soap:operation soapAction="http://tempuri.org/ICal/Sub" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Mul">
+      <soap:operation soapAction="http://tempuri.org/ICal/Mul" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Div">
+      <soap:operation soapAction="http://tempuri.org/ICal/Div" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_ICal" type="tns:ICal">
+    <wsp:PolicyReference URI="#NetTcpBinding_ICal_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetProduct">
+      <soap12:operation soapAction="http://tempuri.org/ICal/GetProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap12:operation soapAction="http://tempuri.org/ICal/Add" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sub">
+      <soap12:operation soapAction="http://tempuri.org/ICal/Sub" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Mul">
+      <soap12:operation soapAction="http://tempuri.org/ICal/Mul" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Div">
+      <soap12:operation soapAction="http://tempuri.org/ICal/Div" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CCal">
+    <wsdl:port name="BasicHttpBinding_ICal" binding="tns:BasicHttpBinding_ICal">
+      <soap:address location="http://192.168.0.33/wcf/example/cal" />
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_ICal" binding="tns:NetTcpBinding_ICal">
+      <soap12:address location="net.tcp://localhost/wcf/example/helloworldservice" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost/wcf/example/helloworldservice</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>DESKTOP-3QV6Q1U\User</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
