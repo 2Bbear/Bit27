@@ -1,0 +1,83 @@
+﻿<Window x:Class="Bank_Client_WPF_0509.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bank_Client_WPF_0509"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="807.235" Background="#FF1F1F1F" >
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Height="408" Margin="37,0,-0.4,0" VerticalAlignment="Top" Width="757" Background="#FF7F7F7F">
+            <TabItem Header="계좌 업무" BorderBrush="#FF494949">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                        <GradientStop Color="#FF939393" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid Background="#FF1F1F1F" Margin="0,0,0.2,-2">
+
+                    <GroupBox Header="계좌생성" HorizontalAlignment="Left" Height="143" Margin="10,10,0,0" VerticalAlignment="Top" Width="203" Foreground="#FF34D6FD">
+                        <StackPanel>
+                            <Label Content="잔액"  HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="#FFB1B1B1" RenderTransformOrigin="1.358,3.916"/>
+                            <Label Content="이름"  HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="#FFB9B9B9" RenderTransformOrigin="1.358,3.916"/>
+                            <Button Margin="0,0,-0.2,0" Content="계좌 생성" Foreground="#FFC7C7C7" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="계좌삭제" HorizontalAlignment="Left" Height="104" Margin="10,176,0,0" VerticalAlignment="Top" Width="203" Foreground="#FF34D6FD">
+                        <StackPanel>
+                            <Label Content="ID"  HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="#FFB1B1B1" RenderTransformOrigin="1.358,3.916"/>
+                            <Button Margin="0,0,-0.2,0" Content="계좌 삭제" Foreground="#FFC7C7C7" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="입금출금" HorizontalAlignment="Left" Height="362" Margin="228,10,0,0" VerticalAlignment="Top" Width="203" Foreground="#FF34D6FD">
+                        <Grid Margin="0,289,-0.2,0.4">
+                            <Label Content="ID"  HorizontalAlignment="Left" Margin="0,-282,0,0" VerticalAlignment="Top" Foreground="#FFB1B1B1" RenderTransformOrigin="1.358,3.916"/>
+                            <Label Content="금액"  HorizontalAlignment="Left" Margin="0,-250,0,0" VerticalAlignment="Top" Foreground="#FFB9B9B9" RenderTransformOrigin="1.358,3.916"/>
+                            <TextBox Margin="38,-282,-2,292"></TextBox>
+                            <Button Width="50" Height="25" Content="입금" Foreground="#FFC7C7C7" Margin="14,-204,117,211" />
+                            <TextBox Margin="39,-247,-3,254"/>
+                            <Button Width="50" Height="25" Content="출금" Foreground="#FFC7C7C7" Margin="119,-204,12,211" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="계좌정보" HorizontalAlignment="Left" Height="362" Margin="448,10,0,0" VerticalAlignment="Top" Width="293" Foreground="#FF34D6FD">
+                        <Grid>
+                            <Label Content="ID"  HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="#FFB1B1B1" RenderTransformOrigin="1.358,3.916"/>
+                            <Label Content="잔액"  HorizontalAlignment="Left" Margin="0,42,0,0" VerticalAlignment="Top" Foreground="#FFB1B1B1" RenderTransformOrigin="1.358,3.916"/>
+                            <Label Content="이름"  HorizontalAlignment="Left" Margin="0,74,0,0" VerticalAlignment="Top" Foreground="#FFB1B1B1" RenderTransformOrigin="1.358,3.916"/>
+                            <Label Content="개설날짜"  HorizontalAlignment="Left" Margin="0,106,0,0" VerticalAlignment="Top" Foreground="#FFB1B1B1" RenderTransformOrigin="1.358,3.916"/>
+                            <TextBox Margin="0,287,81.4,-0.2"></TextBox>
+                            <Button Margin="189,287,0.4,-0.2" Content="계좌 검색" Foreground="#FFC7C7C7" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="조회">
+                <Grid Background="#FFF4D48F">
+                    <TabControl  HorizontalAlignment="Left" Height="360" VerticalAlignment="Top" Width="731" Margin="10,10,0,0">
+                        <TabItem Header="계좌내역 조회">
+                            <Grid Background="#FF232323">
+                                <ListBox  HorizontalAlignment="Left" Height="258" VerticalAlignment="Top" Width="706" Margin="10,10,0,0"/>
+                                <Button Content="눌러" Width="125" Height="34" Margin="591,288,9.6,10"></Button>
+                                <TextBox Margin="298,288,156.6,9"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="전체 계좌정보 조회">
+                            <Grid Background="#FF232323">
+                                <DataGrid Margin="10,10,9.6,62"/>
+                                <Button Content="눌러" Width="125" Height="34" Margin="591,288,9.6,10"></Button>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Menu HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="37" Foreground="#FFCBCBCB" Background="#FF232323">
+            <MenuItem Header="File" >
+                <MenuItem Header="Close" Background="#FFF1B658"/>
+            </MenuItem>
+        </Menu>
+        <ProgressBar HorizontalAlignment="Left" Height="12" Margin="0,408,-0.2,0" VerticalAlignment="Top" Width="801" IsIndeterminate="True"/>
+
+    </Grid>
+</Window>

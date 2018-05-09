@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8a3c2d2c-1166-4dda-a913-ad35a741913b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.0.33/wcf/example/Bank" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Bank3.xsd" MetadataType="Schema" ID="957eaa40-9c64-460d-917a-8b1f84ae99a3" SourceId="1" SourceUrl="http://192.168.0.33/wcf/example/Bank?xsd=xsd3" />
+    <MetadataFile FileName="Bank.disco" MetadataType="Disco" ID="510fa8bf-2e95-4b07-8b8d-c360a72228c9" SourceId="1" SourceUrl="http://192.168.0.33/wcf/example/Bank?disco" />
+    <MetadataFile FileName="Bank.xsd" MetadataType="Schema" ID="99b1ddf3-5efc-47d9-87cf-e9f5494328ef" SourceId="1" SourceUrl="http://192.168.0.33/wcf/example/Bank?xsd=xsd1" />
+    <MetadataFile FileName="Bank1.xsd" MetadataType="Schema" ID="ca42db90-1c75-43ae-aa20-762004e14211" SourceId="1" SourceUrl="http://192.168.0.33/wcf/example/Bank?xsd=xsd0" />
+    <MetadataFile FileName="Bank2.xsd" MetadataType="Schema" ID="81ece93a-80df-4b2d-b7b8-b8100f6608ad" SourceId="1" SourceUrl="http://192.168.0.33/wcf/example/Bank?xsd=xsd2" />
+    <MetadataFile FileName="Bank.wsdl" MetadataType="Wsdl" ID="97a29807-4574-4260-ba0c-33f6bbb7341b" SourceId="1" SourceUrl="http://192.168.0.33/wcf/example/Bank?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

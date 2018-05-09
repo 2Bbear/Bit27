@@ -1,0 +1,64 @@
+명령 쿼리
+
+INSERT
+//계정 생성===============================================
+INSERT INTO Account
+VALUES ('JJH' , 1000,GETDATE(),'시험용 계정입니다.' );
+
+
+DELETE
+//해당 계정 삭제
+DELETE FROM Account
+WHERE AccID = 10;
+
+UPDATE=======================================================================
+//입금하기
+UPDATE Account 
+SET Balance =20000+(SELECT Balance FROM Account WHERE AccID=1010), Date=GETDATE()
+WHERE AccID=1010;
+
+SELECT======================================================================
+//모든 계정 보기
+SELECT * FROM Account;
+
+//만들어진 총 계정 수 보기
+SELECT COUNT(AccID) FROM Account;
+
+//이름으로 계정 id 찾기===================================
+select AccID from Account where (Name = '최창민');
+
+//AccID로 잔액 찾기
+SELECT Balance 
+FROM Account
+WHERE AccID=1010;
+
+//AccID 로 계정 정보 받기
+SELECT *
+FROM Account
+WHERE AccID=1010;
+
+//============================================================================AccList
+SELECT
+//모든 리스트 검색
+SELECT TOP 1000 [AccListID]
+      ,[AccID]
+      ,[IntputMoney]
+      ,[OutputMoney]
+      ,[Balance]
+      ,[Date]
+  FROM [ccm].[dbo].[AccList]
+
+//해당 id로 계좌 내역 검색
+SELECT * FROM AccList WHERE AccID=20;
+INSERT==========================================================================
+//리스트 추가
+INSERT INTO AccList 
+VALUES (SELECT,0,0,1000,GETDATE());
+//해당 이름으로 리스트 추가
+INSERT INTO AccList 
+VALUES ((SELECT AccID FROM Account WHERE Name='JJH'),0,0,2000,GETDATE());
+
+DELETE============================================================================
+//id로 리스트 내역 지우기
+DELETE FROM AccList
+WHERE AccID=1040;

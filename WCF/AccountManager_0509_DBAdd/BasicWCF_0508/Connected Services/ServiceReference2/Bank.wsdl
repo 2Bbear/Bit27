@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Bank" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.0.33/wcf/example/Bank?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.0.33/wcf/example/Bank?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.0.33/wcf/example/Bank?xsd=xsd2" namespace="http://RuAAService.co.kr/Product" />
+      <xsd:import schemaLocation="http://192.168.0.33/wcf/example/Bank?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBank_ConnectDB_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectDB" />
+  </wsdl:message>
+  <wsdl:message name="IBank_ConnectDB_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectDBResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBank_MakeAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:MakeAccount" />
+  </wsdl:message>
+  <wsdl:message name="IBank_MakeAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MakeAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBank_DeleteAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAccount" />
+  </wsdl:message>
+  <wsdl:message name="IBank_DeleteAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBank_GetAccCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccCount" />
+  </wsdl:message>
+  <wsdl:message name="IBank_GetAccCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBank_InputMoney_InputMessage">
+    <wsdl:part name="parameters" element="tns:InputMoney" />
+  </wsdl:message>
+  <wsdl:message name="IBank_InputMoney_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InputMoneyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBank_OutputMoney_InputMessage">
+    <wsdl:part name="parameters" element="tns:OutputMoney" />
+  </wsdl:message>
+  <wsdl:message name="IBank_OutputMoney_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OutputMoneyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBank_SelectAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAccount" />
+  </wsdl:message>
+  <wsdl:message name="IBank_SelectAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBank_SelectAllAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllAccount" />
+  </wsdl:message>
+  <wsdl:message name="IBank_SelectAllAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBank_SelectAllAccount1_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllAccount1" />
+  </wsdl:message>
+  <wsdl:message name="IBank_SelectAllAccount1_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllAccount1Response" />
+  </wsdl:message>
+  <wsdl:message name="IBank_SelectAccountList_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAccountList" />
+  </wsdl:message>
+  <wsdl:message name="IBank_SelectAccountList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAccountListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBank_SelectAccountList1_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAccountList1" />
+  </wsdl:message>
+  <wsdl:message name="IBank_SelectAccountList1_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAccountList1Response" />
+  </wsdl:message>
+  <wsdl:portType name="IBank">
+    <wsdl:operation name="ConnectDB">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBank/ConnectDB" message="tns:IBank_ConnectDB_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBank/ConnectDBResponse" message="tns:IBank_ConnectDB_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MakeAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBank/MakeAccount" message="tns:IBank_MakeAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBank/MakeAccountResponse" message="tns:IBank_MakeAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBank/DeleteAccount" message="tns:IBank_DeleteAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBank/DeleteAccountResponse" message="tns:IBank_DeleteAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBank/GetAccCount" message="tns:IBank_GetAccCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBank/GetAccCountResponse" message="tns:IBank_GetAccCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InputMoney">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBank/InputMoney" message="tns:IBank_InputMoney_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBank/InputMoneyResponse" message="tns:IBank_InputMoney_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OutputMoney">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBank/OutputMoney" message="tns:IBank_OutputMoney_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBank/OutputMoneyResponse" message="tns:IBank_OutputMoney_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBank/SelectAccount" message="tns:IBank_SelectAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBank/SelectAccountResponse" message="tns:IBank_SelectAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBank/SelectAllAccount" message="tns:IBank_SelectAllAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBank/SelectAllAccountResponse" message="tns:IBank_SelectAllAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllAccount1">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBank/SelectAllAccount1" message="tns:IBank_SelectAllAccount1_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBank/SelectAllAccount1Response" message="tns:IBank_SelectAllAccount1_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAccountList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBank/SelectAccountList" message="tns:IBank_SelectAccountList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBank/SelectAccountListResponse" message="tns:IBank_SelectAccountList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAccountList1">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBank/SelectAccountList1" message="tns:IBank_SelectAccountList1_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBank/SelectAccountList1Response" message="tns:IBank_SelectAccountList1_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IBank" type="tns:IBank">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConnectDB">
+      <soap:operation soapAction="http://tempuri.org/IBank/ConnectDB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MakeAccount">
+      <soap:operation soapAction="http://tempuri.org/IBank/MakeAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccount">
+      <soap:operation soapAction="http://tempuri.org/IBank/DeleteAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccCount">
+      <soap:operation soapAction="http://tempuri.org/IBank/GetAccCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InputMoney">
+      <soap:operation soapAction="http://tempuri.org/IBank/InputMoney" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OutputMoney">
+      <soap:operation soapAction="http://tempuri.org/IBank/OutputMoney" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAccount">
+      <soap:operation soapAction="http://tempuri.org/IBank/SelectAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllAccount">
+      <soap:operation soapAction="http://tempuri.org/IBank/SelectAllAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllAccount1">
+      <soap:operation soapAction="http://tempuri.org/IBank/SelectAllAccount1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAccountList">
+      <soap:operation soapAction="http://tempuri.org/IBank/SelectAccountList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAccountList1">
+      <soap:operation soapAction="http://tempuri.org/IBank/SelectAccountList1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Bank">
+    <wsdl:port name="BasicHttpBinding_IBank" binding="tns:BasicHttpBinding_IBank">
+      <soap:address location="http://192.168.0.33/wcf/example/Bank" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
