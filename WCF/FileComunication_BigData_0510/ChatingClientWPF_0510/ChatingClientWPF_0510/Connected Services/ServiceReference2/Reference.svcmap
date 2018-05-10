@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5a24bc66-263d-4b0d-98b4-f055b09c2bf8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.0.33:8080/GetFileService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CFile.wsdl" MetadataType="Wsdl" ID="f8419944-5474-45c0-9731-5351a6483105" SourceId="1" SourceUrl="http://192.168.0.33:8080/GetFileService?wsdl" />
+    <MetadataFile FileName="GetFileService.xsd" MetadataType="Schema" ID="74675bb5-91e2-4832-9fe6-85fcd0765ed7" SourceId="1" SourceUrl="http://192.168.0.33:8080/GetFileService?xsd=xsd0" />
+    <MetadataFile FileName="GetFileService1.xsd" MetadataType="Schema" ID="7ea8e82a-4347-472d-9555-fabe651ffd78" SourceId="1" SourceUrl="http://192.168.0.33:8080/GetFileService?xsd=xsd1" />
+    <MetadataFile FileName="GetFileService2.xsd" MetadataType="Schema" ID="448cd716-1f74-4b2a-9f21-c97752ae0c33" SourceId="1" SourceUrl="http://192.168.0.33:8080/GetFileService?xsd=xsd2" />
+    <MetadataFile FileName="GetFileService.disco" MetadataType="Disco" ID="61d6a66c-20ec-4c1c-9c61-77a7e82c98c1" SourceId="1" SourceUrl="http://192.168.0.33:8080/GetFileService?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

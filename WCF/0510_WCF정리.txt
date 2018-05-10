@@ -1,0 +1,121 @@
+//서버
+namespace Sample
+{
+[ServiceContract(CallbackContract=typeof(ICallback))]
+    public interface ICal
+    {
+        [OperationContract(IsOneWay=true)]
+        void Add(int num1, int num2);
+
+        [OperationContract(IsOneWay = true)]
+        void Sub(int num1, int num2);
+
+        [OperationContract(IsOneWay = true)]
+        void Mul(int num1, int num2);
+
+        [OperationContract(IsOneWay = true)]
+        void Div(int num1, int num2);
+    }
+}
+
+public interface ICallback
+    {
+        [OperationContract(IsOneWay= true)]
+        void Result(float result);
+    }
+
+
+====================================================
+namespace Sample
+{
+     public class CCal : ICal
+    {
+	 private float m_result;
+         private ICallback callback = null;        //? 추가 
+         public CCal()                         
+         {
+             callback = OperationContext.Current.GetCallbackChannel<ICallback>();   //? 추가
+         }
+
+         private float m_result;
+         public void Add(int num1, int num2) { m_result = num1 + num2; callback.Result(m_result);         }
+         public void Sub(int num1, int num2) { m_result = num1 + num2; callback.Result(m_result);         }
+         public void Mul(int num1, int num2) { m_result = num1 * num2; callback.Result(m_result);        }
+         public void Div(int num1, int num2) { m_result = (float)num1 / num2; callback.Result(m_result);         }
+    }
+}
+
+=====================================================
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+
+  <appSettings>
+    <add key="aspnet:UseTaskFriendlySynchronizationContext" value="true" />
+  </appSettings>
+  <system.web>
+    <compilation debug="true" targetFramework="4.5" />
+    <httpRuntime targetFramework="4.5"/>
+  </system.web>
+  <system.serviceModel>
+    <bindings> 
+    </bindings>
+
+    <services>
+      <service name="Sample.CCal">
+        <endpoint address="" binding="wsDualHttpBinding"
+          bindingConfiguration="" contract="Sample.ICal" />
+      </service>
+    </services>  
+   
+  </system.serviceModel>
+  
+
+</configuration>
+
+======================================
+
+<?xml version="1.0"?>
+<configuration>
+
+  <appSettings>
+    <add key="aspnet:UseTaskFriendlySynchronizationContext" value="true" />
+  </appSettings>
+  <system.web>
+    <compilation debug="true" targetFramework="4.6.1" />
+    <httpRuntime targetFramework="4.6.1"/>
+  </system.web>
+  <system.serviceModel>
+    <services>
+      <service name="Sample.CCal">
+        <endpoint address="" binding="wsDualHttpBinding"
+          bindingConfiguration="" contract="Sample.ICal" />
+      </service>
+    </services>
+    
+    <behaviors>
+      <serviceBehaviors>
+        <behavior>
+          <!-- To avoid disclosing metadata information, set the values below to false before deployment -->
+          <serviceMetadata httpGetEnabled="true" httpsGetEnabled="true"/>
+          <!-- To receive exception details in faults for debugging purposes, set the value below to true.  Set to false before deployment to avoid disclosing exception information -->
+          <serviceDebug includeExceptionDetailInFaults="false"/>
+        </behavior>
+      </serviceBehaviors>
+    </behaviors>
+    <protocolMapping>
+        <add binding="basicHttpsBinding" scheme="https" />
+    </protocolMapping>    
+    <serviceHostingEnvironment aspNetCompatibilityEnabled="true" multipleSiteBindingsEnabled="true" />
+  </system.serviceModel>
+  <system.webServer>
+    <modules runAllManagedModulesForAllRequests="true"/>
+    <!--
+        To browse web app root directory during debugging, set the value below to true.
+        Set to false before deployment to avoid disclosing web app folder information.
+      -->
+    <directoryBrowse enabled="true"/>
+  </system.webServer>
+
+</configuration>
+
+//클라
