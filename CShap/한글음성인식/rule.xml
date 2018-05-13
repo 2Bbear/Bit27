@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<grammar version="1.0" xml:lang="ko-KR"
+ sapi:alphabet="x-microsoft-ups"
+ 
+         xmlns="http://www.w3.org/2001/06/grammar"
+ xmlns:sapi="http://schemas.microsoft.com/Speech/2002/06/SRGSExtensions" 
+         tag-format="semantics/1.0" root="Cities">
+
+  <rule id="Cities" scope="public">
+    <one-of>
+      <item>a</item>
+      
+    </one-of>
+  </rule>
+</grammar>
