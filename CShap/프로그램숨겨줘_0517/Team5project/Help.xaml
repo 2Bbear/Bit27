@@ -1,0 +1,8 @@
+﻿<Window x:Class="Team5project.Help"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         Title="Help" Height="555.495" Width="673.627">
+    <Grid>
+        <TextBox IsReadOnly="True" Name="textlist" HorizontalAlignment="Left" Height="506" Margin="10,10,0,0" VerticalAlignment="Top" Width="647" TextWrapping="Wrap"/>
+    </Grid>
+</Window>

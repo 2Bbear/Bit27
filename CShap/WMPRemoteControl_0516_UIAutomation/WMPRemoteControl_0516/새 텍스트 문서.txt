@@ -1,0 +1,49 @@
+private void PlayButton(string filename, string arg)
+        {
+            //Process 찾기
+            Process target_Process;
+            ProcessStartInfo psi;
+            if (arg.Length != 0)
+            {
+                psi = new ProcessStartInfo("C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe", arg);
+            }
+
+            else
+                psi = new ProcessStartInfo("C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe");
+
+
+
+            target_Process = Process.Start(psi);
+            Thread.Sleep(500);
+            //찾은 Process
+            //wrapprocess형태를 담음
+            WrapProcess target_WrapProcess = new WrapProcess(target_Process);
+
+            AutomationElement target_AutomationElement = target_WrapProcess.RootElement;
+
+            WrapInvoke target_WrapInvoke = new WrapInvoke(target_AutomationElement);
+            if (target_WrapInvoke == null)
+            {
+                return;
+            }
+
+            System.Windows.Automation.Condition cond = new PropertyCondition(AutomationElement.IsInvokePatternAvailableProperty, true);
+            //해당 프로세스의 모든 ui를 Collection 형태로 받아옴
+            AutomationElementCollection aec = target_WrapInvoke.AE.FindAll(TreeScope.Subtree, cond);
+
+            //선택된 프로세스에 대해서 모든 ui를 리스트에 추가하는 과정
+            foreach (AutomationElement ae in aec)
+            {
+                WrapInvoke winvoke = new WrapInvoke(ae);
+                //lbox_inv_elem.Items.Add(new WrapInvoke(ae));
+                
+                if (winvoke.ToString().Equals("단추:재생:36"))
+                {
+                    
+                    winvoke.Invoke();
+                }
+            }
+
+
+
+        }

@@ -1,0 +1,13 @@
+﻿<Window x:Class="Team5project.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="음성인식" Height="330" Width="358.6" >
+    <Grid Background="AntiqueWhite">
+
+        <Label x:Name="label1" Content="음성인식 프로그램 입니다." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="157"/>
+        <Label x:Name="timeLabel" Content="Label" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="26" Width="92"/>
+        <Label Name="voicelabel" Content="Label" HorizontalAlignment="Left" Margin="294,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="목소리 크기 :" HorizontalAlignment="Left" Margin="215,10,0,0" VerticalAlignment="Top"/>
+        <TextBox Background="White" HorizontalAlignment="Left" Height="200" Margin="10,85,0,0" TextWrapping="Wrap" Text="사용법&#xD;&#xA;1.사용자가 &quot;컴퓨터&quot; 라고 말한다&#xD;&#xA;2.말한뒤 20초 안에 명령어를 말한다.&#xD;&#xA;3.명령어 목록은 &quot;컴퓨터&quot; -&gt; &quot;도움말&quot;을 참조한다.&#xD;&#xA;--------------------------------------------------------&#xD;&#xA;실행가능 프로그램 목록&#xD;&#xA;- 계산기&#xD;&#xA;- 미디어플레이어" VerticalAlignment="Top" Width="323" IsEnabled="False"/>
+    </Grid>
+</Window>
