@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{c40ab0c6-6bc9-4d0a-8212-a2b31b0316ba}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>simple.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="GetPythonOnCShop_0525\GetPythonOnCShop_0525\obj\Debug\simple.py" />
+    <Compile Include="Practice_0523\1.py" />
+    <Compile Include="Practice_0523\deepleaning.py" />
+    <Compile Include="Practice_0525\0525Test\0525Test\fasce_recog.py" />
+    <Compile Include="Practice_0525\test.py" />
+    <Compile Include="simple.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GetPythonOnCShop_0525\GetPythonOnCShop_0525\obj\Debug\GetPythonOnCShop_0525.csproj.FileListAbsolute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GetPythonOnCShop_0525\" />
+    <Folder Include="GetPythonOnCShop_0525\GetPythonOnCShop_0525\" />
+    <Folder Include="GetPythonOnCShop_0525\GetPythonOnCShop_0525\obj\" />
+    <Folder Include="GetPythonOnCShop_0525\GetPythonOnCShop_0525\obj\Debug" />
+    <Folder Include="Practice_0523" />
+    <Folder Include="Practice_0525" />
+    <Folder Include="Practice_0525\0525Test\" />
+    <Folder Include="Practice_0525\0525Test\0525Test" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>
